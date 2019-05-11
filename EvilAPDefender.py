@@ -1,7 +1,8 @@
 #!/usr/bin/python
 ######################################################################
 #
-# Copyright (C) 2015 Mohamed Hassan Mohamed Idris
+# Copyright (C) 2015 Mohamed Idris
+# Copyright (C) 2019 Shant Patrick Tchatalbachian
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -48,14 +49,13 @@ def Usage():
     print "\n###############################################################\n"
     print "EvilAP_Defender version 2.0 - Protect your WIFI from bad actors!"
     # Please don't remove this. At least respect our rights!
-    print "Authors: Mohamed Hassan, Mohamed Idris, And Shant Patrick Tchatalbachian"
+    print "Authors: Mohamed Idris, And Shant Patrick Tchatalbachian"
+    print "Special thanks to: Khaled Alhawasli, Mukhammed Khalilov, and Ayman Babkir"
     print "\n====================================\n"
     print "Normal Mode Usage: {} -N [-u <username> -p <password>]\n".format(sys.argv[0])
     print "Learning Mode Usage: {} -L [-u <username> -p <password>]\n".format(sys.argv[0])
     print "Help Screen: {} -h or --help\n".format(sys.argv[0])
     print "MySQL Username & Passowrd can be provided as arguments or after running the Tool"
-    print "\n====================================\n"
-    print "Special thanks to: Khaled Alhawasli, Mukhammed Khalilov, and Ayman Babkir"
     print "\n###############################################################\n"
     sys.exit(2)
 
@@ -171,7 +171,7 @@ def Conf_viewSSIDs():
                 cursor.execute(cmd, (row[1],row[2],row[4],row[5],row[6],row[7]))
                 #print "select * from whitelist where mac='{}' and ssid='{}' and channel={} and CIPHER='{}' and Enc='{}' and Auth='{}'".format(row[1],row[2],row[4],row[5],row[6],row[7])
                 if cursor.rowcount > 0:
-                    print bcolors.OKGREEN + "{}. ({} - {} - '{}' - {} - {} - {} - {})\n".format(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]) + bcolors.ENDC
+                    print "{}. ({} - {} - '{}' - {} - {} - {} - {})\n".format(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]) + bcolors.ENDC
                 else:
                     print "{}. ({} - {} - '{}' - {} - {} - {} - {})\n".format(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7])
         else:
@@ -196,12 +196,12 @@ def Conf_viewSSIDs():
             print "\nWhitelisted OUIs (Tagged Parameters):"
             print "(BSSID - SSID - OUI)\n"
             for row in whitelist_OUIs_data:
-                print bcolors.OKGREEN + "({} - {} - {})".format(row[0],row[1],row[2]) + bcolors.ENDC
+                print bcolors.OKGREEN + "({} - {} - {})".format(row[0],row[1],row[2])
         else:
             print "\nCurrently, There are No Whitelisted OUIs\n"
 
     except:
-        print bcolors.FAIL + bcolors.BOLD + "Unexpected error in 'Conf_viewSSIDs': {}\n".format(sys.exc_info()[0]) + bcolors.ENDC
+        print "Unexpected error in 'Conf_viewSSIDs': {}\n".format(sys.exc_info()[0])
 
 # Get MonInterface
 def get_moniface():
@@ -857,7 +857,7 @@ try:
     #sniff(iface=mon_iface, prn=insert_ap, count=100, store=False, lfilter=lambda p: (Dot11Beacon in p or Dot11ProbeResp in p))
 
     #os.system('pkill airodump-ng')
-    time.sleep(60)
+    time.sleep(150)
     airodump.terminate()
     db_connection.commit()
 except:
