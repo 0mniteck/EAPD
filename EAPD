@@ -8,8 +8,8 @@ error() {
 }
 
 start() {
-        echo "EvilAPDefender (EAPD) version 2.0 - Protect your WIFI from bad actors."
-        echo "Authors: Mohamed Hassan, Mohamed Idris, And Shant Patrick Tchatalbachian."
+        echo "EvilAPDefender (EAPD) Daemon version 2.0 - Protect your Wireless Network from Bad Access Points."
+        echo "Author: Shant Patrick Tchatalbachian."
         echo "GNU License v3"
         echo " "
         echo "Starting MySQL..."
