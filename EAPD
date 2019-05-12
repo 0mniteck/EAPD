@@ -2,6 +2,8 @@
 #!/bin/sh /etc/rc.common
 
 START=98
+EXTRA_COMMANDS="L"
+EXTRA_HELP="        L   Learning Mode"
 
 error() {
         echo "${initscript}:" "$@" 1>&2
@@ -41,4 +43,9 @@ stop() {
         pkill -f "python /root/EvilAPDefender.py -N"
         echo "Aborted Scan."
         echo "Aborted Scan at $(date)" >> /root/EvilAPDefender.log
+}
+
+L() {
+        echo "Learning Mode Run at $(date)" >> /root/EvilAPDefender.log
+        python /root/EvilAPDefender.py -L
 }
