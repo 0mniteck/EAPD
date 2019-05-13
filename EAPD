@@ -15,26 +15,26 @@ start() {
         echo "GNU License v3"
         echo " "
         echo "Starting MySQL..."
-        echo "Starting MySQL at $(date)" >> /root/EvilAPDefender.log
+        echo "Starting MySQL at $(date -u)" >> /root/EvilAPDefender.log
         /etc/init.d/mysqld start
         sleep 5
         echo "Pausing Networking..."
-        echo "Pausing Networking at $(date)" >> /root/EvilAPDefender.log
+        echo "Pausing Networking at $(date -u)" >> /root/EvilAPDefender.log
         /etc/init.d/network stop
         sleep 5
         echo "Starting Scan Please Wait..."
-        echo "Starting Scan at $(date)" >> /root/EvilAPDefender.log
+        echo "Starting Scan at $(date -u)" >> /root/EvilAPDefender.log
         python /root/EvilAPDefender.py -N | tee -a /root/EvilAPDefender.log
         echo "Scan Complete."
-        echo "Scan Complete at $(date)" >> /root/EvilAPDefender.log
+        echo "Scan Complete at $(date -u)" >> /root/EvilAPDefender.log
         /etc/init.d/mysqld stop
         sleep 5
         echo "Stopped MySQL."
-        echo "Stopped MySQL at $(date)" >> /root/EvilAPDefender.log
+        echo "Stopped MySQL at $(date -u)" >> /root/EvilAPDefender.log
         /etc/init.d/network start
         sleep 5
         echo "Network Resumed."
-        echo "Network Resumed at $(date)" >> /root/EvilAPDefender.log
+        echo "Network Resumed at $(date -u)" >> /root/EvilAPDefender.log
         sleep 5
         echo "|-------------------------------------------END-------------------------------------------|" >> /root/EvilAPDefender.log
 }
@@ -43,7 +43,7 @@ stop() {
         pkill -f "python /root/EvilAPDefender.py -N"
         pkill -f "python /root/EvilAPDefender.py -L"
         echo "Aborted Scan."
-        echo "Aborted Scan at $(date)" >> /root/EvilAPDefender.log
+        echo "Aborted Scan at $(date -u)" >> /root/EvilAPDefender.log
 }
 
 L() {
@@ -52,26 +52,26 @@ L() {
         echo "GNU License v3"
         echo " "
         echo "Starting MySQL..."
-        echo "Starting MySQL at $(date)" >> /root/EvilAPDefender.log
+        echo "Starting MySQL at $(date -u)" >> /root/EvilAPDefender.log
         /etc/init.d/mysqld start
         sleep 5
         echo "Pausing Networking..."
-        echo "Pausing Networking at $(date)" >> /root/EvilAPDefender.log
+        echo "Pausing Networking at $(date -u)" >> /root/EvilAPDefender.log
         /etc/init.d/network stop
         sleep 5
         echo "Started Learning Mode Please Wait..."
-        echo "Learning Mode Run at $(date)" >> /root/EvilAPDefender.log
+        echo "Learning Mode Run at $(date -u)" >> /root/EvilAPDefender.log
         python /root/EvilAPDefender.py -L | tee -a /root/EvilAPDefender.log
         echo "Learning Mode Complete."
-        echo "Learning Mode Complete at $(date)" >> /root/EvilAPDefender.log
+        echo "Learning Mode Complete at $(date -u)" >> /root/EvilAPDefender.log
         /etc/init.d/mysqld stop
         sleep 5
         echo "Stopped MySQL."
-        echo "Stopped MySQL at $(date)" >> /root/EvilAPDefender.log
+        echo "Stopped MySQL at $(date -u)" >> /root/EvilAPDefender.log
         /etc/init.d/network start
         sleep 5
         echo "Network Resumed."
-        echo "Network Resumed at $(date)" >> /root/EvilAPDefender.log
+        echo "Network Resumed at $(date -u)" >> /root/EvilAPDefender.log
         sleep 5
         echo "|-------------------------------------------END-------------------------------------------|" >> /root/EvilAPDefender.log
 }
