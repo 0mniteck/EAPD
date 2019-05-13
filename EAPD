@@ -47,7 +47,7 @@ stop() {
 }
 
 L() {
-        echo "EvilAPDefender (Learning Mode) - Protect your Wireless Network from Bad Access Points."
+        echo "EvilAPDefender (EAPD) Learning Mode - Protect your Wireless Network from Bad Access Points."
         echo "Author: Shant Patrick Tchatalbachian."
         echo "GNU License v3"
         echo " "
