@@ -1,6 +1,5 @@
 #!/bin/bash
 # WIP Adding pre-requisites to installer soon
-Git clone Https://github.com/0mniteck/EvilAPDefender
 mv EvilAPDefender.py ~/
 mv CRONTABS /etc/crontabs/root
 mv EAPD /etc/init.d/eapd
