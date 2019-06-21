@@ -1,5 +1,5 @@
-#File: /etc/init.d/EAPD                                                       
 #!/bin/sh /etc/rc.common
+# File: /etc/init.d/EAPD
 
 START=98
 EXTRA_COMMANDS="L"
