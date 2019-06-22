@@ -1,5 +1,6 @@
 #!/bin/bash
 # WIP Adding pre-requisites to installer soon
+# as well as adding niceness option for nano installs
 /etc/init.d/cron stop
 /etc/init.d/mysqld disable
 mv EvilAPDefender.py ~/
