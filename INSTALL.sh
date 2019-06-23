@@ -1,6 +1,6 @@
 #!/bin/bash
 # WIP Adding pre-requisites to installer soon
-# also adding niceness/ioniceness option for nano installs to prevent crashes with extroot
+# also adding niceness option for nano installs to prevent crashes with extroot
 /etc/init.d/cron stop
 /etc/init.d/mysqld disable
 mv EvilAPDefender.py ~/
