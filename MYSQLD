@@ -1,0 +1,18 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2010-2011 OpenWrt.org
+
+START=95
+STOP=10
+
+
+error() {
+	echo "${initscript}:" "$@" 1>&2
+}
+
+start() {
+	/usr/bin/mysqld --skip-grant-tables &
+}
+
+stop() {
+	pkill -f "/usr/bin/mysqld --skip-grant-tables"
+}
