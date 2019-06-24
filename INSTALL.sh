@@ -19,3 +19,4 @@ chmod +x /etc/init.d/eapd
 /etc/init.d/eapd disable
 echo "Installer complete"
 echo "Installer complete at $(date -u)" >> /root/EvilAPDefender.log
+exit
