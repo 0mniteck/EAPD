@@ -6,7 +6,6 @@ opkg update
 opkg install aircrack-ng
 opkg install mysql-server
 opkg install python
-opkg install mysql-server
 opkg install python-mysqldb
 opkg install python-pip
 pip install netaddr
