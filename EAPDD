@@ -3,7 +3,7 @@
 
 START=98
 EXTRA_COMMANDS="L"
-EXTRA_HELP="        L   Learning Mode"
+EXTRA_HELP="            L   Learning Mode"
 
 error() {
         echo "${initscript}:" "$@" 1>&2
@@ -54,6 +54,9 @@ L() {
         echo "Stopping Cron..."
         echo "Stopping Cron at $(date -u)" >> /root/EvilAPDefender.log
         /etc/init.d/cron stop
+        echo "Stopping Any Running Scans..."
+        echo "Stopping Any Running Scans at $(date -u)" >> /root/EvilAPDefender.log
+        pkill -f "python /root/EvilAPDefender.py -N"
         echo "Starting MySQL..."
         echo "Starting MySQL at $(date -u)" >> /root/EvilAPDefender.log
         /etc/init.d/mysqld start
