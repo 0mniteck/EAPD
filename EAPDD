@@ -51,6 +51,9 @@ L() {
         echo "Author: Shant Patrick Tchatalbachian."
         echo "GNU License v3"
         echo " "
+        echo "Stopping Cron..."
+        echo "Stopping Cron at $(date -u)" >> /root/EvilAPDefender.log
+        /etc/init.d/cron stop
         echo "Starting MySQL..."
         echo "Starting MySQL at $(date -u)" >> /root/EvilAPDefender.log
         /etc/init.d/mysqld start
@@ -73,5 +76,6 @@ L() {
         echo "Network Resumed."
         echo "Network Resumed at $(date -u)" >> /root/EvilAPDefender.log
         sleep 5
+        echo "Start Scheduled Scans by Running /etc/init.d/cron enable && /etc/init.d/cron start"
         echo "|-------------------------------------------END-------------------------------------------|" >> /root/EvilAPDefender.log
 }
