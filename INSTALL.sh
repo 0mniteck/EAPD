@@ -4,6 +4,8 @@ echo "Starting Installer for EAPD..."
 echo "Starting Installer for EAPD at $(date -u)" >> /root/EvilAPDefender.log
 opkg update
 opkg install aircrack-ng
+mkdir /mnt/data/
+mkdir /mnt/data/mysql/
 opkg install mysql-server
 mysql_install_db --force
 opkg install python python-mysqldb python-pip
