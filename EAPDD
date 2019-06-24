@@ -1,5 +1,5 @@
 #!/bin/sh /etc/rc.common
-# File: /etc/init.d/EAPD
+# File: /etc/init.d/EAPDD
 
 START=98
 EXTRA_COMMANDS="L"
@@ -10,7 +10,7 @@ error() {
 }
 
 start() {
-        echo "EvilAPDefender (EAPD) Daemon - Protect your Wireless Network from Bad Access Points."
+        echo "EvilAPDefender (EAPDD) Daemon - Protect your Wireless Network from Bad Access Points."
         echo "Author: Shant Patrick Tchatalbachian."
         echo "GNU License v3"
         echo " "
@@ -47,7 +47,7 @@ stop() {
 }
 
 L() {
-        echo "EvilAPDefender (EAPD) Learning Mode - Protect your Wireless Network from Bad Access Points."
+        echo "EvilAPDefender (EAPDD) Learning Mode - Protect your Wireless Network from Bad Access Points."
         echo "Author: Shant Patrick Tchatalbachian."
         echo "GNU License v3"
         echo " "
