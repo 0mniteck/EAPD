@@ -22,8 +22,9 @@ chmod 744 /etc/init.d/eapdd
 chmod +x /etc/init.d/mysqld
 chmod +x /etc/init.d/eapdd
 /etc/init.d/mysqld disable
-/etc/init.d/eapd disable
+/etc/init.d/eapdd disable
 echo "Installer Complete."
 echo "Just run /etc/init.d/eapdd L to start learning mode."
 echo "Installer Complete at $(date -u)" >> /root/EvilAPDefender.log
+echo "|-------------------------------------------END-------------------------------------------|" >> /root/EvilAPDefender.log
 exit
