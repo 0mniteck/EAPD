@@ -6,9 +6,7 @@ opkg update
 opkg install aircrack-ng
 opkg install mysql-server
 mysql_install_db --force
-opkg install python
-opkg install python-mysqldb
-opkg install python-pip
+opkg install python python-mysqldb python-pip
 pip install netaddr
 pip install scappy
 /etc/init.d/cron stop && /etc/init.d/cron disable
