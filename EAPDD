@@ -51,12 +51,15 @@ L() {
         echo "Author: Shant Patrick Tchatalbachian."
         echo "GNU License v3"
         echo " "
+        sleep 5
         echo "Stopping Cron..."
         echo "Stopping Cron at $(date -u)" >> /root/EvilAPDefender.log
         /etc/init.d/cron stop
+        sleep 5
         echo "Stopping Any Running Scans..."
         echo "Stopping Any Running Scans at $(date -u)" >> /root/EvilAPDefender.log
         pkill -f "python /root/EvilAPDefender.py -N"
+        sleep 5
         echo "Starting MySQL..."
         echo "Starting MySQL at $(date -u)" >> /root/EvilAPDefender.log
         /etc/init.d/mysqld start
