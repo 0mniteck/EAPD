@@ -15,7 +15,6 @@ rm -f /etc/init.d/mysqld
 rm -f /etc/init.d/eapdd
 echo "Uninstaller Complete."
 echo "Log file saved to /root/eapd.log."
-echo "Just run /etc/init.d/eapdd L to start learning mode."
 echo "Uninstaller Complete at $(date -u)" >> /root/eapd.log
 echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
 exit
