@@ -682,8 +682,8 @@ except:
         print bcolors.FAIL + "Unexpected error while parsing arguments: {}".format(sys.exc_info()[0]) + bcolors.ENDC
 '''
 Mode = ""
-username = "root"
-password = "any"
+username = ""
+password = ""
 
 try:
     opts, args = getopt.getopt(sys.argv[1:], "hLNu:p:", ["help"])
@@ -711,7 +711,7 @@ print "Preparing MySQL Database\n"
 
 try:
     try:
-        db_connection = MySQLdb.connect(host='127.0.0.1', user=username, passwd=password)
+        db_connection = MySQLdb.connect(host='127.0.0.1', user='root', passwd='password')
         print "Connected to MySQL\n"
     except:
         print bcolors.FAIL + bcolors.BOLD + "Invalid username or password for MySQL\n"
