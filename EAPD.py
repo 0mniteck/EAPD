@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # File: /root/eapd.py
+
 ######################################################################
 #
 # Copyright (C) 2015 Mohamed Idris
@@ -19,6 +20,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ######################################################################
+
 import MySQLdb
 import time
 import os
@@ -47,42 +49,34 @@ class bcolors:
 ########### Functions Def
 # Usage
 def Usage():
-    print "\n###############################################################\n"
-    print "EvilAP_Defender version 2.0 - Protect your WIFI from bad actors!"
-    # Please don't remove this. At least respect our rights!
+    print "\n########################USAGE##################################\n"
+    print "Evil Access Point Defender (EAPD) - Protect your Wireless Network from Bad Access Points."
     print "Authors: Mohamed Idris, And Shant Patrick Tchatalbachian"
-    print "Special thanks to: Khaled Alhawasli, Mukhammed Khalilov, and Ayman Babkir"
-    print "\n====================================\n"
+    print "GNU License v3"
+    print " "
     print "Normal Mode Usage: {} -N [-u <username> -p <password>]\n".format(sys.argv[0])
     print "Learning Mode Usage: {} -L [-u <username> -p <password>]\n".format(sys.argv[0])
     print "Help Screen: {} -h or --help\n".format(sys.argv[0])
-    print "MySQL Username & Passowrd can be provided as arguments or after running the Tool"
     print "\n###############################################################\n"
     sys.exit(2)
 
 # Help information
 def Help():
-    print "\n++++++++++++++++++++++++++++ Help ++++++++++++++++++++++++++++++++++\n"
-    print "Requirements:"
-    print "-------------"
-    print "     - MySQL"
-    print "     - AirCrack-ng Suite"
-    print "     - Python"
-    print "\nLearning:"
-    print "--------------"
-    print "     - To configure the tool, use '-L' option\n        Then follow the wizard to configure the tool"
-    print "     - To use the tool, use '-N' option"
+    print "\n############################HELP###############################\n"
+    print " "
+    print "     Check out the Wiki: https://github.com/0mniteck/EvilAPDefender/wiki/Wiki"
+    print " "
     print "\nUsage:"
     print "--------------"
     print "     - Normal Mode Usage: {} -N [-u <username> -p <password>]".format(sys.argv[0])
     print "     - Learning Mode Usage: {} -L [-u <username> -p <password>]".format(sys.argv[0])
     print "     - MySQL Username & Passowrd can be provided as arguments or after running the Tool"
-    print "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+    print "\n###############################################################\n"
     sys.exit(2)
 
 # Learning choices
 def Choices():
-    print "\n#####################################\n"
+    print "\n###############################################################\n"
     print bcolors.OKBLUE + "What do you want to do (please choose a number):"
     print "1. AutoConfig (only choose SSID)"
     print "2. Add specific Access Point"
@@ -94,7 +88,7 @@ def Choices():
 
 # Learning options
 def Options():
-    print "\n#####################################\n"
+    print "\n###############################################################\n"
     print bcolors.OKBLUE + "What option do you want to update (please choose a number):"
     print "1. Configure Preventive Mode"
     print "2. Admin notification"
@@ -164,7 +158,7 @@ def Conf_viewSSIDs():
         cursor.execute(cmd)
         if cursor.rowcount > 0:
             ssids_data = cursor.fetchall()
-            print "\n#####################################\n"
+            print "\n###############################################################\n"
             print "Wireless Networks Found:"
             print "ID. (BSSID - SSID - PWR - Channel - Cipher - Privacy - Auth)\n"
             for row in ssids_data:
@@ -182,7 +176,7 @@ def Conf_viewSSIDs():
         cursor.execute(cmd)
         if cursor.rowcount > 0:
             whitelist_data = cursor.fetchall()
-            print "#####################################\n"
+            print "\n###############################################################\n"
             print "Whitelisted Access Points:"
             print "ID. (BSSID - SSID - MinPWR - MaxPWR - Channel - Cipher - Privacy - Auth)\n"
             for row in whitelist_data:
@@ -353,7 +347,7 @@ def CheckEvilAP():
                     EvilAPOUI = True
 
         ########### Print the Result
-            print "======================= Check Result =======================\n"
+        print "\n###########################CHECK-RESULT########################\n"
             if EvilAPMAC:
                 print bcolors.WARNING + bcolors.BOLD + "Fake AP with different MAC Detected!\n" + bcolors.ENDC
                 msg = "Fake AP with different MAC Detected!\n"
@@ -372,7 +366,7 @@ def CheckEvilAP():
                     deauth_time = int(row[0])
                     print "Deauth time: {}".format(deauth_time)
                     if int(deauth_time) > 0:
-                        print bcolors.OKBLUE + "\n======================= Preventive mode is enabled =======================\n"
+                        print bcolors.OKBLUE + "\n#########################ATTACK-MODE###########################\n"
                         print "Attacking Evil Access Point ..." + bcolors.ENDC
                         cmd = "select opt_val from options where opt_key = 'deauth_repeat'"
                         cursor.execute(cmd)
@@ -415,7 +409,7 @@ def CheckEvilAP():
                         deauth_time = int(row[0])
                         print "Deauth time: {}".format(deauth_time)
                         if int(deauth_time) > 0:
-                            print bcolors.OKBLUE + "\n======================= Preventive mode is enabled =======================\n"
+                            print bcolors.OKBLUE + "\n#########################ATTACK-MODE###########################\n"
                             print "Attacking Evil Access Point ..." + bcolors.ENDC
                             cmd = "select opt_val from options where opt_key = 'deauth_repeat'"
                             cursor.execute(cmd)
@@ -450,7 +444,7 @@ def CheckEvilAP():
                 #AlertAdmin(msg)
             else:
                 print "No Evil AP Detected!\n"
-            print "\n#####################################\n"
+            print "\n###############################################################\n"
 
         else:
             print bcolors.WARNING + bcolors.BOLD + "No Whitelisted SSID Detected!\n"
@@ -520,7 +514,7 @@ def Reset(Ropt):
 
 def LearningMode():
     # here is Learning stuff
-    print "=====================================================\n"
+    print "\n###############################################################\n"
     print "Entering Learning Mode ..."
     try:
         while True:
@@ -530,7 +524,7 @@ def LearningMode():
 
             choice = raw_input(bcolors.OKBLUE + 'Enter the number for your choice: ' + bcolors.ENDC)
             if choice == "1":
-                print "\n======================= AuoConfig Mode =======================\n"
+                print "\n######################AUTO-CONFIG-MODE#########################\n"
                 SSID = raw_input('Enter the SSID name you want to whitelist: ')
                 #cursor.execute("select * from ssids where mac='{}')
                 cmd = "select * from ssids where ssid=%s"
@@ -602,7 +596,7 @@ def LearningMode():
                 while True:
                     cmd = "select * from options"
                     cursor.execute(cmd)
-                    print "======================="
+                    print "\n###############################################################\n"
                     print "Current options:"
                     if cursor.rowcount > 0:
                         options_data = cursor.fetchall()
@@ -847,7 +841,7 @@ except:
         print bcolors.FAIL + bcolors.BOLD + "Unexpected error during removing old 'out.csv-01': {}\n".format(sys.exc_info()[0]) + bcolors.ENDC
 
 # Scanning for available SSIDs
-print "    ======================="
+print "\n###############################################################\n"
 print "SCANNING FOR WIRELESS NETWORKS"
 print "   \n"
 try:
