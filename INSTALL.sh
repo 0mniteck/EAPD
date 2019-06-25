@@ -13,7 +13,7 @@ pip install netaddr
 pip install scappy
 /etc/init.d/cron stop && /etc/init.d/cron disable
 /etc/init.d/mysqld stop
-mv -f EvilAPDefender.py ~/
+mv -f EAPD.py /root/eapd.py
 mv -f CRONTABS /etc/crontabs/root
 mv -f DAEMON/MYSQLD /etc/init.d/mysqld
 mv -f DAEMON/EAPDD /etc/init.d/eapdd
