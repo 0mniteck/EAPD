@@ -24,7 +24,7 @@ start() {
         sleep 5
         echo "Starting Scan Please Wait..."
         echo "Starting Scan at $(date -u)" >> /root/EvilAPDefender.log
-        python /root/EvilAPDefender.py -N | tee -a /root/EvilAPDefender.log
+        python /root/EAPD.py -N | tee -a /root/EvilAPDefender.log
         echo "Scan Complete."
         echo "Scan Complete at $(date -u)" >> /root/EvilAPDefender.log
         /etc/init.d/mysqld stop
@@ -40,8 +40,8 @@ start() {
 }
 
 stop() {
-        pkill -f "python /root/EvilAPDefender.py -N"
-        pkill -f "python /root/EvilAPDefender.py -L"
+        pkill -f "python /root/EAPD.py -N"
+        pkill -f "python /root/EAPD.py -L"
         echo "Aborted Scan."
         echo "Aborted Scan at $(date -u)" >> /root/EvilAPDefender.log
 }
@@ -58,7 +58,7 @@ L() {
         sleep 5
         echo "Stopping Any Running Scans..."
         echo "Stopping Any Running Scans at $(date -u)" >> /root/EvilAPDefender.log
-        pkill -f "python /root/EvilAPDefender.py -N"
+        pkill -f "python /root/EAPD.py -N"
         sleep 5
         echo "Starting MySQL..."
         echo "Starting MySQL at $(date -u)" >> /root/EvilAPDefender.log
