@@ -1,10 +1,10 @@
 {
-    "author": "Foxtrot",
-    "description": "An easy way to generate modules.",
+    "author": "Shant Patrick Tchatalbachian",
+    "description": "Evil Access Point Defender.",
     "devices": [
         "nano",
         "tetra"
     ],
-    "title": "Module Maker",
+    "title": "EAPD",
     "version": "1.0"
 }
