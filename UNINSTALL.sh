@@ -1,4 +1,5 @@
 #!/bin/bash
+rm -f /root/eapd.log
 echo "Starting Uninstaller for EAPD..."
 echo "Starting Uninstaller for EAPD at $(date -u)" >> /root/eapd.log
 /etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/eapd stop
