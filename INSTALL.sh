@@ -13,6 +13,8 @@ pip install netaddr
 pip install scappy
 /etc/init.d/cron stop && /etc/init.d/cron disable
 /etc/init.d/mysqld stop
+mkdir /pineapple/
+mkdir /pineapple/modules/
 mkdir /pineapple/modules/eapd/
 mkdir /pineapple/modules/eapd/api/
 mkdir /pineapple/modules/eapd/js/
