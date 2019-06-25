@@ -98,7 +98,8 @@ L() {
         sleep 5
         echo "Starting Learning Mode Please Wait..."
         echo "Starting Learning Mode at $(date -u)" >> /root/eapd.log
-        python /root/eapd.py -L
+        # For Extroot or Nano Installs remove '| tee -a /root/eapd.log'
+        python /root/eapd.py -L | tee -a /root/eapd.log
         echo "Learning Mode Complete."
         echo "Learning Mode Complete at $(date -u)" >> /root/eapd.log
         /etc/init.d/mysqld stop
