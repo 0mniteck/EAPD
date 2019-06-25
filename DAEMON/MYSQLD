@@ -10,6 +10,7 @@ error() {
 }
 
 start() {
+	mkdir /var/log/mysql/ && chmod 777 /var/log/mysql/
 	mkdir /var/run/mysqld/ && chmod 777 /var/run/mysqld/
 	/usr/bin/mysqld --skip-grant-tables &
 }
