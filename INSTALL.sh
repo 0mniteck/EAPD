@@ -1,5 +1,5 @@
 #!/bin/bash
-# WIP adding niceness option for nano installs to prevent crashes with extroot
+# WIP adding niceness option for Extroot or Wifi-Pineapple Nano installs to prevent crashes.
 echo "Starting Installer for EAPD..."
 echo "Starting Installer for EAPD at $(date -u)" >> /root/eapd.log
 opkg update
