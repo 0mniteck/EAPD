@@ -96,8 +96,8 @@ L() {
         echo "Pausing Networking at $(date -u)" >> /root/eapd.log
         /etc/init.d/network stop
         sleep 5
-        echo "Started Learning Mode Please Wait..."
-        echo "Learning Mode Run at $(date -u)" >> /root/eapd.log
+        echo "Starting Learning Mode Please Wait..."
+        echo "Starting Learning Mode at $(date -u)" >> /root/eapd.log
         python /root/eapd.py -L
         echo "Learning Mode Complete."
         echo "Learning Mode Complete at $(date -u)" >> /root/eapd.log
