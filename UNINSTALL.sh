@@ -14,6 +14,7 @@ rm -f -r /mnt/data
 rm -f /etc/init.d/mysqld
 rm -f /etc/init.d/eapdd
 echo "Uninstaller Complete."
+echo "If this is not a Wifi-Pineapple remove Aircrack-ng manually by running 'opkg remove aircrack-ng'."
 echo "Log file saved to /root/eapd.log."
 echo "Uninstaller Complete at $(date -u)" >> /root/eapd.log
 echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
