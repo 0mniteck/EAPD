@@ -3,7 +3,7 @@ echo "Starting Installer for EAPD..."
 echo "Starting Installer for EAPD at $(date -u)" >> /root/eapd.log
 mkdir /mnt/data/ && mkdir /mnt/data/mysql/
 opkg update && opkg install aircrack-ng mysql-server python python-mysql python-pip
-pip install --upgrade pip && pip install netaddr scappy && mysql_install_db --force
+pip install --upgrade pip && pip install netaddr scapy && mysql_install_db --force
 /etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/mysqld stop
 mkdir /pineapple/ && mkdir /pineapple/modules/ && mkdir /pineapple/modules/eapd/
 mkdir /pineapple/modules/eapd/api/ && mkdir /pineapple/modules/eapd/js/
