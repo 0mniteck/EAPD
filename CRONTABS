@@ -1,3 +1,3 @@
 # File: /etc/crontabs/root
-0 */12 * * * /etc/init.d/eapdd stop && echo "Scheduled Reboot at $(date -u)" >> /root/EvilAPDefender.log && reboot
-*/20 * * * * echo "Scheduled EAPDD run at $(date -u)" >> /root/EvilAPDefender.log && /etc/init.d/eapdd start
+0 */12 * * * /etc/init.d/eapdd stop && echo "Scheduled Reboot at $(date -u)" >> /root/eapd.log && reboot
+*/20 * * * * echo "Scheduled EAPDD run at $(date -u)" >> /root/eapd.log && /etc/init.d/eapdd start
