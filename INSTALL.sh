@@ -18,14 +18,14 @@ mkdir /pineapple/modules/
 mkdir /pineapple/modules/eapd/
 mkdir /pineapple/modules/eapd/api/
 mkdir /pineapple/modules/eapd/js/
-mv -f EAPD.py /root/eapd.py
-mv -f CRONTABS /etc/crontabs/root
-mv -f MODULE/MODULE.info /pineapple/modules/eapd/module.info
-mv -f MODULE/MODULE.html /pineapple/modules/eapd/module.html
-mv -f MODULE/MODULE.php /pineapple/modules/eapd/api/module.php
-mv -f MODULE/MODULE.js /pineapple/modules/eapd/js/module.js
-mv -f DAEMON/MYSQLD /etc/init.d/mysqld
-mv -f DAEMON/EAPDD /etc/init.d/eapdd
+cp -f EAPD.py /root/eapd.py
+cp -f CRONTABS /etc/crontabs/root
+cp -f MODULE/MODULE.info /pineapple/modules/eapd/module.info
+cp -f MODULE/MODULE.html /pineapple/modules/eapd/module.html
+cp -f MODULE/MODULE.php /pineapple/modules/eapd/api/module.php
+cp -f MODULE/MODULE.js /pineapple/modules/eapd/js/module.js
+cp -f DAEMON/MYSQLD /etc/init.d/mysqld
+cp -f DAEMON/EAPDD /etc/init.d/eapdd
 chmod 744 /etc/init.d/mysqld
 chmod 744 /etc/init.d/eapdd
 chmod +x /etc/init.d/mysqld
