@@ -4,7 +4,7 @@ echo "Starting Installer for EAPD at $(date -u)" >> /root/eapd.log
 mkdir /mnt/data/ && mkdir /mnt/data/mysql/ && mkdir /mnt/data/tmp/
 mkdir /var/run/mysqld/ && chmod 777 /var/run/mysqld/
 chmod 777 /mnt/data/ && chmod 777 /mnt/data/mysql/ && chmod 777 /mnt/data/tmp/
-opkg update && opkg install procps-ng-pkill aircrack-ng mysql-server mariadb-client mariadb-server-plugin-auth-socket python python-pip
+opkg update && opkg --autoremove --force-removal-of-dependent-packages remove git git-http && opkg install procps-ng-pkill aircrack-ng mysql-server mariadb-client mariadb-server-plugin-auth-socket python python-pip
 pip install netaddr scapy
 /etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/mysqld stop
 mkdir /pineapple/ && mkdir /pineapple/modules/ && mkdir /pineapple/modules/eapd/
