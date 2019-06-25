@@ -6,7 +6,7 @@ mkdir /var/log/mysql/ && chmod 777 /var/log/mysql/
 mkdir /var/run/mysqld/ && chmod 777 /var/run/mysqld/
 chmod 777 /mnt/data/ && chmod 777 /mnt/data/mysql/ && chmod 777 /mnt/data/tmp/
 opkg update && opkg --autoremove --force-removal-of-dependent-packages remove git git-http
-opkg install procps-ng-pkill aircrack-ng mysql-server mariadb-client mariadb-server-plugin-auth-socket python python-pip
+opkg install procps-ng-pkill aircrack-ng airmon-ng mysql-server mariadb-client mariadb-server-plugin-auth-socket python python-pip
 pip install netaddr scapy
 /etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/mysqld stop
 mkdir /pineapple/ && mkdir /pineapple/modules/ && mkdir /pineapple/modules/eapd/
