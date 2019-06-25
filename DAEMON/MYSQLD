@@ -2,7 +2,7 @@
 # File: /etc/init.d/mysqld
 
 START=95
-STOP=10
+STOP=1
 
 
 error() {
