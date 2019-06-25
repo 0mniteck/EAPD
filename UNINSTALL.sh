@@ -3,7 +3,7 @@ echo "Starting Uninstaller for EAPD..."
 echo "Starting Uninstaller for EAPD at $(date -u)" >> /root/eapd.log
 /etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/eapd stop
 pip uninstall -y netaddr scappy
-opkg --autoremove	remove mysql-server python python-mysqldb python-pip
+opkg --autoremove remove mysql-server python python-mysqldb python-pip
 rm -f /root/eapd.py
 rm -f /etc/crontabs/root
 rm -f /etc/init.d/mysqld
