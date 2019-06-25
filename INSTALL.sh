@@ -2,6 +2,7 @@
 echo "Starting Installer for EAPD..."
 echo "Starting Installer for EAPD at $(date -u)" >> /root/eapd.log
 mkdir /mnt/data/ && mkdir /mnt/data/mysql/ && mkdir /mnt/data/tmp/
+mkdir /var/log/mysql/ && chmod 777 /var/log/mysql/
 mkdir /var/run/mysqld/ && chmod 777 /var/run/mysqld/
 chmod 777 /mnt/data/ && chmod 777 /mnt/data/mysql/ && chmod 777 /mnt/data/tmp/
 opkg update && opkg --autoremove --force-removal-of-dependent-packages remove git git-http
