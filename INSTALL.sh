@@ -1,16 +1,11 @@
 #!/bin/bash
-# WIP adding niceness option for Extroot or Wifi-Pineapple Nano installs to prevent crashes.
 echo "Starting Installer for EAPD..."
 echo "Starting Installer for EAPD at $(date -u)" >> /root/eapd.log
-opkg update
-opkg install aircrack-ng
 mkdir /mnt/data/
 mkdir /mnt/data/mysql/
-opkg install mysql-server
+opkg update && opkg install aircrack-ng mysql-server python python-mysqldb python-pip
+pip install netaddr scappy
 mysql_install_db --force
-opkg install python python-mysqldb python-pip
-pip install netaddr
-pip install scappy
 /etc/init.d/cron stop && /etc/init.d/cron disable
 /etc/init.d/mysqld stop
 mkdir /pineapple/
@@ -34,7 +29,7 @@ chmod +x /etc/init.d/eapdd
 /etc/init.d/eapdd disable
 echo "Installer Complete."
 echo "Log file saved to /root/eapd.log."
-echo "Just run /etc/init.d/eapdd L to start learning mode."
+echo "Just run '/etc/init.d/eapdd L' to start learning mode."
 echo "Installer Complete at $(date -u)" >> /root/eapd.log
 echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
 exit
