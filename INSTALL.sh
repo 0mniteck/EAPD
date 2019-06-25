@@ -15,8 +15,8 @@ pip install scappy
 /etc/init.d/mysqld stop
 mv -f EvilAPDefender.py ~/
 mv -f CRONTABS /etc/crontabs/root
-mv -f MODULE/MYSQLD /etc/init.d/mysqld
-mv -f MODULE/EAPDD /etc/init.d/eapdd
+mv -f DAEMON/MYSQLD /etc/init.d/mysqld
+mv -f DAEMON/EAPDD /etc/init.d/eapdd
 chmod 744 /etc/init.d/mysqld
 chmod 744 /etc/init.d/eapdd
 chmod +x /etc/init.d/mysqld
