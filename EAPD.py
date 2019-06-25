@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# File: /root/EvilAPDefender.py
+# File: /root/eapd.py
 ######################################################################
 #
 # Copyright (C) 2015 Mohamed Idris
