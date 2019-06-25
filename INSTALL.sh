@@ -33,5 +33,5 @@ chmod +x /etc/init.d/eapdd
 echo "Installer Complete."
 echo "Just run /etc/init.d/eapdd L to start learning mode. Log file saved to /root/eapd.log."
 echo "Installer Complete at $(date -u)" >> /root/eapd.log
-echo "|-------------------------------------------END-------------------------------------------|" >> /root/EvilAPDefender.log
+echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
 exit
