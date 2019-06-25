@@ -22,8 +22,8 @@ mv -f MODULE/MODULE.info /pineapple/modules/eapd/module.info
 mv -f MODULE/MODULE.html /pineapple/modules/eapd/module.html
 mv -f MODULE/MODULE.php /pineapple/modules/eapd/api/module.php
 mv -f MODULE/MODULE.js /pineapple/modules/eapd/js/module.js
-mv -f DAEMON /etc/init.d/mysqld
-mv -f DAEMON /etc/init.d/eapdd
+mv -f DAEMON/MYSQLD /etc/init.d/mysqld
+mv -f DAEMON/EAPDD /etc/init.d/eapdd
 chmod 744 /etc/init.d/mysqld
 chmod 744 /etc/init.d/eapdd
 chmod +x /etc/init.d/mysqld
