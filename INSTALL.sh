@@ -31,7 +31,8 @@ chmod +x /etc/init.d/eapdd
 /etc/init.d/mysqld disable
 /etc/init.d/eapdd disable
 echo "Installer Complete."
-echo "Just run /etc/init.d/eapdd L to start learning mode. Log file saved to /root/eapd.log."
+echo "Log file saved to /root/eapd.log."
+echo "Just run /etc/init.d/eapdd L to start learning mode."
 echo "Installer Complete at $(date -u)" >> /root/eapd.log
 echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
 exit
