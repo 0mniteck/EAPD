@@ -347,7 +347,7 @@ def CheckEvilAP():
                     EvilAPOUI = True
 
         ########### Print the Result
-        print "\n###########################CHECK-RESULT########################\n"
+            print "\n###########################CHECK-RESULT########################\n"
             if EvilAPMAC:
                 print bcolors.WARNING + bcolors.BOLD + "Fake AP with different MAC Detected!\n" + bcolors.ENDC
                 msg = "Fake AP with different MAC Detected!\n"
