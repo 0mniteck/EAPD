@@ -682,8 +682,8 @@ except:
         print bcolors.FAIL + "Unexpected error while parsing arguments: {}".format(sys.exc_info()[0]) + bcolors.ENDC
 '''
 Mode = ""
-username = ""
-password = ""
+username = "root"
+password = "any"
 
 try:
     opts, args = getopt.getopt(sys.argv[1:], "hLNu:p:", ["help"])
