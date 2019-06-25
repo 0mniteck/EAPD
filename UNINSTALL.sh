@@ -8,7 +8,7 @@ opkg --autoremove --force-removal-of-dependent-packages remove procps-ng-pkill m
 rm -f /root/eapd.py && rm -f /etc/crontabs/root && rm -f /etc/init.d/mysqld && rm -f /etc/init.d/eapdd
 rm -f -r /pineapple/modules/eapd && rm -f -r /mnt/data
 echo "Uninstaller Complete." && echo "Uninstaller Complete at $(date -u)" >> /root/eapd.log
-echo "If this is not a Wifi-Pineapple remove Aircrack-ng manually by running 'opkg --autoremove remove aircrack-ng'."
+echo "If this is not a Wifi-Pineapple remove Aircrack-ng manually by running 'opkg --autoremove remove aircrack-ng airmon-ng'."
 echo "Log file saved to /root/eapd.log."
 echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
 exit
