@@ -11,8 +11,9 @@ opkg --autoremove --force-removal-of-dependent-packages remove git git-http
 opkg install procps-ng-pkill aircrack-ng airmon-ng mysql-server mariadb-client mariadb-server-plugin-auth-socket python python-pip
 pip install netaddr scapy
 /etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/mysqld stop
-mkdir /pineapple/ && mkdir /pineapple/modules/ && mkdir /pineapple/modules/eapd/
-mkdir /pineapple/modules/eapd/api/ && mkdir /pineapple/modules/eapd/js/
+mkdir /pineapple/
+mkdir /pineapple/modules/
+mkdir /pineapple/modules/eapd/ && mkdir /pineapple/modules/eapd/api/ && mkdir /pineapple/modules/eapd/js/
 cp -f EAPD.py /root/eapd.py && cp -f CRONTABS /etc/crontabs/root
 cp -f MODULE/MODULE.info /pineapple/modules/eapd/module.info
 cp -f MODULE/MODULE.html /pineapple/modules/eapd/module.html
