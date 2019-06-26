@@ -35,19 +35,12 @@ start() {
         echo "Starting MySQL..." && echo "Starting MySQL at $(date -u)" >> /root/eapd.log
         /etc/init.d/mysqld start
         sleep 5
-        echo "Pausing Networking..." && echo "Pausing Networking at $(date -u)" >> /root/eapd.log
-        /sbin/wifi down
-        sleep 5
         echo "Starting Scan Please Wait..." && echo "Starting Scan at $(date -u)" >> /root/eapd.log
         python /root/eapd.py -N | tee -a /root/eapd.log
         echo "Scan Complete." && echo "Scan Complete at $(date -u)" >> /root/eapd.log
         /etc/init.d/mysqld stop
         sleep 5
         echo "Stopped MySQL." && echo "Stopped MySQL at $(date -u)" >> /root/eapd.log
-        /sbin/wifi up
-        sleep 5
-        echo "Network Resumed." && echo "Network Resumed at $(date -u)" >> /root/eapd.log
-        sleep 5
         echo "Log file saved to /root/eapd.log."
         echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
 }
@@ -63,7 +56,6 @@ L() {
         echo "Evil Access Point Defender - Daemon (EAPDD) - Protect your Wireless Network from Bad Access Points."
         echo "Author: Shant Patrick Tchatalbachian." && echo "GNU License v3"
         echo " " && echo "Learning Mode." && echo "Learning Mode" >> /root/eapd.log && echo " "
-        sleep 5
         echo "Stopping Cron..." && echo "Stopping Cron at $(date -u)" >> /root/eapd.log
         /etc/init.d/cron stop
         sleep 5
@@ -73,18 +65,12 @@ L() {
         echo "Starting MySQL..." && echo "Starting MySQL at $(date -u)" >> /root/eapd.log
         /etc/init.d/mysqld start
         sleep 5
-        echo "Pausing Networking..." && echo "Pausing Networking at $(date -u)" >> /root/eapd.log
-        /sbin/wifi down
-        sleep 5
         echo "Starting Learning Mode Please Wait..." && echo "Starting Learning Mode at $(date -u)" >> /root/eapd.log
         python /root/eapd.py -L
         echo "Learning Mode Complete." && echo "Learning Mode Complete at $(date -u)" >> /root/eapd.log
         /etc/init.d/mysqld stop
         sleep 5
         echo "Stopped MySQL." && echo "Stopped MySQL at $(date -u)" >> /root/eapd.log
-        /sbin/wifi up
-        sleep 5
-        echo "Network Resumed." && echo "Network Resumed at $(date -u)" >> /root/eapd.log
         echo "Log file saved to /root/eapd.log."
         echo "Start Scheduled Scans by Running '/etc/init.d/cron enable && /etc/init.d/cron start'."
         echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
