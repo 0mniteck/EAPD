@@ -1,8 +1,28 @@
-#!/bin/bash
+#!/bin/ash
+# UNINSTALL.sh
+
+######################################################################
+#
+# Copyright (C) 2019 Shant Patrick Tchatalbachian
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>
+#
+######################################################################
+
 rm -f /root/eapd.log
 echo "Starting Uninstaller for EAPD..." && echo " " && echo "Starting Uninstaller for EAPD at $(date -u)" >> /root/eapd.log
-/etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/eapdd stop
-sleep 5
+/etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/eapdd stop && sleep 5
 pip uninstall -y netaddr scapy
 opkg --autoremove --force-removal-of-dependent-packages remove procps-ng-pkill mysql-server mariadb-server mariadb-client mariadb-server-plugin-auth-socket python python-mysql python-pip
 rm -f /root/eapd.py && rm -f /etc/crontabs/root && rm -f /etc/init.d/mysqld && rm -f /etc/init.d/eapdd
