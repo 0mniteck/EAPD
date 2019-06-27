@@ -30,6 +30,6 @@ rm -f -r /pineapple/modules/eapd/ && rm -f -r /mnt/data/ && rm -f -r /var/log/my
 opkg --autoremove --force-removal-of-dependent-packages remove procps-ng-pkill mysql-server mariadb-server mariadb-client mariadb-server-plugin-auth-socket python python-mysql python-pip
 echo "Uninstaller Complete." && echo " " && echo "Uninstaller Complete at $(date -u)" >> /root/eapd.log
 echo "If this is not a Wifi-Pineapple remove Aircrack-ng manually by running 'opkg --autoremove remove aircrack-ng airmon-ng'."
-echo " " && echo "Log file saved to /root/eapd.log."
+echo " " && echo "Log file saved to /root/eapd.log." && echo " "
 echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
 exit
