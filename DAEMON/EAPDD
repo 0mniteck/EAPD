@@ -21,10 +21,8 @@
 ######################################################################
 
 EXTRA_COMMANDS="L H"
-EXTRA_HELP=<<EOF
-        L       Learning Mode
-        H       Help
-EOF
+EXTRA_HELP="        L       Learning Mode
+        H       Help"
 
 error() {
         echo "${initscript}:" "$@" 1>&2
