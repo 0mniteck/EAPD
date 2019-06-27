@@ -72,6 +72,6 @@ L() {
         sleep 5
         echo "Stopped MySQL." && echo "Stopped MySQL at $(date -u)" >> /root/eapd.log
         echo "Log file saved to /root/eapd.log."
-        echo "Start Scheduled Scans by Running '/etc/init.d/cron enable && /etc/init.d/cron start'."
+        echo "Start Scheduled Scans by Running '/etc/init.d/cron enable && reboot'."
         echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
 }
