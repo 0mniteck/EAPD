@@ -2,7 +2,8 @@
 rm -f /root/eapd.log
 echo "Starting Uninstaller for EAPD..."
 echo "Starting Uninstaller for EAPD at $(date -u)" >> /root/eapd.log
-/etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/eapd stop
+/etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/eapdd stop
+sleep 5
 pip uninstall -y netaddr scapy
 opkg --autoremove --force-removal-of-dependent-packages remove procps-ng-pkill mysql-server mariadb-server mariadb-client mariadb-server-plugin-auth-socket python python-mysql python-pip
 rm -f /root/eapd.py && rm -f /etc/crontabs/root && rm -f /etc/init.d/mysqld && rm -f /etc/init.d/eapdd
