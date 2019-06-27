@@ -514,8 +514,6 @@ def Reset(Ropt):
 
 def LearningMode():
     # here is Learning stuff
-    print "\n###############################################################\n"
-    print "Entering Learning Mode ..."
     try:
         while True:
             Conf_viewSSIDs()
@@ -826,11 +824,6 @@ try:
                 print "Monitor interface {} created successfully.\n".format(mon_iface)
         else:
                 print "Monitor interface cannot be created. Make sure your card support monitor mode and Aircrack-ng suite.\n"
-
-        if 'NetworkManager' in airmon_out:
-                print "\n 'NetworkManager' is running. I will stop it because it affects the application!"
-        if 'wpa_supplicant' in airmon_out:
-                print "\n 'wpa_supplicant' is running. I will stop it because it affects the application!"
 except:
         print bcolors.FAIL + bcolors.BOLD + "Unexpected error during Creating Monitor Interface: {}\n".format(sys.exc_info()[0]) + bcolors.ENDC
 
