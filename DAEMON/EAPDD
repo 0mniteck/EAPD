@@ -22,7 +22,7 @@
 
 START=98
 EXTRA_COMMANDS="L"
-EXTRA_HELP="            L   Learning Mode"
+EXTRA_HELP="        L       Learning Mode"
 
 error() {
         echo "${initscript}:" "$@" 1>&2
