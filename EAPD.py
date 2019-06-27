@@ -649,7 +649,8 @@ def LearningMode():
                 CheckEvilAP()
                 break
             elif choice == "7":
-                print "Exiting the application...\n" + print "Please Wait...\n"
+                print "Exiting the application...\n" 
+                print "Please Wait...\n"
                 break
             else:
                 print "Wrong choice! Please use one of the avilable choices\n"
