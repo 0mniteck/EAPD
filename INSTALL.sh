@@ -44,6 +44,6 @@ chmod +x /etc/init.d/mysqld && chmod +x /etc/init.d/eapdd
 /etc/init.d/mysqld disable && /etc/init.d/eapdd disable && mysql_install_db --force && opkg install python-mysql
 echo "Installer Complete." && echo " " && echo "Installer Complete at $(date -u)" >> /root/eapd.log
 echo "Log file saved to /root/eapd.log." && echo " "
-echo "Just run '/etc/init.d/eapdd L' to start learning mode."
+echo "Just run '/etc/init.d/eapdd L' to start learning mode." && echo " "
 echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
 exit
