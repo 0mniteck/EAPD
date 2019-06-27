@@ -712,7 +712,7 @@ try:
         db_connection = MySQLdb.connect(host='127.0.0.1', user='root', passwd='password')
         print "Connected to MySQL\n"
     except:
-        print bcolors.FAIL + print "Make sure MySQL server is running\n" + bcolors.ENDC
+        print bcolors.FAIL + "Make sure MySQL server is running\n" + bcolors.ENDC
         sys.exit(2)
 
     cursor = db_connection.cursor()
