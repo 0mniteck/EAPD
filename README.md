@@ -1,4 +1,4 @@
-# Evil Access Point Defender - Daemon (EAPDD)
+# Evil Access Point Defender
 Protect your Wireless Network from Bad Access Points.
 
 Daemonized and modified to run on OpenWrt 15.x and above.
