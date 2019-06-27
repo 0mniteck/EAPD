@@ -17,7 +17,7 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# along with this program.  If not, see <http://www.gnu.org/licenses/>
 #
 ######################################################################
 
@@ -25,7 +25,7 @@ import MySQLdb
 import time
 import os
 from subprocess import *
-import csv     # imports the csv module
+import csv
 import logging
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import *
@@ -50,12 +50,12 @@ class bcolors:
 # Usage
 def Usage():
     print "\n########################USAGE##################################\n"
-    print "Evil Access Point Defender (EAPD) - Protect your Wireless Network from Bad Access Points."
-    print "Authors: Mohamed Idris, And Shant Patrick Tchatalbachian"
-    print "GNU License v3"
-    print " "
-    print "Normal Mode Usage: {} -N [-u <username> -p <password>]\n".format(sys.argv[0])
-    print "Learning Mode Usage: {} -L [-u <username> -p <password>]\n".format(sys.argv[0])
+    print "Evil Access Point Defender (EAPD) - Protect your Wireless Network from Bad Access Points\n."
+    print "Authors: Mohamed Idris, And Shant Patrick Tchatalbachian\n"
+    print "GNU License v3\n"
+    print " \n"
+    print "Normal Mode Usage: {} -N \n".format(sys.argv[0])
+    print "Learning Mode Usage: {} -L \n".format(sys.argv[0])
     print "Help Screen: {} -h or --help\n".format(sys.argv[0])
     print "\n###############################################################\n"
     sys.exit(2)
@@ -64,13 +64,12 @@ def Usage():
 def Help():
     print "\n############################HELP###############################\n"
     print " "
-    print "     Check out the Wiki: https://github.com/0mniteck/EvilAPDefender/wiki/Wiki"
+    print "     Check out the Wiki: https://github.com/0mniteck/EAPD/wiki/Wiki\n"
     print " "
     print "\nUsage:"
-    print "--------------"
-    print "     - Normal Mode Usage: {} -N [-u <username> -p <password>]".format(sys.argv[0])
-    print "     - Learning Mode Usage: {} -L [-u <username> -p <password>]".format(sys.argv[0])
-    print "     - MySQL Username & Passowrd can be provided as arguments or after running the Tool"
+    print " "
+    print "     - Normal Mode Usage: {} -N \n".format(sys.argv[0])
+    print "     - Learning Mode Usage: {} -L \n".format(sys.argv[0])
     print "\n###############################################################\n"
     sys.exit(2)
 
@@ -646,14 +645,14 @@ def LearningMode():
                         break
 
             elif choice == "6":
-                print "Entering Normal Mode ...\n"
+                print "Entering Normal Mode...\n"
                 CheckEvilAP()
                 break
             elif choice == "7":
-                print "Exiting the application ... please wait ..."
+                print "Exiting the application...\n" + print "Please Wait...\n"
                 break
             else:
-                print "Wrong choice! Please use one of the avilable choices"
+                print "Wrong choice! Please use one of the avilable choices\n"
     except:
         print bcolors.FAIL + bcolors.BOLD + "Unexpected error in 'LearningMode': {}".format(sys.exc_info()[0]) + bcolors.ENDC
 
@@ -666,10 +665,10 @@ def LearningMode():
 '''
 try:
     if "-L" in sys.argv[1:]:
-        print "Entering Learning Mode ...\n"
+        print "Entering Learning Mode...\n"
         Mode = "Learning"
     elif "-N" in sys.argv[1:]:
-        print "Entering Normal Mode ...\n"
+        print "Entering Scanning Mode...\n"
         print " \n"
         Mode = "Normal"
     elif ("-h" in sys.argv[1:]) or ("--help" in sys.argv[1:]):
@@ -712,8 +711,7 @@ try:
         db_connection = MySQLdb.connect(host='127.0.0.1', user='root', passwd='password')
         print "Connected to MySQL\n"
     except:
-        print bcolors.FAIL + bcolors.BOLD + "Invalid username or password for MySQL\n"
-        print "Make sure MySQL server is running and your username and password are valid!\n" + bcolors.ENDC
+        print bcolors.FAIL + print "Make sure MySQL server is running\n" + bcolors.ENDC
         sys.exit(2)
 
     cursor = db_connection.cursor()
@@ -798,7 +796,7 @@ try:
         print "To view monitor interfaces run this command: " + bcolors.OKBLUE + "airmon-ng\n" + bcolors.ENDC
         print "To remove a monitor interface use: " + bcolors.OKBLUE + "airmon-ng stop [mon interface]\n" + bcolors.ENDC
         print "Make sure to remove all monitor interfaces one by one\n"
-        print "Exiting the application ... please wait ...\n"
+        print "Exiting the application..." + print "Please Wait...\n"
         Reset("DB")
         sys.exit(2)
 except:
@@ -812,7 +810,7 @@ try:
 
         print "Using wireless interface: " + wireless_interface + "\n"
 
-        print 'Creating a monitoring interface'
+        print "Creating a monitoring interface\n"
 
         print " \n"
 
@@ -836,7 +834,7 @@ except:
 # Scanning for available SSIDs
 print "\n###############################################################\n"
 print "SCANNING FOR WIRELESS NETWORKS"
-print "   \n"
+print " \n"
 try:
     airodump = Popen(["airodump-ng", "--output-format", "csv",  "-w", "out.csv", mon_iface])
     #os.system('airodump-ng --output-format csv -w out.csv ' + mon_iface + ' &')
@@ -854,10 +852,10 @@ except:
 ParseAirodumpCSV()
 
 if Mode == "Normal":
-    print "Entering Normal Mode ...\n"
+    print "Entering Scanning Mode...\n"
     CheckEvilAP()
 elif Mode == "Learning":
-    print "Entering Learning Mode ...\n"
+    print "Entering Learning Mode...\n"
     LearningMode()
 else:
     print("Mode is not identified, Please use the suitable option to run the tool or use '%s' with no options for help menu." % sys.argv[0])
