@@ -650,7 +650,7 @@ def LearningMode():
                 break
             elif choice == "7":
                 print "Exiting the application...\n" 
-                print "Please Wait...\n"
+                print "Please wait...\n"
                 break
             else:
                 print "Wrong choice! Please use one of the avilable choices\n"
@@ -785,7 +785,8 @@ try:
         wireless_interface = output[0:6].strip()
     else:
         print bcolors.FAIL + "\n\nCould not find the wireless interface (wlan)!\n" + bcolors.ENDC
-        print "Exiting the application ... please wait ..."
+        print "Exiting the application...\n"
+        print "Please wait...\n"
         Reset("DB")
         sys.exit(2)
 
@@ -797,7 +798,8 @@ try:
         print "To view monitor interfaces run this command: " + bcolors.OKBLUE + "airmon-ng\n" + bcolors.ENDC
         print "To remove a monitor interface use: " + bcolors.OKBLUE + "airmon-ng stop [mon interface]\n" + bcolors.ENDC
         print "Make sure to remove all monitor interfaces one by one\n"
-        print "Exiting the application..." + print "Please Wait...\n"
+        print "Exiting the application...\n"
+        print "Please wait...\n"
         Reset("DB")
         sys.exit(2)
 except:
