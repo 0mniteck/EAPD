@@ -20,8 +20,11 @@
 #
 ######################################################################
 
-EXTRA_COMMANDS="L"
-EXTRA_HELP="        L       Learning Mode"
+EXTRA_COMMANDS="L H"
+EXTRA_HELP=<<EOF
+        L       Learning Mode
+        H       Help
+EOF
 
 error() {
         echo "${initscript}:" "$@" 1>&2
@@ -67,4 +70,13 @@ L() {
         echo "Log file saved to /root/eapd.log." && echo " "
         echo "Start Scheduled Scans by Running '/etc/init.d/cron enable && reboot'." && echo " "
         echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
+}
+
+H() {
+        echo "Evil Access Point Defender - Daemon (EAPDD) - Protect your Wireless Network from Bad Access Points."
+        echo "Author: Shant Patrick Tchatalbachian." && echo "GNU License v3"
+        echo " " && echo "Runs Daemonized on OpenWrt 15.x and above."
+        echo " " && echo "Check out the Wiki: https://github.com/0mniteck/EAPD/wiki/Wiki"
+        echo "Just run '/etc/init.d/eapdd L' to start learning mode."
+        echo "Start Scheduled Scans by Running '/etc/init.d/cron enable && reboot'." && echo " "
 }
