@@ -165,7 +165,7 @@ def Conf_viewSSIDs():
                 cursor.execute(cmd, (row[1],row[2],row[4],row[5],row[6],row[7]))
                 #print "select * from whitelist where mac='{}' and ssid='{}' and channel={} and CIPHER='{}' and Enc='{}' and Auth='{}'".format(row[1],row[2],row[4],row[5],row[6],row[7])
                 if cursor.rowcount > 0:
-                    print "{}. ({} - {} - '{}' - {} - {} - {} - {})\n".format(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]) + bcolors.ENDC
+                    print "{}. ({} - {} - '{}' - {} - {} - {} - {})\n".format(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7])
                 else:
                     print "{}. ({} - {} - '{}' - {} - {} - {} - {})\n".format(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7])
         else:
@@ -190,7 +190,7 @@ def Conf_viewSSIDs():
             print "\nWhitelisted OUIs (Tagged Parameters):"
             print "(BSSID - SSID - OUI)\n"
             for row in whitelist_OUIs_data:
-                print bcolors.OKGREEN + "({} - {} - {})".format(row[0],row[1],row[2])
+                print "({} - {} - {})".format(row[0],row[1],row[2])
         else:
             print "\nCurrently, There are No Whitelisted OUIs\n"
 
@@ -282,7 +282,7 @@ def insert_ap(pkt):
             if p.ID == 0:
                 ssid = p.info
 
-            if p.ID == 221:
+                if p.ID == 221:
                 s = p.info.encode("hex")
                 OUI = s[:6]
                 #print p.info.encode("hex")
