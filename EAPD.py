@@ -283,7 +283,7 @@ def insert_ap(pkt):
                 ssid = p.info
 
                 if p.ID == 221:
-                s = p.info.encode("hex")
+                    s = p.info.encode("hex")
                 OUI = s[:6]
                 #print p.info.encode("hex")
                 #oui = OUI(s[:6])
