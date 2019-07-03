@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # File: /root/eapd.py
 
-######################################################################
+#######################################################################
 #
 # Copyright (C) 2015 Mohamed Idris
 # Copyright (C) 2019 Shant Patrick Tchatalbachian
@@ -17,9 +17,9 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>
+# along with this program.  If not, see <https://www.gnu.org/licenses/>
 #
-######################################################################
+#######################################################################
 
 import MySQLdb
 import time
@@ -33,18 +33,6 @@ from netaddr import *
 import sys, getopt
 import smtplib
 import threading
-
-########### Classes Def
-# Colors
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
 
 ########### Functions Def
 # Usage
@@ -76,22 +64,22 @@ def Help():
 # Learning choices
 def Choices():
     print "\n###############################################################\n"
-    print bcolors.OKBLUE + "What do you want to do (please choose a number):"
+    print "What do you want to do (please choose a number):"
     print "1. AutoConfig (only choose SSID)"
     print "2. Add specific Access Point"
     print "3. Remove specific Access Point"
     print "4. Remove whitelisted Access Points"
     print "5. Update options"
     print "6. Go into Normal Mode"
-    print "7. Nothing, just exit\n" + bcolors.ENDC
+    print "7. Nothing, just exit\n"
 
 # Learning options
 def Options():
     print "\n###############################################################\n"
-    print bcolors.OKBLUE + "What option do you want to update (please choose a number):"
+    print "What option do you want to update (please choose a number):"
     print "1. Configure Preventive Mode"
     print "2. Admin notification"
-    print "3. Return to previous menu\n" + bcolors.ENDC
+    print "3. Return to previous menu\n"
 
 # sending an alert to the admin email
 def AlertAdmin(message):
@@ -119,35 +107,33 @@ def AlertAdmin(message):
                         message = "From: EvilAP_Defender <{}>\nTo: Admin <{}>\nSubject: EvilAP_Defender Alert!\n\n"\
                             .format(admin_smtp_username, admin_email) + message
                         try:
-                            print bcolors.OKBLUE + "\nConnecting to SMTP server\n" + bcolors.ENDC
+                            print "\nConnecting to SMTP server\n"
                             mailsrv = smtplib.SMTP(admin_smtp,587)
-                            print bcolors.OKBLUE + "\nSending ehlo message to SMTP server\n" + bcolors.ENDC
+                            print "\nSending ehlo message to SMTP server\n"
                             mailsrv.ehlo()
-                            print bcolors.OKBLUE + "\nStarting TLS with SMTP server\n" + bcolors.ENDC
+                            print "\nStarting TLS with SMTP server\n"
                             mailsrv.starttls()
-                            print bcolors.OKBLUE + "\nSending ehlo message to SMTP server\n" + bcolors.ENDC
+                            print "\nSending ehlo message to SMTP server\n"
                             mailsrv.ehlo()
-                            print bcolors.OKBLUE + "\nLogin to SMTP server\n" + bcolors.ENDC
+                            print "\nLogin to SMTP server\n"
                             mailsrv.login(admin_smtp_username,admin_smtp_password)
-                            print bcolors.OKBLUE + "\nSending the message ...\n" + bcolors.ENDC
+                            print "\nSending the message ...\n"
                             mailsrv.sendmail(admin_smtp_username, admin_email, message)
-                            print bcolors.OKBLUE + "\nDisconnecting from mail server ...\n" + bcolors.ENDC
+                            print "\nDisconnecting from mail server ...\n"
                             mailsrv.quit()
-                            print bcolors.OKGREEN + bcolors.BOLD + "\nSuccessfully sent email to admin\n" + bcolors.ENDC
+                            print "\nSuccessfully sent email to admin\n"
                         except:
-                            print bcolors.FAIL + bcolors.BOLD + "\nError: unable to send an email to admin: {}\n".format(sys.exc_info()[0]) + bcolors.ENDC
-                            #print bcolors.OKGREEN + bcolors.BOLD + "\nSuccessfully sent email to admin\n" + bcolors.ENDC
+                            print "\nError: unable to send an email to admin: {}\n".format(sys.exc_info()[0])
                     else:
-                        print bcolors.WARNING + "Cannot send alert. SMTP password not found!\nConfigure admin notification from Learning Mode\n" + bcolors.ENDC
+                        print "Cannot send alert. SMTP password not found!\nConfigure admin notification from Learning Mode\n"
                 else:
-                    print bcolors.WARNING + "Cannot send alert. SMTP username not found!\nConfigure admin notification from Learning Mode\n" + bcolors.ENDC
+                    print "Cannot send alert. SMTP username not found!\nConfigure admin notification from Learning Mode\n"
             else:
-                print bcolors.WARNING + "Cannot send alert. SMTP address not found!\nConfigure admin notification from Learning Mode\n" + bcolors.ENDC
+                print "Cannot send alert. SMTP address not found!\nConfigure admin notification from Learning Mode\n"
         else:
-            print bcolors.WARNING + "Cannot send alert. Admin email not found!\nConfigure admin notification from Learning Mode\n" + bcolors.ENDC
+            print "Cannot send alert. Admin email not found!\nConfigure admin notification from Learning Mode\n"
     except:
-        print bcolors.FAIL + bcolors.BOLD + "Unexpected error in 'AlertAdmin': {}\n".format(sys.exc_info()[0]) + bcolors.ENDC
-        #print bcolors.OKGREEN + bcolors.BOLD + "\nSuccessfully sent email to admin\n" + bcolors.ENDC
+        print "Unexpected error in 'AlertAdmin': {}\n".format(sys.exc_info()[0])
 
     return
 
@@ -163,7 +149,6 @@ def Conf_viewSSIDs():
             for row in ssids_data:
                 cmd = "select * from whitelist where mac=%s and ssid=%s and channel=%s and CIPHER=%s and Enc=%s and Auth=%s"
                 cursor.execute(cmd, (row[1],row[2],row[4],row[5],row[6],row[7]))
-                #print "select * from whitelist where mac='{}' and ssid='{}' and channel={} and CIPHER='{}' and Enc='{}' and Auth='{}'".format(row[1],row[2],row[4],row[5],row[6],row[7])
                 if cursor.rowcount > 0:
                     print "{}. ({} - {} - '{}' - {} - {} - {} - {})\n".format(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7])
                 else:
@@ -179,7 +164,7 @@ def Conf_viewSSIDs():
             print "Whitelisted Access Points:"
             print "ID. (BSSID - SSID - MinPWR - MaxPWR - Channel - Cipher - Privacy - Auth)\n"
             for row in whitelist_data:
-                print bcolors.OKGREEN + "{}. ({} - {} - '{}' - '{}' - {} - {} - {} - {})".format(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]) + bcolors.ENDC
+                print "{}. ({} - {} - '{}' - '{}' - {} - {} - {} - {})".format(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8])
         else:
             print "\nCurrently, There are No Whitelisted Access Points\n"
 
@@ -228,22 +213,17 @@ def cmd_iwconfig():
 # Deauth Attack
 def Deauth(Dbssid,Dssid,Dchannel,Dtime):
     try:
-        #Dssid = '"' + Dssid + '"'
         print "Attacking Dbssid: {} - Dssid: {} - Dchannel: {} - Dtime: {}\n".format(Dbssid,Dssid,Dchannel,Dtime)
-        print bcolors.OKBLUE + "\nChanging monitor interface into channel [{}]\n".format(Dchannel) + bcolors.ENDC
+        print "\nChanging monitor interface into channel [{}]\n".format(Dchannel)
         Reset("INTF")
-        #print "After Reset\n"
         airmon_out = Popen(["airmon-ng", "start", wireless_interface, Dchannel], stdout=PIPE).communicate()[0]
-        #print "after airmon\n"
         mon_iface = get_moniface()
-        #mon_iface = "mon0"
-        #print mon_iface
-        print bcolors.OKBLUE + "\nAttack time set to: {} Seconds\n".format(Dtime) + bcolors.ENDC
+        print "\nAttack time set to: {} Seconds\n".format(Dtime)
         aireplay = Popen(["aireplay-ng", "--deauth", "0",  "-a", Dbssid, "-e", Dssid, mon_iface])
         time.sleep(Dtime)
         aireplay.terminate()
     except Exception,e:
-        print bcolors.FAIL + bcolors.BOLD + "Unexpected error in 'Deauth': {}\n".format(sys.exc_info()[0]) + str(e) + bcolors.ENDC
+        print "Unexpected error in 'Deauth': {}\n".format(sys.exc_info()[0]) + str(e)
 
 #Initialize options
 def Initialize_options():
@@ -259,21 +239,17 @@ def Initialize_options():
             cmd = "insert into options values('deauth_repeat','1')"
             cursor.execute(cmd)
     except:
-        print bcolors.FAIL + bcolors.BOLD + "Unexpected error in 'Initialize_options': {}\n".format(sys.exc_info()[0]) + bcolors.ENDC
+        print "Unexpected error in 'Initialize_options': {}\n".format(sys.exc_info()[0])
 
 # Tagged Parameters parsing
 def insert_ap(pkt):
     try:
-        ## Done in the lfilter param
-        # if Dot11Beacon not in pkt and Dot11ProbeResp not in pkt:
-        #     return
         bssid = pkt[Dot11].addr3
         if bssid in aps:
             return
         p = pkt[Dot11Elt]
         cap = pkt.sprintf("{Dot11Beacon:%Dot11Beacon.cap%}"
                           "{Dot11ProbeResp:%Dot11ProbeResp.cap%}").split('+')
-        #print pkt.info
 
         ssid, OUI = None, None
         OUIs = []
@@ -285,24 +261,18 @@ def insert_ap(pkt):
             if p.ID == 221:
                 s = p.info.encode("hex")
                 OUI = s[:6]
-                #print p.info.encode("hex")
-                #oui = OUI(s[:6])
-                #print oui.registration(0).org
-                #print "SSID: %r [%s], OUI: %r" % (ssid, bssid, OUI)
                 if OUI not in OUIs:
                     OUIs.append(OUI)
 
             p = p.payload
 
-        #cursor.execute("select * from whitelist where ssid = '" + ssid + "'")
-        #if cursor.rowcount > 0:
         for item in OUIs:
             cmd = "insert into ssids_OUIs (mac, ssid, oui) values(%s,%s,%s)"
             cursor.execute(cmd, (bssid, ssid, item))
 
         aps[bssid] = (ssid)
     except:
-        print bcolors.FAIL + bcolors.BOLD + "Unexpected error in 'insert_ap': {}\n".format(sys.exc_info()[0]) + bcolors.ENDC
+        print "Unexpected error in 'insert_ap': {}\n".format(sys.exc_info()[0])
 
 # Check for Evil APs
 def CheckEvilAP():
@@ -348,16 +318,15 @@ def CheckEvilAP():
         ########### Print the Result
             print "\n###########################CHECK-RESULT########################\n"
             if EvilAPMAC:
-                print bcolors.WARNING + bcolors.BOLD + "Fake AP with different MAC Detected!\n" + bcolors.ENDC
+                print "Fake AP with different MAC Detected!\n"
                 msg = "Fake AP with different MAC Detected!\n"
                 msg = msg + "(BSSID - SSID - PWR - Channel - Cipher - Privacy - Auth)\n"
                 print "(BSSID - SSID - PWR - Channel - Cipher - Privacy - Auth)"
                 for row in Evil_data:
-                    print bcolors.WARNING + "({} - {} - '{}' - {} - {} - {} - {})\n".format(row[1],row[2],row[3],row[4],row[5],row[6],row[7]) + bcolors.ENDC
+                    print "({} - {} - '{}' - {} - {} - {} - {})\n".format(row[1],row[2],row[3],row[4],row[5],row[6],row[7])
                     msg = msg + "({} - {} - '{}' - {} - {} - {} - {})\n".format(row[1],row[2],row[3],row[4],row[5],row[6],row[7])
                 thread = threading.Thread(target=AlertAdmin, args=(msg,))
                 thread.start()
-                #AlertAdmin(msg)
                 cmd = "select opt_val from options where opt_key = 'deauth_time'"
                 cursor.execute(cmd)
                 if cursor.rowcount > 0:
@@ -365,8 +334,8 @@ def CheckEvilAP():
                     deauth_time = int(row[0])
                     print "Deauth time: {}".format(deauth_time)
                     if int(deauth_time) > 0:
-                        print bcolors.OKBLUE + "\n#########################ATTACK-MODE###########################\n"
-                        print "Attacking Evil Access Point ..." + bcolors.ENDC
+                        print "\n#########################ATTACK-MODE###########################\n"
+                        print "Attacking Evil Access Point ..."
                         cmd = "select opt_val from options where opt_key = 'deauth_repeat'"
                         cursor.execute(cmd)
                         if cursor.rowcount > 0:
@@ -382,22 +351,20 @@ def CheckEvilAP():
                                 else:
                                     for row in Evil_data:
                                         Deauth(row[1],row[2],str(row[4]),deauth_time)
-                        print bcolors.OKBLUE + "\nStop attacking Evil Access Point ..." + bcolors.ENDC
+                        print "\nStop attacking Evil Access Point ..."
                         print "\n\n"
                     else:
-                        print bcolors.WARNING + "Preventive Mode is not enabled\n" + bcolors.ENDC
+                        print "Preventive Mode is not enabled\n"
 
             elif EvilAPAttrib:
-                print bcolors.WARNING + bcolors.BOLD + "Fake AP with different Attribute Detected!\n" + bcolors.ENDC
-                msg = "Fake AP with different Attribute Detected!\n"
+                print "Fake AP with different Attribute Detected!\n"
                 msg = msg + "(BSSID - SSID - PWR - Channel - Cipher - Privacy - Auth)\n"
                 print "(BSSID - SSID - PWR - Channel - Cipher - Privacy - Auth)"
                 for row in attrib_data:
-                    print bcolors.WARNING + "({} - {} - '{}' - {} - {} - {} - {})\n".format(row[1],row[2],row[3],row[4],row[5],row[6],row[7]) + bcolors.ENDC
+                    print "({} - {} - '{}' - {} - {} - {} - {})\n".format(row[1],row[2],row[3],row[4],row[5],row[6],row[7])
                     msg = msg + "({} - {} - '{}' - {} - {} - {} - {})\n".format(row[1],row[2],row[3],row[4],row[5],row[6],row[7])
                 thread = threading.Thread(target=AlertAdmin, args=(msg,))
                 thread.start()
-                #AlertAdmin(msg)
                 cmd = "select distinct * from ssids as s inner join whitelist as w on s.ssid = w.ssid and s.mac = w.mac where s.channel != w.channel"
                 cursor.execute(cmd)
                 if cursor.rowcount > 0:
@@ -408,8 +375,8 @@ def CheckEvilAP():
                         deauth_time = int(row[0])
                         print "Deauth time: {}".format(deauth_time)
                         if int(deauth_time) > 0:
-                            print bcolors.OKBLUE + "\n#########################ATTACK-MODE###########################\n"
-                            print "Attacking Evil Access Point ..." + bcolors.ENDC
+                            print "\n#########################ATTACK-MODE###########################\n"
+                            print "Attacking Evil Access Point ..."
                             cmd = "select opt_val from options where opt_key = 'deauth_repeat'"
                             cursor.execute(cmd)
                             if cursor.rowcount > 0:
@@ -425,18 +392,18 @@ def CheckEvilAP():
                                     else:
                                         for row in attrib_data:
                                             Deauth(row[1],row[2],str(row[4]),deauth_time)
-                            print bcolors.OKBLUE + "\nStop attacking Evil Access Point ..." + bcolors.ENDC
+                            print "\nStop attacking Evil Access Point ..."
                             print "\n\n"
                         else:
-                            print bcolors.WARNING + "Preventive Mode is not enabled\n" + bcolors.ENDC
+                            print "Preventive Mode is not enabled\n"
 
             elif EvilAPOUI:
-                print bcolors.WARNING + bcolors.BOLD + "Fake AP with different OUI Detected!\n" + bcolors.ENDC
+                print "Fake AP with different OUI Detected!\n"
                 msg = "Fake AP with different OUI Detected!\n"
                 msg = msg + "(BSSID - SSID - OUI)\n"
                 print "(BSSID - SSID - OUI)"
                 for row in OUIs_data:
-                    print bcolors.WARNING + "({} - {} - {})\n".format(row[0],row[1],row[2]) + bcolors.ENDC
+                    print "({} - {} - {})\n".format(row[0],row[1],row[2])
                     msg = msg + "({} - {} - {})\n".format(row[0],row[1],row[2])
                 thread = threading.Thread(target=AlertAdmin, args=(msg,))
                 thread.start()
@@ -446,26 +413,17 @@ def CheckEvilAP():
             print "\n###############################################################\n"
 
         else:
-            print bcolors.WARNING + bcolors.BOLD + "No Whitelisted SSID Detected!\n"
-            print "Run the tool in the Learning Mode first and add your own SSID into whitelist" + bcolors.ENDC
+            print "No Whitelisted SSID Detected!\n"
+            print "Run the tool in the Learning Mode first and add your SSID into whitelist"
     except:
-        print bcolors.FAIL + bcolors.BOLD + "Unexpected error in 'CheckEvilAP': {}\n".format(sys.exc_info()[0]) + bcolors.ENDC
+        print "Unexpected error in 'CheckEvilAP': {}\n".format(sys.exc_info()[0])
 
 # Parsing the output
 def ParseAirodumpCSV():
     try:
-        # Trying to solve the issue of having null bytes
-        '''if '\0' in open('out.csv-01.csv').read():
-            fo = open('out.csv-01.csv', 'wb')
-            fo.write(data.replace('\x00', ''))
-            fo.close()'''
-
         f = open('out.csv-01.csv', 'rb') # opens the csv file
         try:
-            #reader = csv.reader(f)  # creates the reader object
-            # Trying to solve the issue of having null bytes (utf-16)
             reader = csv.reader(x.replace('\0', '') for x in f)  # creates the reader object
-
             for row in reader:   # iterates the rows of the file in orders
                 if 'BSSID' in row:
                     continue
@@ -473,20 +431,12 @@ def ParseAirodumpCSV():
                     continue
                 if len(row) < 1:
                     continue
-                #ESSID = 'insert into ssids (mac,ssid,pwr,channel,CIPHER,Enc,Auth) values(' + row[0].strip() + ',' + row[13].strip() + ',' + row[8].strip() \
-                #+ ',' + row[3].strip() + ',' + row[6].strip() + ',' + row[5].strip() + ',' + row[7].strip() + ')'
-                #print ESSID
-                #cursor.execute('insert into ssids (mac,ssid,channel) values(ESSID,SSID,CHANNEL)')
                 cmd = "insert into ssids (mac,ssid,pwr,channel,CIPHER,Enc,Auth) values(%s,%s,%s,%s,%s,%s,%s)"
                 cursor.execute(cmd, (row[0].strip(), row[13].strip(), row[8].strip(), row[3].strip(), row[6].strip(), row[5].strip(), row[7].strip()))
-                #cursor.execute('insert into ssids (mac,ssid,pwr,channel,CIPHER,Enc,Auth) values(' + "'" + row[0].strip() + "'" + ',' + "'" + row[13].strip() + "'" + ',' + row[8].strip() \
-                #+ ',' + row[3].strip() + ',' + "'" + row[6].strip() + "'" + ',' + "'" + row[5].strip() + "'" + ',' + "'" + row[7].strip() + "'" + ')')
-                #print '#ESSID: ' + row[0].strip() + ' #Channel: ' + row[3].strip() + ' #Enc: ' + row[5].strip() + ' #Cipher: ' + row[6].strip() + ' #Auth: ' + row[7].strip() + ' #PWR: ' + row[8].strip() + ' #SSID: ' + row[13].strip()
-
             db_connection.commit()
 
         finally:
-            f.close()      # closing
+            f.close()
     except:
         print ""
 
@@ -496,34 +446,27 @@ def Reset(Ropt):
         time.sleep(1)
         if Ropt == "INTF":
             os.system('airmon-ng stop ' + mon_iface)
-            # os.system('airmon-ng stop ' + wireless_interface)
-        # elif Ropt == "INTF_NoMon":
-        #    os.system('airmon-ng stop ' + wireless_interface)
         elif Ropt == "DB":
             cursor.close()
             db_connection.close()
         else:
             os.system('rm out.csv-01.*')
             os.system('airmon-ng stop ' + mon_iface)
-            # os.system('airmon-ng stop ' + wireless_interface)
             cursor.close()
             db_connection.close()
     except:
-        print bcolors.FAIL + bcolors.BOLD + "Unexpected error in 'Reset': {}\n".format(sys.exc_info()[0]) + bcolors.ENDC
+        print "Unexpected error in 'Reset': {}\n".format(sys.exc_info()[0])
 
 def LearningMode():
     # here is Learning stuff
     try:
         while True:
             Conf_viewSSIDs()
-
             Choices()
-
-            choice = raw_input(bcolors.OKBLUE + 'Enter the number for your choice: ' + bcolors.ENDC)
+            choice = raw_input('Enter the number for your choice: ')
             if choice == "1":
                 print "\n######################AUTO-CONFIG-MODE#########################\n"
                 SSID = raw_input('Enter the SSID name you want to whitelist: ')
-                #cursor.execute("select * from ssids where mac='{}')
                 cmd = "select * from ssids where ssid=%s"
                 cursor.execute(cmd, (SSID,))
                 if cursor.rowcount > 0:
@@ -565,7 +508,7 @@ def LearningMode():
                 cmd = "select * from whitelist where mac=%s"
                 cursor.execute(cmd, (bssid_rm,))
                 if cursor.rowcount > 0:
-                    bssid_rm_confirm = raw_input(bcolors.WARNING + 'This will remove the identified BSSID from whitelist! Are you still want to continue?(y/n): ' + bcolors.ENDC)
+                    bssid_rm_confirm = raw_input('This will remove the identified BSSID from whitelist! Are you still want to continue?(y/n): ')
                     if bssid_rm_confirm == "y":
                         cmd = "delete from whitelist where mac=%s"
                         cursor.execute(cmd, (bssid_rm,))
@@ -578,7 +521,7 @@ def LearningMode():
                 else:
                     print "The BSSID you entered cannot be found among the whitelisted BSSIDs"
             elif choice == "4":
-                confirm = raw_input(bcolors.WARNING + 'This will remove all whitelisted SSIDs! Are you still want to continue?(y/n): ' + bcolors.ENDC)
+                confirm = raw_input('This will remove all whitelisted SSIDs! Are you still want to continue?(y/n): ')
                 if confirm == "y":
                     cmd = "delete from whitelist"
                     cursor.execute(cmd)
@@ -606,7 +549,7 @@ def LearningMode():
                         print "\n"
 
                     Options()
-                    option = raw_input(bcolors.OKBLUE + 'Enter the number for your choice: ' + bcolors.ENDC)
+                    option = raw_input('Enter the number for your choice: ')
                     if option == "1":
                         deauth_time = int(raw_input('Enter Deauth attack time (attack duration in seconds. To disable enter 0): '))
                         cmd = "delete from options where opt_key = 'deauth_time'"
@@ -655,30 +598,10 @@ def LearningMode():
             else:
                 print "Wrong choice! Please use one of the avilable choices\n"
     except:
-        print bcolors.FAIL + bcolors.BOLD + "Unexpected error in 'LearningMode': {}".format(sys.exc_info()[0]) + bcolors.ENDC
-
-
-
+        print "Unexpected error in 'LearningMode': {}".format(sys.exc_info()[0])
 
 ##################################################################### Main Start Here
 
-#opts, args = getopt.getopt(sys.argv[1:],"L")
-'''
-try:
-    if "-L" in sys.argv[1:]:
-        print "Entering Learning Mode...\n"
-        Mode = "Learning"
-    elif "-N" in sys.argv[1:]:
-        print "Entering Scanning Mode...\n"
-        print " \n"
-        Mode = "Normal"
-    elif ("-h" in sys.argv[1:]) or ("--help" in sys.argv[1:]):
-        Help()
-    else:
-        Usage()
-except:
-        print bcolors.FAIL + "Unexpected error while parsing arguments: {}".format(sys.exc_info()[0]) + bcolors.ENDC
-'''
 Mode = ""
 username = ""
 password = ""
@@ -688,7 +611,7 @@ try:
 except getopt.GetoptError:
     Usage()
 except:
-        print bcolors.FAIL + "Unexpected error while parsing arguments: {}".format(sys.exc_info()[0]) + bcolors.ENDC 
+        print "Unexpected error while parsing arguments: {}".format(sys.exc_info()[0])
 for opt, arg in opts:
     if opt in ("-h", "--help"):
         Help()
@@ -712,7 +635,7 @@ try:
         db_connection = MySQLdb.connect(host='127.0.0.1', user='root', passwd='password')
         print "Connected to MySQL\n"
     except:
-        print bcolors.FAIL + "Make sure MySQL server is running\n" + bcolors.ENDC
+        print "Make sure MySQL server is running\n"
         sys.exit(2)
 
     cursor = db_connection.cursor()
@@ -771,7 +694,7 @@ try:
     cmd = 'Truncate table ssids_OUIs'
     cursor.execute(cmd)
 except:
-        print bcolors.FAIL + bcolors.BOLD + "Unexpected error during intializing MySQL: {}\n".format(sys.exc_info()[0])
+        print "Unexpected error during intializing MySQL: {}\n".format(sys.exc_info()[0])
         sys.exit(2)
 
 Initialize_options()
@@ -784,7 +707,7 @@ try:
     if "wlan" in output:
         wireless_interface = output[0:6].strip()
     else:
-        print bcolors.FAIL + "\n\nCould not find the wireless interface (wlan)!\n" + bcolors.ENDC
+        print "\n\nCould not find the wireless interface (wlan)!\n"
         print "Exiting the application...\n"
         print "Please wait...\n"
         Reset("DB")
@@ -793,46 +716,38 @@ try:
     # Check if mon interface is not disabled
     airmon_data = Popen("airmon-ng", stdout=PIPE).communicate()[0]
     if 'mon' in airmon_data:
-        print bcolors.FAIL + "\n\nWarning: Monitor interface has been detected."
-        print "Please remove all monitoring interfaces before you run the application\n" + bcolors.ENDC
-        print "To view monitor interfaces run this command: " + bcolors.OKBLUE + "airmon-ng\n" + bcolors.ENDC
-        print "To remove a monitor interface use: " + bcolors.OKBLUE + "airmon-ng stop [mon interface]\n" + bcolors.ENDC
+        print "\n\nWarning: Monitor interface has been detected."
+        print "Please remove all monitoring interfaces before you run the application\n"
+        print "To view monitor interfaces run this command: airmon-ng\n"
+        print "To remove a monitor interface use: airmon-ng stop [mon interface]\n"
         print "Make sure to remove all monitor interfaces one by one\n"
         print "Exiting the application...\n"
         print "Please wait...\n"
         Reset("DB")
         sys.exit(2)
 except:
-        print bcolors.FAIL + bcolors.BOLD + "Unexpected error during Preparing Monitor Interface: {}\n".format(sys.exc_info()[0]) + bcolors.ENDC
+        print "Unexpected error during Preparing Monitor Interface: {}\n".format(sys.exc_info()[0])
 
 # Creating Monitor Interface
 try:
         print "Restarting wireless interface: " + wireless_interface + "\n"
         os.system('ifconfig ' + wireless_interface + ' down')
         os.system('ifconfig ' + wireless_interface + ' up')
-
         print "Using wireless interface: " + wireless_interface + "\n"
-
         print "Creating a monitoring interface\n"
-
-        print " \n"
-
         airmon_out = Popen(["airmon-ng", "start", wireless_interface], stdout=PIPE).communicate()[0]
-
         mon_iface = get_moniface()
-
         if mon_iface != 0:
                 print "Monitor interface {} created successfully.\n".format(mon_iface)
         else:
                 print "Monitor interface cannot be created. Make sure your card support monitor mode and Aircrack-ng suite.\n"
 except:
-        print bcolors.FAIL + bcolors.BOLD + "Unexpected error during Creating Monitor Interface: {}\n".format(sys.exc_info()[0]) + bcolors.ENDC
-
+        print "Unexpected error during Creating Monitor Interface: {}\n".format(sys.exc_info()[0])
 ########### Remove the old output from airodump
 try:
     os.system('rm out.csv-01.*')
 except:
-        print bcolors.FAIL + bcolors.BOLD + "Unexpected error during removing old 'out.csv-01': {}\n".format(sys.exc_info()[0]) + bcolors.ENDC
+        print "Unexpected error during removing old 'out.csv-01': {}\n".format(sys.exc_info()[0])
 
 # Scanning for available SSIDs
 print "\n###############################################################\n"
@@ -840,17 +755,12 @@ print "SCANNING FOR WIRELESS NETWORKS"
 print " \n"
 try:
     airodump = Popen(["airodump-ng", "--output-format", "csv",  "-w", "out.csv", mon_iface])
-    #os.system('airodump-ng --output-format csv -w out.csv ' + mon_iface + ' &')
-
     aps = {}
-    #sniff(iface=mon_iface, prn=insert_ap, count=100, store=False, lfilter=lambda p: (Dot11Beacon in p or Dot11ProbeResp in p))
-
-    #os.system('pkill airodump-ng')
     time.sleep(150)
     airodump.terminate()
     db_connection.commit()
 except:
-        print bcolors.FAIL + bcolors.BOLD + "Unexpected error during scanning for available SSIDs: {}\n".format(sys.exc_info()[0]) + bcolors.ENDC
+        print "Unexpected error during scanning for available SSIDs: {}\n".format(sys.exc_info()[0])
 
 ParseAirodumpCSV()
 
