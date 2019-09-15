@@ -28,7 +28,8 @@ mkdir /var/log/mysql/ && chmod 777 /var/log/mysql/
 mkdir /var/log/mysqld/ && chmod 777 /var/log/mysqld/
 mkdir /var/run/mysqld/ && chmod 777 /var/run/mysqld/
 opkg update && opkg --autoremove --force-removal-of-dependent-packages remove git-http
-opkg install procps-ng-pkill aircrack-ng airmon-ng mysql-server mariadb-client mariadb-server-plugin-auth-socket python python-pip
+opkg install procps-ng-pkill mysql-server mariadb-client mariadb-server-extra python python-pip
+pip install --upgrade pip
 pip install netaddr scapy
 /etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/mysqld stop
 mkdir /pineapple/
@@ -42,7 +43,9 @@ cp -f MODULE/MODULE.js /pineapple/modules/eapd/js/module.js
 cp -f DAEMON/MYSQLD /etc/init.d/mysqld && cp -f DAEMON/EAPDD /etc/init.d/eapdd
 chmod 744 /etc/init.d/mysqld && chmod 744 /etc/init.d/eapdd
 chmod +x /etc/init.d/mysqld && chmod +x /etc/init.d/eapdd
+echo 'innodb_use_native_aio = 0' >> /etc/mysql/conf.d/50-server.cnf
 /etc/init.d/mysqld disable && /etc/init.d/eapdd disable && mysql_install_db --force && opkg install python-mysql
+/etc/init.d/mysqld start && mysql_secure_installation && /etc/init.d/mysqld stop
 echo "Installer Complete." && echo " " && echo "Installer Complete at $(date -u)" >> /root/logs/install.log
 echo "Log file saved to /root/logs/install.log." && echo " "
 echo "Just run '/etc/init.d/eapdd L' to start learning mode." && echo " "
