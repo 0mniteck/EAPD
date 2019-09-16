@@ -318,6 +318,9 @@ def CheckEvilAP():
         ########### Print the Result
             print "\n###########################CHECK-RESULT########################\n"
             if EvilAPMAC:
+                file = open("eapd.log","a")
+                file.write("Fake AP with different MAC Detected!\n")
+                file.close()
                 print "Fake AP with different MAC Detected!\n"
                 msg = "Fake AP with different MAC Detected!\n"
                 msg = msg + "(BSSID - SSID - PWR - Channel - Cipher - Privacy - Auth)\n"
@@ -334,8 +337,11 @@ def CheckEvilAP():
                     deauth_time = int(row[0])
                     print "Deauth time: {}".format(deauth_time)
                     if int(deauth_time) > 0:
+                        file = open("eapd.log","a")
+                        file.write("Attacking Evil Access Point.\n")
+                        file.close()
                         print "\n#########################ATTACK-MODE###########################\n"
-                        print "Attacking Evil Access Point ..."
+                        print "Attacking Evil Access Point..."
                         cmd = "select opt_val from options where opt_key = 'deauth_repeat'"
                         cursor.execute(cmd)
                         if cursor.rowcount > 0:
@@ -351,12 +357,15 @@ def CheckEvilAP():
                                 else:
                                     for row in Evil_data:
                                         Deauth(row[1],row[2],str(row[4]),deauth_time)
-                        print "\nStop attacking Evil Access Point ..."
+                        print "\nStop attacking Evil Access Point..."
                         print "\n\n"
                     else:
                         print "Preventive Mode is not enabled\n"
 
             elif EvilAPAttrib:
+                file = open("eapd.log","a")
+                file.write("Fake AP with different Attribute Detected!\n")
+                file.close()
                 print "Fake AP with different Attribute Detected!\n"
                 msg = msg + "(BSSID - SSID - PWR - Channel - Cipher - Privacy - Auth)\n"
                 print "(BSSID - SSID - PWR - Channel - Cipher - Privacy - Auth)"
@@ -375,8 +384,11 @@ def CheckEvilAP():
                         deauth_time = int(row[0])
                         print "Deauth time: {}".format(deauth_time)
                         if int(deauth_time) > 0:
+                            file = open("eapd.log","a")
+                            file.write("Attacking Evil Access Point.\n")
+                            file.close()
                             print "\n#########################ATTACK-MODE###########################\n"
-                            print "Attacking Evil Access Point ..."
+                            print "Attacking Evil Access Point..."
                             cmd = "select opt_val from options where opt_key = 'deauth_repeat'"
                             cursor.execute(cmd)
                             if cursor.rowcount > 0:
@@ -392,7 +404,7 @@ def CheckEvilAP():
                                     else:
                                         for row in attrib_data:
                                             Deauth(row[1],row[2],str(row[4]),deauth_time)
-                            print "\nStop attacking Evil Access Point ..."
+                            print "\nStop attacking Evil Access Point..."
                             print "\n\n"
                         else:
                             print "Preventive Mode is not enabled\n"
@@ -409,10 +421,16 @@ def CheckEvilAP():
                 thread.start()
                 #AlertAdmin(msg)
             else:
+                file = open("eapd.log","a")
+                file.write("No Evil AP Detected!\n")
+                file.close()
                 print "No Evil AP Detected!\n"
             print "\n###############################################################\n"
 
         else:
+            file = open("eapd.log","a")
+            file.write("No Whitelisted SSID Detected!\n")
+            file.close()
             print "No Whitelisted SSID Detected!\n"
             print "Run the tool in the Learning Mode first and add your SSID into whitelist"
     except:
@@ -632,7 +650,7 @@ print "Preparing MySQL Database\n"
 
 try:
     try:
-        db_connection = MySQLdb.connect(host='127.0.0.1', user='root', passwd='password')
+        db_connection = MySQLdb.connect(host='127.0.0.1', user='root', passwd='Your_Password_Goes_Here')
         print "Connected to MySQL\n"
     except:
         print "Make sure MySQL server is running\n"
@@ -750,6 +768,9 @@ except:
         print "Unexpected error during removing old 'out.csv-01': {}\n".format(sys.exc_info()[0])
 
 # Scanning for available SSIDs
+file = open("eapd.log","a")
+file.write("Scanning for wireless networks.\n")
+file.close()
 print "\n###############################################################\n"
 print "SCANNING FOR WIRELESS NETWORKS"
 print " \n"
