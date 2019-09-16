@@ -47,7 +47,7 @@ echo 'innodb_use_native_aio = 0' >> /etc/mysql/conf.d/50-server.cnf
 /etc/init.d/mysqld disable && /etc/init.d/eapdd disable && mysql_install_db --force && opkg install python-mysql
 /usr/bin/mysqld --skip-grant-tables &
 mysql_secure_installation
-pfkill -f "/usr/bin/mysqld --skip-grant-tables"
+pkill -f "/usr/bin/mysqld --skip-grant-tables"
 echo "Installer Complete." && echo " " && echo "Installer Complete at $(date -u)" >> /root/logs/install.log
 echo "Log file saved to /root/logs/install.log." && echo " "
 echo "Set Mysql password on line 635 of /root/eapd.py, then just run '/etc/init.d/eapdd L' to start learning mode." && echo " "
