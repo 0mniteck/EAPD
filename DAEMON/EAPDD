@@ -29,6 +29,7 @@ error() {
 }
 
 start() {
+        led BLUE on
         echo "Evil Access Point Defender - Daemon (EAPDD) - Protect your Wireless Network from Bad Access Points."
         echo "Author: Shant Patrick Tchatalbachian." && echo "GNU License v3"
         echo " " && echo "Scanning Mode." && echo "Scanning Mode" >> /root/eapd.log && echo " "
@@ -41,6 +42,7 @@ start() {
         echo "Stopped MySQL." && echo " " && echo "Stopped MySQL at $(date -u)" >> /root/eapd.log
         echo "Log file saved to /root/eapd.log." && echo " "
         echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
+        led BLUE off
 }
 
 stop() {
@@ -48,6 +50,7 @@ stop() {
         echo "Aborted Scan." && echo " " && echo "Aborted Scan at $(date -u)" >> /root/eapd.log
         echo "Log file saved to /root/eapd.log." && echo " "
         echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
+        led BLUE off
 }
 
 L() {
@@ -60,6 +63,7 @@ L() {
         pkill -f "python /root/eapd.py -N" && sleep 10
         echo "Starting MySQL..." && echo " " && echo "Starting MySQL at $(date -u)" >> /root/eapd.log
         /etc/init.d/mysqld start && sleep 5
+        led BLUE on
         echo "Starting Learning Mode Please Wait..." && echo " " && echo "Starting Learning Mode at $(date -u)" >> /root/eapd.log
         python /root/eapd.py -L
         echo " " && echo "Learning Mode Complete." && echo " " && echo "Learning Mode Complete at $(date -u)" >> /root/eapd.log
@@ -68,6 +72,7 @@ L() {
         echo "Log file saved to /root/eapd.log." && echo " "
         echo "Start Scheduled Scans by Running '/etc/init.d/cron enable && reboot'." && echo " "
         echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
+        led BLUE off
 }
 
 H() {
