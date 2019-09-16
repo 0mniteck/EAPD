@@ -36,7 +36,7 @@ start() {
         echo "Starting MySQL..." && echo " " && echo "Starting MySQL at $(date -u)" >> /root/eapd.log
         /etc/init.d/mysqld start && sleep 5
         echo "Starting Scan Please Wait..." && echo " " && echo "Starting Scan at $(date -u)" >> /root/eapd.log
-        python /root/eapd.py -N | tee -a /root/eapd.log
+        python /root/eapd.py -N
         echo " " && echo "Scan Complete." && echo " " && echo "Scan Complete at $(date -u)" >> /root/eapd.log
         /etc/init.d/mysqld stop && sleep 5
         echo "Stopped MySQL." && echo " " && echo "Stopped MySQL at $(date -u)" >> /root/eapd.log
