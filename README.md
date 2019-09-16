@@ -3,6 +3,6 @@ Protect your Wireless Network from Bad Access Points.
 
 Runs Daemonized on the Wifi-Pineapple 2.6.1 and above.
 
-Version 1 has now been released: <a target="_blank" href="https://github.com/0mniteck/EAPD/releases/tag/v1">v1</a>
+Download: <a target="_blank" href="https://github.com/0mniteck/EAPD/releases/tag/Rolling">Rolling Release</a>
 
 Check out the wiki: <a target="_blank" href="https://github.com/0mniteck/EAPD/wiki/Wiki">Github/0mniteck/EAPD/Wiki</a>
