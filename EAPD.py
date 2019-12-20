@@ -180,7 +180,7 @@ def Conf_viewSSIDs():
             print "\nCurrently, There are No Whitelisted OUIs\n"
 
     except:
-        print "Unexpected error in 'Conf_viewSSIDs': {}\n".format(sys.exc_info()[0])
+        print ""
 
 # Get MonInterface
 def get_moniface():
@@ -734,17 +734,9 @@ try:
     # Check if mon interface is not disabled
     airmon_data = Popen("airmon-ng", stdout=PIPE).communicate()[0]
     if 'mon' in airmon_data:
-        print "\n\nWarning: Monitor interface has been detected."
-        print "Please remove all monitoring interfaces before you run the application\n"
-        print "To view monitor interfaces run this command: airmon-ng\n"
-        print "To remove a monitor interface use: airmon-ng stop [mon interface]\n"
-        print "Make sure to remove all monitor interfaces one by one\n"
-        print "Exiting the application...\n"
-        print "Please wait...\n"
-        Reset("DB")
-        sys.exit(2)
+        print "Found existing monitor."
 except:
-        print "Unexpected error during Preparing Monitor Interface: {}\n".format(sys.exc_info()[0])
+        print ""
 
 # Creating Monitor Interface
 try:
@@ -765,7 +757,7 @@ except:
 try:
     os.system('rm out.csv-01.*')
 except:
-        print "Unexpected error during removing old 'out.csv-01': {}\n".format(sys.exc_info()[0])
+        print ""
 
 # Scanning for available SSIDs
 file = open("eapd.log","a")
@@ -781,8 +773,7 @@ try:
     airodump.terminate()
     db_connection.commit()
 except:
-        print "Unexpected error during scanning for available SSIDs: {}\n".format(sys.exc_info()[0])
-
+        print ""
 ParseAirodumpCSV()
 
 if Mode == "Normal":
