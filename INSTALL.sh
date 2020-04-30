@@ -46,9 +46,9 @@ chmod 744 /etc/init.d/mysqld && chmod 744 /etc/init.d/eapdd
 chmod +x /etc/init.d/mysqld && chmod +x /etc/init.d/eapdd
 echo 'innodb_use_native_aio = 0' >> /etc/mysql/conf.d/50-server.cnf
 /etc/init.d/mysqld disable && /etc/init.d/eapdd disable && mysql_install_db --force && opkg install python-mysql
-/usr/bin/mysqld --skip-grant-tables &
-mysql_secure_installation
-pkill -f "/usr/bin/mysqld --skip-grant-tables"
+/usr/bin/mysqld &
+mysql_secure_installation &
+pkill -f "/usr/bin/mysqld"
 echo "Installer Complete." && echo " " && echo "Installer Complete at $(date -u)" >> /root/logs/install.log
 echo "Log file saved to /root/logs/install.log." && echo " "
 echo "|-----------------------------------------README!-----------------------------------------|" && echo " "
