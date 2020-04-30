@@ -51,6 +51,7 @@ mysql_secure_installation
 pkill -f "/usr/bin/mysqld --skip-grant-tables"
 echo "Installer Complete." && echo " " && echo "Installer Complete at $(date -u)" >> /root/logs/install.log
 echo "Log file saved to /root/logs/install.log." && echo " "
+echo "|-----------------------------------------README!-----------------------------------------|" && echo " "
 echo "Set Mysql password on line 635 of /root/eapd.py, then just run '/etc/init.d/eapdd L' to start learning mode." && echo " "
 echo "|-------------------------------------------END-------------------------------------------|" >> /root/logs/install.log
 exit
