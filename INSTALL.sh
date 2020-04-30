@@ -30,6 +30,7 @@ mkdir /var/run/mysqld/ && chmod 777 /var/run/mysqld/
 opkg update && opkg --autoremove --force-removal-of-dependent-packages remove git-http
 opkg install procps-ng-pkill mysql-server mariadb-client mariadb-server-extra python python-pip
 pip install --upgrade pip
+pip install wheel
 pip install netaddr scapy
 /etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/mysqld stop
 mkdir /pineapple/
