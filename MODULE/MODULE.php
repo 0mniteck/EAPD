@@ -22,6 +22,6 @@ class EAPD extends Module
         chdir($old_path);
         $this->response = array("success" => true,    // define $this->response. We can use an array to set multiple responses.
                                 "greeting" => "EAPD Action Center",
-                                "content" => $output);
+                                "content" => $output );
     }
 }
