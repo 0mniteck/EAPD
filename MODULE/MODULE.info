@@ -1,10 +1,6 @@
 {
     "author": "Shant Patrick Tchatalbachian",
     "description": "Evil Access Point Defender.",
-    "devices": [
-        "tetra",
-        "nano"
-    ],
     "title": "EAPD",
     "version": "1.0"
 }
