@@ -17,7 +17,7 @@ class EAPD extends Module
     private function getContents()  // This is the function that will be executed when you send the request "getContents".
     {
         $this->response = array("success" => true,    // define $this->response. We can use an array to set multiple responses.
-                                "greeting" => "Hey there!",
-                                "content" => "This is the HTML template for your new module! The example shows you the basics of using HTML, AngularJS and PHP to seamlessly pass information to and from Javascript and PHP and output it to HTML.");
+                                "greeting" => "EAPD Action Center",
+                                "content" => "");
     }
 }
