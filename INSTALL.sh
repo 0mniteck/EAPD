@@ -49,6 +49,9 @@ echo 'innodb_use_native_aio = 0' >> /etc/mysql/conf.d/50-server.cnf
 /usr/bin/mysqld &
 mysql_secure_installation &
 pkill -f "/usr/bin/mysqld"
+rm /etc/rc.local
+echo '/etc/init.d/eapdd stop' > /etc/rc.local
+echo 'exit 0' >> /etc/rc.local
 echo "Installer Complete." && echo " " && echo "Installer Complete at $(date -u)" >> /root/logs/install.log
 echo "Log file saved to /root/logs/install.log." && echo " "
 echo "|-----------------------------------------README!-----------------------------------------|" && echo " "
