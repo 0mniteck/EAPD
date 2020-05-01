@@ -16,8 +16,12 @@ class EAPD extends Module
 
     private function getContents()  // This is the function that will be executed when you send the request "getContents".
     {
+        $old_path = getcwd();
+        chdir('/root/');
+        $output = shell_exec("echo 'Current Logs' & echo '' & cat eapd.log");
+        chdir($old_path);
         $this->response = array("success" => true,    // define $this->response. We can use an array to set multiple responses.
                                 "greeting" => "EAPD Action Center",
-                                "content" => "");
+                                "content" => $output);
     }
 }
