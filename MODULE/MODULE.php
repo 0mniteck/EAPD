@@ -3,7 +3,7 @@
 
 /* The class name must be the name of your module, without spaces. */
 /* It must also extend the "Module" class. This gives your module access to API functions */
-class _MODULE_NAME extends Module
+class EAPD extends Module
 {
     public function route()
     {
