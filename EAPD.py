@@ -469,9 +469,6 @@ def Reset(Ropt):
         elif Ropt == "DB":
             cursor.close()
             db_connection.close()
-            os.system('airmon-ng stop ' + mon_iface)
-            os.system('ifconfig ' + wireless_interface + ' down')
-            os.system('ifconfig ' + wireless_interface + ' up')
         else:
             os.system('rm out.csv-01.*')
             os.system('airmon-ng stop ' + mon_iface)
