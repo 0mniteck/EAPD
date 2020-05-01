@@ -6,7 +6,7 @@ registerController('ExampleController', ['$api', '$scope', function($api, $scope
 
     /* Use the API to send a request to your module.php */
     $api.request({
-        module: '_MODULE_NAME', //Your module name
+        module: 'EAPD', //Your module name
         action: 'getContents'   //Your action defined in module.php
     }, function(response) {
         if (response.success === true) {           //If the response has an index called "success" that returns the boolean "true", then:
