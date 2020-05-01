@@ -36,7 +36,6 @@ start() {
         echo "Starting MySQL..." && echo " " && echo "Starting MySQL at $(date -u)" >> /root/eapd.log
         /etc/init.d/mysqld start && sleep 5
         echo "Starting Scan Please Wait..." && echo " " && echo "Starting Scan at $(date -u)" >> /root/eapd.log
-        airmon-ng start wlan1
         python /root/eapd.py -N
         echo " " && echo "Scan Complete." && echo " " && echo "Scan Complete at $(date -u)" >> /root/eapd.log
         /etc/init.d/mysqld stop && sleep 5
@@ -66,7 +65,6 @@ L() {
         /etc/init.d/mysqld start && sleep 5
         led BLUE off
         echo "Starting Learning Mode Please Wait..." && echo " " && echo "Starting Learning Mode at $(date -u)" >> /root/eapd.log
-        airmon-ng start wlan1
         python /root/eapd.py -L
         echo " " && echo "Learning Mode Complete." && echo " " && echo "Learning Mode Complete at $(date -u)" >> /root/eapd.log
         /etc/init.d/mysqld stop && sleep 5
