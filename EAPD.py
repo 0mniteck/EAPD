@@ -726,8 +726,10 @@ try:
     output = Popen("iwconfig", stdout=PIPE).communicate()[0]
     wireless_interface = ""
     mon_iface = ""
-    if "wlan" in output:
-        wireless_interface = output[0:6].strip()
+    if "wlan2" in output:
+        wireless_interface = "wlan2"
+    elseif "wlan1" in output:
+        wireless_interface = "wlan1"
     else:
         print "\n\nCould not find the wireless interface (wlan)!\n"
         print "Exiting the application...\n"
