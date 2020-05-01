@@ -728,7 +728,7 @@ try:
     mon_iface = ""
     if "wlan2" in output:
         wireless_interface = "wlan2"
-    elseif "wlan1" in output:
+    elif "wlan1" in output:
         wireless_interface = "wlan1"
     else:
         print "\n\nCould not find the wireless interface (wlan)!\n"
