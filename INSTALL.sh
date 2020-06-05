@@ -29,7 +29,7 @@ mkdir /var/lib/mysql/ && chmod 777 /var/lib/mysql/
 mkdir /var/log/mysqld/ && chmod 777 /var/log/mysqld/
 mkdir /var/run/mysqld/ && chmod 777 /var/run/mysqld/
 opkg update && opkg --autoremove --force-removal-of-dependent-packages remove git-http
-opkg install procps-ng-pkill mysql-server mariadb-client mariadb-server-extra python python-pip
+opkg install procps-ng-pkill mariadb-server mariadb-client mariadb-server-extra python python-pip
 pip install --upgrade pip
 pip install wheel
 pip install netaddr scapy
