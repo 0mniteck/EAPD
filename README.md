@@ -1,7 +1,8 @@
 # Evil Access Point Defender
 Protect your Wireless Network from Bad Access Points.
 
-Runs from init.d on the Wifi-Pineapple best on version 2.7.0 and above,<br />with an external USB on /mnt.
+Runs from init.d on the Wifi-Pineapple best on version 2.7.0 and above,
+<br />with an external USB on /mnt or extroot to /overlay, and swapon is preffered.
 
 Download: <a target="_blank" href="https://github.com/0mniteck/EAPD/archive/master.zip">Current Release</a>
 
