@@ -21,7 +21,7 @@
 ######################################################################
 
 mkdir /root/logs
-echo "Starting Installer for EAPD..." && echo " " && echo "Starting Installer for EAPD at $(date)" >> /root/logs/install.log
+echo "Starting Installer for EAPD..." && echo " " && echo "Starting Installer for EAPD at $(date '+%r on %x')" >> /root/logs/install.log
 read -s -n 1 -p "Make sure you have an external USB on /mnt or an extroot to /overlay, and swap must be on. Press any key to continue . . . or ctrl+c to stop"
 mkdir /mnt/data/ && mkdir /mnt/data/mysql/ && mkdir /mnt/data/tmp/
 chmod 777 /mnt/data/ && chmod 777 /mnt/data/mysql/ && chmod 777 /mnt/data/tmp/
@@ -59,7 +59,7 @@ mysql_secure_installation
 rm /etc/rc.local
 echo '/etc/init.d/eapdd stop' > /etc/rc.local
 echo 'exit 0' >> /etc/rc.local
-echo "Installer Complete." && echo " " && echo "Installer Complete at $(date)" >> /root/logs/install.log
+echo "Installer Complete." && echo " " && echo "Installer Complete at $(date '+%r on %x')" >> /root/logs/install.log
 echo "Log file saved to /root/logs/install.log." && echo " "
 echo "|-----------------------------------------README!-----------------------------------------|" && echo " "
 echo "Set Mysql password on line 657 of /root/eapd.py, then just run '/etc/init.d/eapdd L' to start learning mode." && echo " "
