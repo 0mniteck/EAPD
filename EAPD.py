@@ -321,6 +321,9 @@ def CheckEvilAP():
                 file = open("/root/eapd.log","a")
                 file.write("Fake AP with different MAC Detected!\n")
                 file.close()
+                file = open("/tmp/fail","a")
+                file.write("Yes")
+                file.close()
                 print "Fake AP with different MAC Detected!\n"
                 msg = "Fake AP with different MAC Detected!\n"
                 msg = msg + "(BSSID - SSID - PWR - Channel - Cipher - Privacy - Auth)\n"
@@ -365,6 +368,9 @@ def CheckEvilAP():
             elif EvilAPAttrib:
                 file = open("/root/eapd.log","a")
                 file.write("Fake AP with different Attribute Detected!\n")
+                file.close()
+                file = open("/tmp/fail","a")
+                file.write("Yes")
                 file.close()
                 print "Fake AP with different Attribute Detected!\n"
                 msg = msg + "(BSSID - SSID - PWR - Channel - Cipher - Privacy - Auth)\n"
@@ -430,6 +436,9 @@ def CheckEvilAP():
         else:
             file = open("/root/eapd.log","a")
             file.write("No Whitelisted SSID Detected!\n")
+            file.close()
+            file = open("/tmp/fail","a")
+            file.write("Yes")
             file.close()
             print "No Whitelisted SSID Detected!\n"
             print "Run the tool in the Learning Mode first and add your SSID into whitelist"
