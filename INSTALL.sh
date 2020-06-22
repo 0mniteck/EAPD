@@ -58,7 +58,7 @@ mysql_secure_installation
 /etc/init.d/mysqld stop
 rm /etc/rc.local
 echo '/etc/init.d/eapdd stop' > /etc/rc.local
-echo 'exit 0' >> /etc/rc.local
+echo 'exit' >> /etc/rc.local
 echo "Installer Complete." && echo " " && echo "Installer Complete at $(date '+%r on %x')" >> /root/logs/install.log
 echo "Log file saved to /root/logs/install.log." && echo " "
 echo "|-----------------------------------------README!-----------------------------------------|" && echo " "
