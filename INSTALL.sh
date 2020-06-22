@@ -62,6 +62,6 @@ echo 'exit 0' >> /etc/rc.local
 echo "Installer Complete." && echo " " && echo "Installer Complete at $(date '+%r on %x')" >> /root/logs/install.log
 echo "Log file saved to /root/logs/install.log." && echo " "
 echo "|-----------------------------------------README!-----------------------------------------|" && echo " "
-echo "Set Mysql password on line 657 of /root/eapd.py, then just run '/etc/init.d/eapdd L' to start learning mode." && echo " "
+echo "Set Mysql password on line 666 of /root/eapd.py, then just run '/etc/init.d/eapdd L' to start learning mode." && echo " "
 echo "|-------------------------------------------END-------------------------------------------|" >> /root/logs/install.log
 exit
