@@ -21,17 +21,22 @@
 ######################################################################
 
 mkdir /root/logs
-echo "Starting Installer for EAPD..." && echo " " && echo "Starting Installer for EAPD at $(date -u)" >> /root/logs/install.log
+echo "Starting Installer for EAPD..." && echo " " && echo "Starting Installer for EAPD at $(date)" >> /root/logs/install.log
 mkdir /mnt/data/ && mkdir /mnt/data/mysql/ && mkdir /mnt/data/tmp/
 chmod 777 /mnt/data/ && chmod 777 /mnt/data/mysql/ && chmod 777 /mnt/data/tmp/
 mkdir /var/log/mysql/ && chmod 777 /var/log/mysql/
 mkdir /var/log/mysqld/ && chmod 777 /var/log/mysqld/
 mkdir /var/run/mysqld/ && chmod 777 /var/run/mysqld/
 opkg update && opkg --autoremove --force-removal-of-dependent-packages remove git-http
-opkg install procps-ng-pkill mariadb-server mariadb-client mariadb-server-extra python python-pip
+opkg install mariadb-server
+opkg install mariadb-client
+opkg install mariadb-server-extra
+opkg install python
+opkg install python-pip --force-overwrite
 pip install --upgrade pip
 pip install wheel
-pip install netaddr scapy
+pip install netaddr
+pip install scapy
 /etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/mysqld stop
 mkdir /pineapple/
 mkdir /pineapple/modules/
@@ -46,15 +51,15 @@ chmod 744 /etc/init.d/mysqld && chmod 744 /etc/init.d/eapdd
 chmod +x /etc/init.d/mysqld && chmod +x /etc/init.d/eapdd
 echo 'innodb_use_native_aio = 0' >> /etc/mysql/conf.d/50-server.cnf
 /etc/init.d/mysqld disable && /etc/init.d/eapdd disable && mysql_install_db --force && opkg install python-mysql
-/usr/bin/mysqld &
+/etc/init.d/mysqld start &
 mysql_secure_installation &
-pkill -f "/usr/bin/mysqld"
+/etc/init.d/mysqld stop
 rm /etc/rc.local
 echo '/etc/init.d/eapdd stop' > /etc/rc.local
 echo 'exit 0' >> /etc/rc.local
 echo "Installer Complete." && echo " " && echo "Installer Complete at $(date -u)" >> /root/logs/install.log
 echo "Log file saved to /root/logs/install.log." && echo " "
 echo "|-----------------------------------------README!-----------------------------------------|" && echo " "
-echo "Set Mysql password on line 653 of /root/eapd.py, then just run '/etc/init.d/eapdd L' to start learning mode." && echo " "
+echo "Set Mysql password on line 657 of /root/eapd.py, then just run '/etc/init.d/eapdd L' to start learning mode." && echo " "
 echo "|-------------------------------------------END-------------------------------------------|" >> /root/logs/install.log
 exit
