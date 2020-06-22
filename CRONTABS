@@ -19,5 +19,5 @@
 #
 ######################################################################
 
-0 23 * * * /etc/init.d/eapdd stop && mv /root/eapd.log /root/logs/$(date +%F-eapd.log) && echo "Scheduled Reboot at $(date -u)" >> /root/eapd.log && reboot
-42 * * * * echo "Scheduled EAPDD run at $(date -u)" >> /root/eapd.log && /etc/init.d/eapdd start
+0 */12 * * * /etc/init.d/eapdd stop && mv /root/eapd.log /root/logs/$(date +%F-eapd.log) && echo "Scheduled Reboot at $(date)" >> /root/eapd.log && reboot
+*/24 * * * * echo "Scheduled EAPDD run at $(date)" >> /root/eapd.log && /etc/init.d/eapdd start
