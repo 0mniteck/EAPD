@@ -318,7 +318,7 @@ def CheckEvilAP():
         ########### Print the Result
             print "\n###########################CHECK-RESULT########################\n"
             if EvilAPMAC:
-                file = open("eapd.log","a")
+                file = open("/root/eapd.log","a")
                 file.write("Fake AP with different MAC Detected!\n")
                 file.close()
                 print "Fake AP with different MAC Detected!\n"
@@ -337,7 +337,7 @@ def CheckEvilAP():
                     deauth_time = int(row[0])
                     print "Deauth time: {}".format(deauth_time)
                     if int(deauth_time) > 0:
-                        file = open("eapd.log","a")
+                        file = open("/root/eapd.log","a")
                         file.write("Attacking Evil Access Point.\n")
                         file.close()
                         print "\n#########################ATTACK-MODE###########################\n"
@@ -363,7 +363,7 @@ def CheckEvilAP():
                         print "Preventive Mode is not enabled\n"
 
             elif EvilAPAttrib:
-                file = open("eapd.log","a")
+                file = open("/root/eapd.log","a")
                 file.write("Fake AP with different Attribute Detected!\n")
                 file.close()
                 print "Fake AP with different Attribute Detected!\n"
@@ -384,7 +384,7 @@ def CheckEvilAP():
                         deauth_time = int(row[0])
                         print "Deauth time: {}".format(deauth_time)
                         if int(deauth_time) > 0:
-                            file = open("eapd.log","a")
+                            file = open("/root/eapd.log","a")
                             file.write("Attacking Evil Access Point.\n")
                             file.close()
                             print "\n#########################ATTACK-MODE###########################\n"
@@ -421,14 +421,14 @@ def CheckEvilAP():
                 thread.start()
                 #AlertAdmin(msg)
             else:
-                file = open("eapd.log","a")
+                file = open("/root/eapd.log","a")
                 file.write("No Evil AP Detected!\n")
                 file.close()
                 print "No Evil AP Detected!\n"
             print "\n###############################################################\n"
 
         else:
-            file = open("eapd.log","a")
+            file = open("/root/eapd.log","a")
             file.write("No Whitelisted SSID Detected!\n")
             file.close()
             print "No Whitelisted SSID Detected!\n"
@@ -728,19 +728,19 @@ try:
     mon_iface = ""
     if "wlan2" in output:
         wireless_interface = "wlan2"
-        file = open("eapd.log","a")
+        file = open("/root/eapd.log","a")
         file.write("Using Wlan2.\n")
         file.close()
     elif "wlan1" in output:
         wireless_interface = "wlan1"
-        file = open("eapd.log","a")
+        file = open("/root/eapd.log","a")
         file.write("Using Wlan1.\n")
         file.close()
     else:
         print "\n\nCould not find the wireless interface (wlan)!\n"
         print "Exiting the application...\n"
         print "Please wait...\n"
-        file = open("eapd.log","a")
+        file = open("/root/eapd.log","a")
         file.write("Couldn't find Wlan1 or Wlan2, Error!.\n")
         file.close()
         Reset("DB")
@@ -775,7 +775,7 @@ except:
         print ""
 
 # Scanning for available SSIDs
-file = open("eapd.log","a")
+file = open("/root/eapd.log","a")
 file.write("Scanning for wireless networks.\n")
 file.close()
 print "\n###############################################################\n"
