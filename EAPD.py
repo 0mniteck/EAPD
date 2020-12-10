@@ -735,12 +735,7 @@ try:
     output = Popen("iwconfig", stdout=PIPE).communicate()[0]
     wireless_interface = ""
     mon_iface = ""
-    if "wlan2" in output:
-        wireless_interface = "wlan2"
-        file = open("/root/eapd.log","a")
-        file.write("Using Wlan2.\n")
-        file.close()
-    elif "wlan1" in output:
+    if "wlan1" in output:
         wireless_interface = "wlan1"
         file = open("/root/eapd.log","a")
         file.write("Using Wlan1.\n")
