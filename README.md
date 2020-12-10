@@ -7,14 +7,14 @@ Download: <a target="_blank" href="https://github.com/0mniteck/EAPD/archive/mast
 
 Installation:
 
- opkg update && opkg install git-http
+     opkg update && opkg install git-http
 
- git clone https://github.com/0mniteck/EAPD
+     git clone https://github.com/0mniteck/EAPD
 
- cd EAPD
+     cd EAPD
 
- chmod 744 INSTALL.sh && chmod +x INSTALL.sh 
+     chmod 744 INSTALL.sh && chmod +x INSTALL.sh 
 
- ./INSTALL.sh
+     ./INSTALL.sh
 
 Check out the wiki: <a target="_blank" href="https://github.com/0mniteck/EAPD/wiki/Wiki">Github/0mniteck/EAPD/Wiki</a>
