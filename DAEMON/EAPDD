@@ -40,13 +40,6 @@ start() {
         /etc/init.d/mysqld stop && sleep 5
         echo "Stopped MySQL." && echo " " && echo "Stopped MySQL at $(date '+%r on %x')" >> /root/eapd.log
         echo "Log file saved to /root/eapd.log." && echo " "
-        fail="$(cat /tmp/fail)"
-        if [ "$fail" == "Yes" ]; then
-                echo "Evil Access Point Detected at $(date '+%r on %x')!!!" >> /tmp/auth
-                C2EXFIL STRING /tmp/auth FAIL
-                C2EXFIL STRING /root/eapd.log FAIL_LOG
-                wget -q -s "https://cronitor.link/AUTHLINK/fail?auth_key=YOUR_AUTH_KEY_HERE
-        fi
         echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
 }
 
