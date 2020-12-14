@@ -41,11 +41,7 @@ pip install scapy
 /etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/mysqld stop
 mkdir /pineapple/
 mkdir /pineapple/modules/
-mkdir /pineapple/modules/EAPD/ && mkdir /pineapple/modules/EAPD/api/ && mkdir /pineapple/modules/EAPD/js/
-cp -f MODULE/MODULE.info /pineapple/modules/EAPD/module.info
-cp -f MODULE/MODULE.html /pineapple/modules/EAPD/module.html
-cp -f MODULE/MODULE.php /pineapple/modules/EAPD/api/module.php
-cp -f MODULE/MODULE.js /pineapple/modules/EAPD/js/module.js
+mkdir /pineapple/modules/EAPD/
 cp -f EAPD.py /root/eapd.py && cp -f CRONTABS /etc/crontabs/root
 cp -f DAEMON/MYSQLD /etc/init.d/mysqld && cp -f DAEMON/EAPDD /etc/init.d/eapdd
 chmod 744 /etc/init.d/mysqld && chmod 744 /etc/init.d/eapdd
