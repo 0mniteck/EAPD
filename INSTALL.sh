@@ -22,7 +22,7 @@
 
 mkdir /root/logs
 echo "Starting Installer for EAPD..." && echo " " && echo "Starting Installer for EAPD at $(date '+%r on %x')" >> /root/logs/install.log
-read -s -n 1 -p "On models before the MK7, or other openwrt, please look at the wiki for instructions. Press any key to continue . . . or ctrl+c to stop"
+read -s -n 1 -p "On models before the MK7, or other openwrt, please look at the wiki under Requirements. Press any key to continue . . . or ctrl+c to stop"
 mkdir /mnt/data/ && mkdir /mnt/data/mysql/ && mkdir /mnt/data/tmp/
 chmod 777 /mnt/data/ && chmod 777 /mnt/data/mysql/ && chmod 777 /mnt/data/tmp/
 mkdir /var/log/mysql/ && chmod 777 /var/log/mysql/
@@ -53,15 +53,15 @@ chmod +x /etc/init.d/mysqld && chmod +x /etc/init.d/eapdd
 echo 'innodb_use_native_aio = 0' >> /etc/mysql/conf.d/50-server.cnf
 /etc/init.d/mysqld disable && /etc/init.d/eapdd disable && mysql_install_db --force && opkg install python-mysql
 /etc/init.d/mysqld start
-read -s -n 1 -p "Make sure MySQL is fully started then press any key to continue . . . or ctrl+c to stop"
+read -s -n 1 -p "Make sure MySQL is fully started!!! then press any key to continue . . . or ctrl+c to stop"
 mysql_secure_installation
 /etc/init.d/mysqld stop
 rm /etc/rc.local
 echo '/etc/init.d/eapdd stop' > /etc/rc.local
-echo 'exit' >> /etc/rc.local
 echo "Installer Complete." && echo " " && echo "Installer Complete at $(date '+%r on %x')" >> /root/logs/install.log
 echo "Log file saved to /root/logs/install.log." && echo " "
 echo "|-----------------------------------------README!-----------------------------------------|" && echo " "
-echo "Set Mysql password on line 666 of /root/eapd.py, then just run '/etc/init.d/eapdd L' to start learning mode." && echo " "
+echo "Add the password you set in MYSQL_SECURE_INSTALLATION to line 666 of /root/eapd.py && echo " "
+echo "Then just run '/etc/init.d/eapdd L' to start learning mode." && echo " "
 echo "|-------------------------------------------END-------------------------------------------|" >> /root/logs/install.log
 exit
