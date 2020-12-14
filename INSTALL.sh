@@ -22,7 +22,7 @@
 
 mkdir /root/logs
 echo "Starting Installer for EAPD..." && echo " " && echo "Starting Installer for EAPD at $(date '+%r on %x')" >> /root/logs/install.log
-read -s -n 1 -p "On models before the MK7, Make sure you have an external USB on /mnt or an extroot to /overlay, and swap must be on. Press any key to continue . . . or ctrl+c to stop"
+read -s -n 1 -p "On models before the MK7, or other openwrt, please look at the wiki for instructions. Press any key to continue . . . or ctrl+c to stop"
 mkdir /mnt/data/ && mkdir /mnt/data/mysql/ && mkdir /mnt/data/tmp/
 chmod 777 /mnt/data/ && chmod 777 /mnt/data/mysql/ && chmod 777 /mnt/data/tmp/
 mkdir /var/log/mysql/ && chmod 777 /var/log/mysql/
