@@ -745,7 +745,7 @@ try:
         print "Exiting the application...\n"
         print "Please wait...\n"
         file = open("/root/eapd.log","a")
-        file.write("Couldn't find Wlan1 or Wlan2, Error!.\n")
+        file.write("Couldn't find Wlan1, Error!.\n")
         file.close()
         Reset("DB")
         sys.exit(2)
