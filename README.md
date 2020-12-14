@@ -6,3 +6,5 @@ Runs smoothly on the Wifi-Pineapple MK7.
 Download: <a target="_blank" href="https://github.com/0mniteck/EAPD/archive/master.zip">Current Release</a>
 
 Check out the wiki: <a target="_blank" href="https://github.com/0mniteck/EAPD/wiki/Wiki">Github/0mniteck/EAPD/Wiki</a>
+
+Updated: 12/14/2020
