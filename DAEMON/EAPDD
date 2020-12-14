@@ -80,8 +80,8 @@ L() {
 H() {
         echo "Evil Access Point Defender - Daemon (EAPDD) - Protect your Wireless Network from Bad Access Points."
         echo "Author: Shant Patrick Tchatalbachian." && echo "GNU License v3"
-        echo " " && echo "Runs Daemonized on OpenWrt 15.x and above."
+        echo " " && echo "Runs Daemonized on OpenWrt 19.x and above."
         echo " " && echo "Check out the Wiki: https://github.com/0mniteck/EAPD/wiki/Wiki"
         echo " " && echo "Just run '/etc/init.d/eapdd L' to start learning mode."
-        echo " " && echo "Start Scheduled Scans by Running '/etc/init.d/cron enable && reboot'." && echo " "
+        echo " " && echo "Start Scheduled Scans by Running '/etc/init.d/cron enable && /etc/init.d/cron start'." && echo " "
 }
