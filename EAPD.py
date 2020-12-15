@@ -479,7 +479,7 @@ def Reset(Ropt):
             cursor.close()
             db_connection.close()
         else:
-            os.system('rm out.csv-01.*')
+            os.system('rm *.csv')
             os.system('airmon-ng stop ' + mon_iface)
             os.system('ifconfig ' + wireless_interface + ' down')
             os.system('ifconfig ' + wireless_interface + ' up')
@@ -521,7 +521,7 @@ def LearningMode():
                 cursor.execute(cmd, (new_bssid,))
                 if cursor.rowcount > 0:
                     cmd = "delete from whitelist where mac=%s"
-                    cursor.execute(cmd, (new_bssid,))
+                    cursor.execute(out.csv-01cmd, (new_bssid,))
                     cmd = "delete from whitelist_OUIs where mac=%s"
                     cursor.execute(cmd, (new_bssid,))
                     cmd = "insert into whitelist(mac,ssid,min_pwr,max_pwr,channel,CIPHER,Enc,Auth) select mac,ssid,pwr-5,pwr+5,channel,CIPHER,Enc,Auth \
@@ -774,7 +774,7 @@ except:
         print "Unexpected error during Creating Monitor Interface: {}\n".format(sys.exc_info()[0])
 ########### Remove the old output from airodump
 try:
-    os.system('rm out.csv-01.*')
+    os.system('rm *.csv')
 except:
         print ""
 
