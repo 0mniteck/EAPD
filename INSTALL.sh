@@ -42,6 +42,7 @@ pip install scapy
 mkdir /pineapple/
 mkdir /pineapple/modules/
 mkdir /pineapple/modules/EAPD/
+cp -f MODULES/* /pineapple/modules/EAPD/*
 cp -f EAPD.py /root/eapd.py && cp -f CRONTABS /etc/crontabs/root
 cp -f DAEMON/MYSQLD /etc/init.d/mysqld && cp -f DAEMON/EAPDD /etc/init.d/eapdd
 chmod 744 /etc/init.d/mysqld && chmod 744 /etc/init.d/eapdd
