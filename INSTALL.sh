@@ -49,12 +49,12 @@ chmod 744 /etc/init.d/mysqld && chmod 744 /etc/init.d/eapdd
 chmod +x /etc/init.d/mysqld && chmod +x /etc/init.d/eapdd
 echo 'innodb_use_native_aio = 0' >> /etc/mysql/conf.d/50-server.cnf
 /etc/init.d/mysqld disable && /etc/init.d/eapdd disable && mysql_install_db --force && opkg install python-mysql
-/etc/init.d/mysqld start
-read -s -n 1 -p "Make sure MySQL is fully started!!! then press any key to continue . . . or ctrl+c to stop"
+/etc/init.d/mysqld start && echo " "
+read -s -n 1 -p "Make sure MySQL is fully started!!! then press any key to continue . . . or ctrl+c to stop" && echo " "
 mysql_secure_installation
 /etc/init.d/mysqld stop
 rm /etc/rc.local
-echo '/etc/init.d/eapdd stop' > /etc/rc.local
+echo '/etc/init.d/eapdd stop' > /etc/rc.local && echo " "
 echo "Installer Complete." && echo " " && echo "Installer Complete at $(date '+%r on %x')" >> /root/logs/install.log
 echo "Log file saved to /root/logs/install.log." && echo " "
 echo "|-----------------------------------------README!-----------------------------------------|" && echo " "
