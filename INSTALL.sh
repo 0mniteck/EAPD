@@ -58,7 +58,7 @@ echo '/etc/init.d/eapdd stop' > /etc/rc.local
 echo "Installer Complete." && echo " " && echo "Installer Complete at $(date '+%r on %x')" >> /root/logs/install.log
 echo "Log file saved to /root/logs/install.log." && echo " "
 echo "|-----------------------------------------README!-----------------------------------------|" && echo " "
-echo "Add the password you set in MYSQL_SECURE_INSTALLATION to line 666 of /root/eapd.py && echo " "
+echo "Add the password you set in MYSQL_SECURE_INSTALLATION to line 666 of /root/eapd.py" && echo " "
 echo "Then just run '/etc/init.d/eapdd L' to start learning mode." && echo " "
 echo "|-------------------------------------------END-------------------------------------------|" >> /root/logs/install.log
 exit
