@@ -20,4 +20,4 @@
 ######################################################################
 
 0 23 * * * /etc/init.d/eapdd stop && C2EXFIL STRING /root/eapd.log EAPD_LOG && mv /root/eapd.log /root/logs/$(date +%F-eapd.log) && echo "Exported and moved log at $(date '+%r on %x')" >> /root/eapd.log
-24,48 * * * * rm -r /root/*.csv && echo "Scheduled EAPDD run at $(date '+%r on %x')" >> /root/eapd.log && /etc/init.d/eapdd start
+24,48 * * * * rm -r /root/*.csv & echo "Scheduled EAPDD run at $(date '+%r on %x')" >> /root/eapd.log && /etc/init.d/eapdd start
