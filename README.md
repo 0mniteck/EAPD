@@ -7,4 +7,4 @@ Download: <a target="_blank" href="https://github.com/0mniteck/EAPD/archive/mast
 
 Check out the wiki: <a target="_blank" href="https://github.com/0mniteck/EAPD/wiki/Wiki">Github/0mniteck/EAPD/Wiki</a>
 
-Updated Last: 12/18/2020
+Updated Last: 1/5/2021
