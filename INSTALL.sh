@@ -49,7 +49,7 @@ chmod 744 /etc/init.d/mysqld && chmod 744 /etc/init.d/eapdd
 chmod +x /etc/init.d/mysqld && chmod +x /etc/init.d/eapdd
 printf 'innodb_use_native_aio = 0\n' >> /etc/mysql/conf.d/50-server.cnf
 /etc/init.d/mysqld disable && /etc/init.d/eapdd disable && mysql_install_db --force && opkg install python-mysql
-/etc/init.d/mysqld start && printf "\n\n"
+/etc/init.d/mysqld start && sleep 10 && printf "\n"
 read -s -n 1 -p "Make sure MySQL is fully started!!! then press any key to continue . . . or ctrl+c to stop" && printf "\n\n"
 #mysql_secure_installation
 rootpass=$(openssl rand -base64 16)
@@ -61,17 +61,17 @@ DELETE FROM mysql.db WHERE Db='test' OR Db='test_%';
 FLUSH PRIVILEGES;
 EOF
 /etc/init.d/mysqld stop
-sed -i '23i        password=$rootpass' /etc/init.d/eapdd
+sed -i "23ipassword=$rootpass" /etc/init.d/eapdd
 rm /etc/rc.local
-printf '/etc/init.d/eapdd stop\n' > /etc/rc.local && printf "\n\n"
+printf '/etc/init.d/eapdd stop\n' > /etc/rc.local && sleep 10 && printf "\n\n"
 read -n 1 -p "Please select an interface Wlan[1-9]: " interface && printf "\n\n"
-sed -i '23i        interface=$interface' /etc/init.d/eapdd
-read -n 1 -p "Please select a frequency [2(ghz)/5(ghz)]: " frequency && printf "\n\n"
-sed -i '23i        frequency=$frequency' /etc/init.d/eapdd
+sed -i "23iinterface=$interface" /etc/init.d/eapdd
+read -n 1 -p "Please select the frequency your card supports [2(Ghz)/5(Ghz)]: " frequency && printf "\n\n"
+sed -i "23ifrequency=$frequency" /etc/init.d/eapdd
 printf "Installer Complete.\n\n" && printf "Installer Complete at $(date '+%r on %x')\n" >> /root/logs/install.log
 printf "|-----------------------------------------README!-----------------------------------------|\n\n"
 printf "Log file saved to /root/logs/install.log.\n\n"
-printf "Add the password '$rootpass' to line 666 of /root/eapd.py\n\n"
-printf "Then just run '/etc/init.d/eapdd L' to start learning mode.\n\n"
+printf "Your SQL password is '$rootpass'\n\n"
+printf "Just run '/etc/init.d/eapdd L' to start learning mode.\n\n"
 printf "|-------------------------------------------END-------------------------------------------|\n" >> /root/logs/install.log
 exit
