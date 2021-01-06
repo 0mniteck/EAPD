@@ -45,6 +45,7 @@ cp -f EAPD.py /root/eapd.py && cp -f CRONTABS /etc/crontabs/root
 cp -f DAEMON/MYSQLD /etc/init.d/mysqld && cp -f DAEMON/EAPDD /etc/init.d/eapdd
 chmod 744 /etc/init.d/mysqld && chmod 744 /etc/init.d/eapdd
 chmod +x /etc/init.d/mysqld && chmod +x /etc/init.d/eapdd
+chmod 3400 /root/eapd.py && chmod +x /root/eapd.py
 printf 'innodb_use_native_aio = 0\n' >> /etc/mysql/conf.d/50-server.cnf
 /etc/init.d/mysqld disable && /etc/init.d/eapdd disable && mysql_install_db --force && opkg install python-mysql
 /etc/init.d/mysqld start && sleep 10 && printf "\n"
@@ -68,7 +69,8 @@ sed -i "23iinterface=$interface" /etc/init.d/eapdd
 read -n 1 -p "Please select the frequency your card supports [2(Ghz)/5(Ghz)]: " frequency && printf "\n\n"
 sed -i "23ifrequency=$frequency" /etc/init.d/eapdd
 sed -i "23i###############VARS################\n" /etc/init.d/eapdd
-chmod 3400 /etc/init.d/mysqld && chmod 3400 /etc/init.d/eapdd && chmod 3400 /root/eapd.py
+chmod 3400 /etc/init.d/mysqld && chmod 3400 /etc/init.d/eapdd
+chmod +x /etc/init.d/mysqld && chmod +x /etc/init.d/eapdd
 printf "Installer Complete.\n\n" && printf "Installer Complete at $(date '+%r on %x')\n" >> /root/logs/install.log
 printf "|-----------------------------------------README!-----------------------------------------|\n\n"
 printf "Log file saved to /root/logs/install.log.\n\n"
