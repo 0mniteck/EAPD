@@ -68,6 +68,7 @@ sed -i "23iinterface=$interface" /etc/init.d/eapdd
 read -n 1 -p "Please select the frequency your card supports [2(Ghz)/5(Ghz)]: " frequency && printf "\n\n"
 sed -i "23ifrequency=$frequency" /etc/init.d/eapdd
 sed -i "23i###############VARS################\n" /etc/init.d/eapdd
+chmod 3400 /etc/init.d/mysqld && chmod 3400 /etc/init.d/eapdd && chmod 3400 /root/eapd.py
 printf "Installer Complete.\n\n" && printf "Installer Complete at $(date '+%r on %x')\n" >> /root/logs/install.log
 printf "|-----------------------------------------README!-----------------------------------------|\n\n"
 printf "Log file saved to /root/logs/install.log.\n\n"
