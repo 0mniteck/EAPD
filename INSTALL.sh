@@ -34,7 +34,7 @@ opkg install mariadb-client
 opkg install mariadb-server-extra
 opkg install python --force-overwrite
 opkg install python-pip --force-overwrite
-pip install --upgrade pip
+#pip install --upgrade pip
 pip install wheel
 pip install netaddr
 pip install scapy
