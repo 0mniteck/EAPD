@@ -663,7 +663,7 @@ print "Preparing MySQL Database\n"
 
 try:
     try:
-        db_connection = MySQLdb.connect(host='127.0.0.1', user='root', passwd='Your_Password_Goes_Here')
+        db_connection = MySQLdb.connect(host='127.0.0.1', user='root', passwd=password)
         print "Connected to MySQL\n"
     except:
         print "Make sure MySQL server is running\n"
