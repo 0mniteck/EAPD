@@ -65,8 +65,8 @@ sed -i '32ipassword=$rootpass' /etc/init.d/eapdd
 rm /etc/rc.local
 printf '/etc/init.d/eapdd stop\n' > /etc/rc.local && printf "\n\n"
 printf "Installer Complete.\n\n" && printf "Installer Complete at $(date '+%r on %x')\n" >> /root/logs/install.log
-printf "Log file saved to /root/logs/install.log.\n\n"
 printf "|-----------------------------------------README!-----------------------------------------|\n\n"
+printf "Log file saved to /root/logs/install.log.\n\n"
 printf "Add the password '$rootpass' to line 666 of /root/eapd.py\n\n"
 printf "Then just run '/etc/init.d/eapdd L' to start learning mode.\n\n"
 printf "|-------------------------------------------END-------------------------------------------|\n" >> /root/logs/install.log
