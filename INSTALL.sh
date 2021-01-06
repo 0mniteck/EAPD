@@ -61,7 +61,7 @@ DELETE FROM mysql.db WHERE Db='test' OR Db='test_%';
 FLUSH PRIVILEGES;
 EOF
 /etc/init.d/mysqld stop
-sed -i '32i        password=$rootpass' /etc/init.d/eapdd
+sed -i '23i        password=$rootpass' /etc/init.d/eapdd
 rm /etc/rc.local
 printf '/etc/init.d/eapdd stop\n' > /etc/rc.local && printf "\n\n"
 printf "Installer Complete.\n\n" && printf "Installer Complete at $(date '+%r on %x')\n" >> /root/logs/install.log
