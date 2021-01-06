@@ -410,6 +410,12 @@ def CheckEvilAP():
                             print "Preventive Mode is not enabled\n"
 
             elif EvilAPOUI:
+                file = open("/root/eapd.log","a")
+                file.write("Fake AP with different OUI Detected!\n")
+                file.close()
+                file = open("/tmp/fail","a")
+                file.write("Yes")
+                file.close()
                 print "Fake AP with different OUI Detected!\n"
                 msg = "Fake AP with different OUI Detected!\n"
                 msg = msg + "(BSSID - SSID - OUI)\n"
@@ -430,9 +436,6 @@ def CheckEvilAP():
         else:
             file = open("/root/eapd.log","a")
             file.write("No Whitelisted SSID Detected!\n")
-            file.close()
-            file = open("/tmp/fail","a")
-            file.write("Yes")
             file.close()
             print "No Whitelisted SSID Detected!"
             print "Run Learning Mode first and add your SSID into the whitelist.\n"
@@ -793,7 +796,7 @@ try:
         airodump = Popen(["airodump-ng", "--output-format", "csv",  "-w", "out.csv", mon_iface])
     
     aps = {}
-    time.sleep(150)
+    time.sleep(120)
     airodump.terminate()
     db_connection.commit()
 except:
