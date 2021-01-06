@@ -3,7 +3,7 @@
 
 ######################################################################
 #
-# Copyright (C) 2020 Shant Patrick Tchatalbachian
+# Copyright (C) 2021 Shant Patrick Tchatalbachian
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
