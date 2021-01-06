@@ -1,5 +1,5 @@
 # Module
 # --- WIP ---
-Get access on the Wifi-Pineapple Management Interface.
+Module to get access on the Wifi-Pineapple Management Interface.
 
-Needs to be rewritten for the MK7.
+Needs to be built and written for the MK7.
