@@ -3,7 +3,7 @@
 
 ######################################################################
 #
-# Copyright (C) 2020 Shant Patrick Tchatalbachian
+# Copyright (C) 2021 Shant Patrick Tchatalbachian
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,63 +25,64 @@ EXTRA_HELP="        L       Learning Mode
         H       Help"
 
 error() {
-        echo "${initscript}:" "$@" 1>&2
+        printf "${initscript}:" "$@" 1>&2
 }
 
 start() {
-        echo "Evil Access Point Defender - Daemon (EAPDD) - Protect your Wireless Network from Bad Access Points."
-        echo "Author: Shant Patrick Tchatalbachian." && echo "GNU License v3"
-        echo " " && echo "Scanning Mode." && echo "Scanning Mode" >> /root/eapd.log && echo " "
-        echo "Starting MySQL..." && echo " " && echo "Starting MySQL at $(date '+%r on %x')" >> /root/eapd.log
+        printf "\033[92m\n\nEvil Access Point Defender - Daemon (EAPDD) - Protect your Wireless Network from Bad Access Points.\n"
+        printf "Author: Shant Patrick Tchatalbachian.\nGNU License v3\n\n"
+        printf "Scanning Mode.\n\n" && printf "Scanning Mode\n" >> /root/eapd.log
+        printf "Starting MySQL...\n\n" && printf "Starting MySQL at $(date '+%r on %x')\n" >> /root/eapd.log
         /etc/init.d/mysqld start && sleep 5
-        echo "Starting Scan Please Wait..." && echo " " && echo "Starting Scan at $(date '+%r on %x')" >> /root/eapd.log
+        printf "\n\nStarting Scan Please Wait...\n\n" && printf "Starting Scan at $(date '+%r on %x')\n" >> /root/eapd.log
         python /root/eapd.py -N
-        echo " " && echo "Scan Complete." && echo " " && echo "Scan Complete at $(date '+%r on %x')" >> /root/eapd.log
+        printf "\n\nScan Complete.\n\n" && printf "Scan Complete at $(date '+%r on %x')\n" >> /root/eapd.log
         /etc/init.d/mysqld stop && sleep 5
-        echo "Stopped MySQL." && echo " " && echo "Stopped MySQL at $(date '+%r on %x')" >> /root/eapd.log
-        echo "Log file saved to /root/eapd.log." && echo " "
+        printf "Stopped MySQL.\n\n" && printf "Stopped MySQL at $(date '+%r on %x')\n" >> /root/eapd.log
+        printf "Log file saved to /root/eapd.log.\n\n"
         fail="$(cat /tmp/fail)"
         if [ "$fail" == "Yes" ]; then
-                echo "EAPD Fail at $(date '+%r on %x')!!! Check Log!" >> /tmp/auth	
+                printf "EAPD Fail at $(date '+%r on %x')!!! Check Log!\n" >> /tmp/auth	
                 C2EXFIL STRING /tmp/auth FAIL
                 C2EXFIL STRING /root/eapd.log FAIL_LOG
                 wget -q -s "https://cronitor.link/YOUR_AUTHLINK_HERE/fail?auth_key=YOUR_AUTH_KEY_HERE&msg=EAPD"
         fi
-        echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
+        printf "|-------------------------------------------END-------------------------------------------|\n" >> /root/eapd.log
 }
 
 stop() {
         pkill -f "python /root/eapd.py -N" && pkill -f "python /root/eapd.py -L" && /etc/init.d/mysqld stop
-        echo "Aborted Scan." && echo " " && echo "Aborted Scan, Moved Log, or Reboot at $(date '+%r on %x')" >> /root/eapd.log
-        echo "Log file saved to /root/eapd.log." && echo " "
-        echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
+        printf "\n\nAborted Scan.\n\n" && printf "Aborted Scan, Moved Log, or Reboot at $(date '+%r on %x')\n" >> /root/eapd.log
+        printf "Log file saved to /root/eapd.log.\n\n"
+        printf "|-------------------------------------------END-------------------------------------------|\n" >> /root/eapd.log
 }
 
 L() {
-        echo "Evil Access Point Defender - Daemon (EAPDD) - Protect your Wireless Network from Bad Access Points."
-        echo "Author: Shant Patrick Tchatalbachian." && echo "GNU License v3"
-        echo " " && echo "Learning Mode." && echo "Learning Mode" >> /root/eapd.log && echo " "
-        echo "Stopping Cron..." && echo " " && echo "Stopping Cron at $(date '+%r on %x')" >> /root/eapd.log
+        printf "\033[92m\n\nEvil Access Point Defender - Daemon (EAPDD) - Protect your Wireless Network from Bad Access Points.\n"
+        printf "Author: Shant Patrick Tchatalbachian.\nGNU License v3\n\n"
+        printf "Learning Mode.\n\n" && printf "Learning Mode\n" >> /root/eapd.log
+        printf "Stopping Cron...\n\n" && printf "Stopping Cron at $(date '+%r on %x')\n" >> /root/eapd.log
         /etc/init.d/cron stop && sleep 5
-        echo "Stopping Any Running Scans..." && echo " " && echo "Stopping Any Running Scans at $(date '+%r on %x')" >> /root/eapd.log
+        printf "\n\nStopping Any Running Scans...\n\n" && printf "Stopping Any Running Scans at $(date '+%r on %x')\n" >> /root/eapd.log
         pkill -f "python /root/eapd.py -N" && sleep 10
-        echo "Starting MySQL..." && echo " " && echo "Starting MySQL at $(date '+%r on %x')" >> /root/eapd.log
+        printf "\n\nStarting MySQL...\n\n" && printf "Starting MySQL at $(date '+%r on %x')\n" >> /root/eapd.log
         /etc/init.d/mysqld start && sleep 5
-        echo "Starting Learning Mode Please Wait..." && echo " " && echo "Starting Learning Mode at $(date '+%r on %x')" >> /root/eapd.log
+        printf "\n\nStarting Learning Mode Please Wait...\n\n" && printf "Starting Learning Mode at $(date '+%r on %x')\n" >> /root/eapd.log
         python /root/eapd.py -L
-        echo " " && echo "Learning Mode Complete." && echo " " && echo "Learning Mode Complete at $(date '+%r on %x')" >> /root/eapd.log
+        printf "\n\nLearning Mode Complete.\n\n" && printf "Learning Mode Complete at $(date '+%r on %x')\n" >> /root/eapd.log
         /etc/init.d/mysqld stop && sleep 5
-        echo "Stopped MySQL." && echo " " && echo "Stopped MySQL at $(date '+%r on %x')" >> /root/eapd.log
-        echo "Log file saved to /root/eapd.log." && echo " "
-        echo "Start Scheduled Scans by Running '/etc/init.d/cron enable && /etc/init.d/cron start'." && echo " "
-        echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd.log
+        printf "\n\nStopped MySQL.\n\n" && printf "Stopped MySQL at $(date '+%r on %x')\n" >> /root/eapd.log
+        printf "|-----------------------------------------README!-----------------------------------------|\n\n"
+        printf "Log file saved to /root/eapd.log.\n\n"
+        printf "Start Scheduled Scans by Running '/etc/init.d/cron enable && /etc/init.d/cron start'.\n\n"
+        printf "|-------------------------------------------END-------------------------------------------|\n" >> /root/eapd.log
 }
 
 H() {
-        echo "Evil Access Point Defender - Daemon (EAPDD) - Protect your Wireless Network from Bad Access Points."
-        echo "Author: Shant Patrick Tchatalbachian." && echo "GNU License v3"
-        echo " " && echo "Runs Daemonized on OpenWrt 19.x and above."
-        echo " " && echo "Check out the Wiki: https://github.com/0mniteck/EAPD/wiki/Wiki"
-        echo " " && echo "Just run '/etc/init.d/eapdd L' to start learning mode."
-        echo " " && echo "Start Scheduled Scans by Running '/etc/init.d/cron enable && /etc/init.d/cron start'." && echo " "
+        printf "\n\nEvil Access Point Defender - Daemon (EAPDD) - Protect your Wireless Network from Bad Access Points.\n"
+        printf "Author: Shant Patrick Tchatalbachian.\nGNU License v3\n\n"
+        printf "Runs Daemonized on OpenWrt 19.x and above.\n\n"
+        printf "Check out the Wiki: https://github.com/0mniteck/EAPD/wiki/Wiki\n\n"
+        printf "Just run '/etc/init.d/eapdd L' to start learning mode.\n\n"
+        printf "Start Scheduled Scans by Running '/etc/init.d/cron enable && /etc/init.d/cron start'.\n\n"
 }
