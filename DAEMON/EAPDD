@@ -29,7 +29,7 @@ error() {
 }
 
 start() {
-        rm -f /tmp/auth
+        rm -f /tmp/auth && rm -f /tmp/fail && rm -fr /root/*.csv
         printf "\033[92m\n\nEvil Access Point Defender - Daemon (EAPDD) - Protect your Wireless Network from Bad Access Points.\n\033[0m"
         printf "Author: Shant Patrick Tchatalbachian.\nGNU License v3\n\n"
         printf "Scanning Mode.\n\n" && printf "Scanning Mode\n" >> /root/eapd.log
@@ -59,6 +59,7 @@ stop() {
 }
 
 L() {
+        rm -r /root/*.csv
         printf "\033[92m\n\nEvil Access Point Defender - Daemon (EAPDD) - Protect your Wireless Network from Bad Access Points.\n\033[0m"
         printf "Author: Shant Patrick Tchatalbachian.\nGNU License v3\n\n"
         printf "Learning Mode.\n\n" && printf "Learning Mode\n" >> /root/eapd.log
