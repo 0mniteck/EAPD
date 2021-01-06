@@ -3,7 +3,7 @@
 
 ######################################################################
 #
-# Copyright (C) 2020 Shant Patrick Tchatalbachian
+# Copyright (C) 2021 Shant Patrick Tchatalbachian
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ rm -f /root/eapd.py && rm -f /etc/crontabs/root && rm -f /etc/init.d/mysqld && r
 rm -f -r /pineapple/modules/EAPD/ && rm -f -r /mnt/data/ && rm -f -r /var/log/mysql/ && rm -f -r /var/log/mysqld/ && rm -f -r /var/run/mysqld/
 opkg --autoremove --force-removal-of-dependent-packages remove mariadb-server mariadb-client mariadb-server-extra python python-mysql python-pip
 rm -f /etc/mysql/conf.d/50-server.cnf
-printf "\nUninstaller Complete.\n\n" && printf "Uninstaller Complete at $(date '+%r on %x')\n" >> /root/eapd-uninstall.log
+printf "\n\nUninstaller Complete.\n\n" && printf "Uninstaller Complete at $(date '+%r on %x')\n" >> /root/eapd-uninstall.log
 printf "Log file saved to /root/eapd-uninstall.log.\n\n"
 print "|-------------------------------------------END-------------------------------------------|\n" >> /root/eapd-uninstall.log
 exit
