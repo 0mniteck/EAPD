@@ -53,7 +53,7 @@ start() {
 
 stop() {
         pkill -f "python /root/eapd.py -N" && pkill -f "python /root/eapd.py -L" && /etc/init.d/mysqld stop
-        printf "\n\nAborted Scan.\n\n" && printf "Aborted Scan, Moved Log, or Reboot at $(date '+%r on %x')\n" >> /root/eapd.log
+        printf "\nAborted Scan.\n\n" && printf "Aborted Scan, Moved Log, or Reboot at $(date '+%r on %x')\n" >> /root/eapd.log
         printf "Log file saved to /root/eapd.log.\n\n"
         printf "|-------------------------------------------END-------------------------------------------|\n" >> /root/eapd.log
 }
