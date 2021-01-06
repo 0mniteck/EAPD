@@ -83,7 +83,6 @@ L() {
 H() {
         printf "\n\nEvil Access Point Defender - Daemon (EAPDD) - Protect your Wireless Network from Bad Access Points.\n"
         printf "Author: Shant Patrick Tchatalbachian.\nGNU License v3\n\n"
-        printf "Runs Daemonized on OpenWrt 19.x and above.\n\n"
         printf "Check out the Wiki: https://github.com/0mniteck/EAPD/wiki/Wiki\n\n"
         printf "Just run '/etc/init.d/eapdd L' to start learning mode.\n\n"
         printf "Start Scheduled Scans by Running '/etc/init.d/cron enable && /etc/init.d/cron start'.\n\n"
