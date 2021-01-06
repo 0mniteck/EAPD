@@ -59,7 +59,7 @@ DELETE FROM mysql.db WHERE Db='test' OR Db='test_%';
 FLUSH PRIVILEGES;
 EOF
 /etc/init.d/mysqld stop
-sed -i "23i###################################" /etc/init.d/eapdd
+sed -i "23i###################################\n" /etc/init.d/eapdd
 sed -i "23ipassword='$rootpass'\n" /etc/init.d/eapdd
 rm /etc/rc.local
 printf '/etc/init.d/eapdd stop\n' > /etc/rc.local && sleep 10
