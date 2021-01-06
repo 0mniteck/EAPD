@@ -505,7 +505,7 @@ def LearningMode():
                     cursor.execute(cmd, (SSID,))
                     cmd = "delete from whitelist_OUIs where ssid=%s"
                     cursor.execute(cmd, (SSID,))
-                    cmd = "insert into whitelist(mac,ssid,min_pwr,max_pwr,channel,CIPHER,Enc,Auth) select mac,ssid,pwr-5,pwr+5,channel,CIPHER,Enc,Auth \
+                    cmd = "insert into whitelist(mac,ssid,min_pwr,max_pwr,channel,CIPHER,Enc,Auth) select mac,ssid,pwr-10,pwr+10,channel,CIPHER,Enc,Auth \
                     from ssids where ssid = %s"
                     cursor.execute(cmd, (SSID,))
                     cmd = "insert into whitelist_OUIs select * from ssids_OUIs where ssid=%s"
@@ -524,7 +524,7 @@ def LearningMode():
                     cursor.execute(cmd, (new_bssid,))
                     cmd = "delete from whitelist_OUIs where mac=%s"
                     cursor.execute(cmd, (new_bssid,))
-                    cmd = "insert into whitelist(mac,ssid,min_pwr,max_pwr,channel,CIPHER,Enc,Auth) select mac,ssid,pwr-5,pwr+5,channel,CIPHER,Enc,Auth \
+                    cmd = "insert into whitelist(mac,ssid,min_pwr,max_pwr,channel,CIPHER,Enc,Auth) select mac,ssid,pwr-10,pwr+10,channel,CIPHER,Enc,Auth \
                     from ssids where mac = %s"
                     cursor.execute(cmd, (new_bssid,))
                     cmd = "insert into whitelist_OUIs select * from ssids_OUIs where mac=%s"
