@@ -21,7 +21,7 @@
 ######################################################################
 
 rm -f /root/eapd.log && rm -f -r /root/logs
-prinf "\nStarting Uninstaller for EAPD...\n\n" && printf "Starting Uninstaller for EAPD at $(date '+%r on %x')\n" >> /root/eapd-uninstall.log
+printf "\nStarting Uninstaller for EAPD...\n\n" && printf "Starting Uninstaller for EAPD at $(date '+%r on %x')\n" >> /root/eapd-uninstall.log
 /etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/eapdd stop && sleep 5
 python -m pip uninstall -y netaddr scapy wheel
 opkg --autoremove --force-removal-of-dependent-packages remove mariadb-server mariadb-client mariadb-server-extra python python-mysql python-pip
