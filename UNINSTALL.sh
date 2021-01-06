@@ -31,5 +31,5 @@ opkg --autoremove --force-removal-of-dependent-packages remove mariadb-server ma
 rm -f /etc/mysql/conf.d/50-server.cnf
 printf "\n\nUninstaller Complete.\n\n" && printf "Uninstaller Complete at $(date '+%r on %x')\n" >> /root/eapd-uninstall.log
 printf "Log file saved to /root/eapd-uninstall.log.\n\n"
-print "|-------------------------------------------END-------------------------------------------|\n" >> /root/eapd-uninstall.log
+printf "|-------------------------------------------END-------------------------------------------|\n" >> /root/eapd-uninstall.log
 exit
