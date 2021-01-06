@@ -64,6 +64,10 @@ EOF
 sed -i '23i        password=$rootpass' /etc/init.d/eapdd
 rm /etc/rc.local
 printf '/etc/init.d/eapdd stop\n' > /etc/rc.local && printf "\n\n"
+read -n 1 -p "Please select an interface Wlan[1-9]: " interface && printf "\n\n"
+sed -i '23i        interface=$interface' /etc/init.d/eapdd
+read -n 1 -p "Please select a frequency [2(ghz)/5(ghz)]: " frequency && printf "\n\n"
+sed -i '23i        frequency=$frequency' /etc/init.d/eapdd
 printf "Installer Complete.\n\n" && printf "Installer Complete at $(date '+%r on %x')\n" >> /root/logs/install.log
 printf "|-----------------------------------------README!-----------------------------------------|\n\n"
 printf "Log file saved to /root/logs/install.log.\n\n"
