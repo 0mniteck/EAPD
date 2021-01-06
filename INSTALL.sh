@@ -21,7 +21,7 @@
 ######################################################################
 
 mkdir /root/logs
-printf "\033[92m\nStarting Installer for EAPD...\n\n" && printf "Starting Installer for EAPD at $(date '+%r on %x')\n" >> /root/logs/install.log
+printf "\033[92m\n\nStarting Installer for EAPD...\n\n" && printf "Starting Installer for EAPD at $(date '+%r on %x')\n" >> /root/logs/install.log
 read -s -n 1 -p "On models before the MK7, or other openwrt, please look at the wiki under Requirements. Turn off PineAP then Press any key to continue . . . or ctrl+c to stop" && printf "\n\n"
 mkdir /mnt/data/ && mkdir /mnt/data/mysql/ && mkdir /mnt/data/tmp/
 chmod 777 /mnt/data/ && chmod 777 /mnt/data/mysql/ && chmod 777 /mnt/data/tmp/
