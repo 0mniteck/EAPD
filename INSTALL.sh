@@ -65,7 +65,7 @@ sed -i "23ipassword='$rootpass'\n" /etc/init.d/eapdd
 rm /etc/rc.local
 printf '/etc/init.d/eapdd stop\n' > /etc/rc.local && sleep 10
 read -n 1 -p "Please select an interface Wlan[1-9]: " interface && printf "\n\n"
-sed -i "23iinterface=$interface" /etc/init.d/eapdd
+sed -i "23iinterface=wlan$interface" /etc/init.d/eapdd
 read -n 1 -p "Please select the frequency your card supports [2(Ghz)/5(Ghz)]: " frequency && printf "\n\n"
 sed -i "23ifrequency=$frequency" /etc/init.d/eapdd
 sed -i "23i###############VARS################\n" /etc/init.d/eapdd
