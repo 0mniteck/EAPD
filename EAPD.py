@@ -4,7 +4,7 @@
 ######################################################################
 #
 # Copyright (C) 2015 Mohamed Idris
-# Copyright (C) 2020 Shant Patrick Tchatalbachian
+# Copyright (C) 2021 Shant Patrick Tchatalbachian
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -38,10 +38,9 @@ import threading
 # Usage
 def Usage():
     print "\n########################USAGE##################################\n"
-    print "Evil Access Point Defender (EAPD) - Protect your Wireless Network from Bad Access Points\n."
+    print "\nEvil Access Point Defender (EAPD) - Protect your Wireless Network from Bad Access Points\n."
     print "Authors: Mohamed Idris, And Shant Patrick Tchatalbachian\n"
-    print "GNU License v3\n"
-    print " \n"
+    print "GNU License v3\n\n"
     print "Normal Mode Usage: {} -N \n".format(sys.argv[0])
     print "Learning Mode Usage: {} -L \n".format(sys.argv[0])
     print "Help Screen: {} -h or --help\n".format(sys.argv[0])
@@ -51,11 +50,8 @@ def Usage():
 # Help information
 def Help():
     print "\n############################HELP###############################\n"
-    print " "
-    print "     Check out the Wiki: https://github.com/0mniteck/EAPD/wiki/Wiki\n"
-    print " "
-    print "\nUsage:"
-    print " "
+    print "\n     Check out the Wiki: https://github.com/0mniteck/EAPD/wiki/Wiki\n\n"
+    print "\nUsage:\n"
     print "     - Normal Mode Usage: {} -N \n".format(sys.argv[0])
     print "     - Learning Mode Usage: {} -L \n".format(sys.argv[0])
     print "\n###############################################################\n"
@@ -360,8 +356,7 @@ def CheckEvilAP():
                                 else:
                                     for row in Evil_data:
                                         Deauth(row[1],row[2],str(row[4]),deauth_time)
-                        print "\nStop attacking Evil Access Point..."
-                        print "\n\n"
+                        print "\nStop attacking Evil Access Point...\n\n"
                     else:
                         print "Preventive Mode is not enabled\n"
 
@@ -410,8 +405,7 @@ def CheckEvilAP():
                                     else:
                                         for row in attrib_data:
                                             Deauth(row[1],row[2],str(row[4]),deauth_time)
-                            print "\nStop attacking Evil Access Point..."
-                            print "\n\n"
+                            print "\nStop attacking Evil Access Point...\n\n"
                         else:
                             print "Preventive Mode is not enabled\n"
 
@@ -440,8 +434,8 @@ def CheckEvilAP():
             file = open("/tmp/fail","a")
             file.write("Yes")
             file.close()
-            print "No Whitelisted SSID Detected!\n"
-            print "Run the tool in the Learning Mode first and add your SSID into whitelist"
+            print "No Whitelisted SSID Detected!"
+            print "Run Learning Mode first and add your SSID into the whitelist.\n"
     except:
         print "Unexpected error in 'CheckEvilAP': {}\n".format(sys.exc_info()[0])
 
@@ -623,11 +617,11 @@ def LearningMode():
                 CheckEvilAP()
                 break
             elif choice == "7":
-                print "Exiting the application...\n" 
+                print "Exiting the application..." 
                 print "Please wait...\n"
                 break
             else:
-                print "Wrong choice! Please use one of the avilable choices\n"
+                print "Wrong choice! Please use one of the avilable choices.\n"
     except:
         print "Unexpected error in 'LearningMode': {}".format(sys.exc_info()[0])
 
@@ -636,9 +630,11 @@ def LearningMode():
 Mode = ""
 username = ""
 password = ""
+interface = ""
+frequency = ""
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "hLNu:p:", ["help"])
+    opts, args = getopt.getopt(sys.argv[1:], "hLNu:p:i:f:", ["help"])
 except getopt.GetoptError:
     Usage()
 except:
@@ -654,6 +650,10 @@ for opt, arg in opts:
         username = arg
     if opt == "-p":
         password = arg
+    if opt == "-i":
+        interface = arg
+    if opt == "-f":
+        frequency = arg
 
 if Mode == "":
     Usage()
@@ -735,17 +735,17 @@ try:
     output = Popen("iwconfig", stdout=PIPE).communicate()[0]
     wireless_interface = ""
     mon_iface = ""
-    if "wlan1" in output:
-        wireless_interface = "wlan1"
+    if "wlan" in output:
+        wireless_interface = interface
         file = open("/root/eapd.log","a")
-        file.write("Using Wlan1.\n")
+        file.write("Using " + wireless_interface + ".\n")
         file.close()
     else:
-        print "\n\nCould not find the wireless interface (wlan)!\n"
+        print "\n\nCould not find the wireless interface!"
         print "Exiting the application...\n"
         print "Please wait...\n"
         file = open("/root/eapd.log","a")
-        file.write("Couldn't find Wlan1, Error!.\n")
+        file.write("Couldn't find the wireless interface, Error!.\n")
         file.close()
         Reset("DB")
         sys.exit(2)
@@ -774,7 +774,7 @@ except:
         print "Unexpected error during Creating Monitor Interface: {}\n".format(sys.exc_info()[0])
 ########### Remove the old output from airodump
 try:
-    os.system('rm *.csv')
+        os.system('rm *.csv')
 except:
         print ""
 
@@ -783,11 +783,15 @@ file = open("/root/eapd.log","a")
 file.write("Scanning for wireless networks.\n")
 file.close()
 print "\n###############################################################\n"
-print "SCANNING FOR WIRELESS NETWORKS"
-print " \n"
+print "SCANNING FOR WIRELESS NETWORKS\n"
 try:
-    airodump = Popen(["airodump-ng", "--output-format", "csv",  "-w", "out.csv", mon_iface])
-#5G#airodump = Popen(["airodump-ng", "--output-format", "csv",  "-w", "out.csv", "--channel", "1,2,3,4,5,6,7,8,9,10,11,36,40,44,48,52,56,60,64,100,104,108,112,116,120,124,128,132,136,140,149,153,157,161,165", mon_iface])
+    if frequency == "2":
+        airodump = Popen(["airodump-ng", "--output-format", "csv",  "-w", "out.csv", mon_iface])
+    elif frequency == "5":
+        airodump = Popen(["airodump-ng", "--output-format", "csv",  "-w", "out.csv", "--channel", "1,2,3,4,5,6,7,8,9,10,11,36,40,44,48,52,56,60,64,100,104,108,112,116,120,124,128,132,136,140,149,153,157,161,165", mon_iface])
+    else:
+        airodump = Popen(["airodump-ng", "--output-format", "csv",  "-w", "out.csv", mon_iface])
+    
     aps = {}
     time.sleep(150)
     airodump.terminate()
