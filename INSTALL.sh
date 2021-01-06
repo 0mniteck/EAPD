@@ -35,9 +35,7 @@ opkg install mariadb-server-extra
 opkg install python --force-overwrite
 opkg install python-pip --force-overwrite
 #python -m pip install --upgrade pip
-python -m pip install wheel
-python -m pip install netaddr
-python -m pip install scapy
+python -m pip install wheel netaddr scapy
 /etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/mysqld stop
 mkdir /pineapple/
 mkdir /pineapple/modules/
