@@ -2,7 +2,7 @@
 
 ######################################################################
 #
-# Copyright (C) 2020 Shant Patrick Tchatalbachian
+# Copyright (C) 2021 Shant Patrick Tchatalbachian
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,5 +19,5 @@
 #
 ######################################################################
 
-0 23 * * * /etc/init.d/eapdd stop && C2EXFIL STRING /root/eapd.log EAPD_LOG && mv -f /root/eapd.log /root/logs/$(date +%F-eapd.log) && echo "Exported and moved log at $(date '+%r on %x')" >> /root/eapd.log
-24,48 * * * * rm -r /root/*.csv & echo "Scheduled EAPDD run at $(date '+%r on %x')" >> /root/eapd.log && /etc/init.d/eapdd start
+0 23 * * * /etc/init.d/eapdd stop && C2EXFIL STRING /root/eapd.log EAPD_LOG && mv -f /root/eapd.log /root/logs/$(date +%F-eapd.log) && printf "Exported and moved log at $(date '+%r on %x')\n" >> /root/eapd.log
+24,48 * * * * rm -r /root/*.csv & printf "Scheduled EAPDD run at $(date '+%r on %x')\n" >> /root/eapd.log && /etc/init.d/eapdd start
