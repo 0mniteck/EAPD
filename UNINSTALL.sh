@@ -21,14 +21,15 @@
 ######################################################################
 
 rm -f /root/eapd.log && rm -f -r /root/logs
-echo "Starting Uninstaller for EAPD..." && echo " " && echo "Starting Uninstaller for EAPD at $(date '+%r on %x')" >> /root/eapd-uninstall.log
+prinf "\nStarting Uninstaller for EAPD...\n\n" && printf "Starting Uninstaller for EAPD at $(date '+%r on %x')\n" >> /root/eapd-uninstall.log
 /etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/eapdd stop && sleep 5
-pip uninstall -y netaddr scapy wheel
+python -m pip uninstall -y netaddr scapy wheel
 opkg --autoremove --force-removal-of-dependent-packages remove mariadb-server mariadb-client mariadb-server-extra python python-mysql python-pip
 rm -f /root/eapd.py && rm -f /etc/crontabs/root && rm -f /etc/init.d/mysqld && rm -f /etc/init.d/eapdd
 rm -f -r /pineapple/modules/EAPD/ && rm -f -r /mnt/data/ && rm -f -r /var/log/mysql/ && rm -f -r /var/log/mysqld/ && rm -f -r /var/run/mysqld/
 opkg --autoremove --force-removal-of-dependent-packages remove mariadb-server mariadb-client mariadb-server-extra python python-mysql python-pip
-echo "Uninstaller Complete." && echo " " && echo "Uninstaller Complete at $(date '+%r on %x')" >> /root/eapd-uninstall.log
-echo " " && echo "Log file saved to /root/eapd-uninstall.log." && echo " "
-echo "|-------------------------------------------END-------------------------------------------|" >> /root/eapd-uninstall.log
+rm -f /etc/mysql/conf.d/50-server.cnf
+printf "\nUninstaller Complete.\n\n" && printf "Uninstaller Complete at $(date '+%r on %x')\n" >> /root/eapd-uninstall.log
+printf "Log file saved to /root/eapd-uninstall.log.\n\n"
+print "|-------------------------------------------END-------------------------------------------|\n" >> /root/eapd-uninstall.log
 exit
