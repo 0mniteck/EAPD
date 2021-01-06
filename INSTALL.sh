@@ -61,13 +61,12 @@ DELETE FROM mysql.db WHERE Db='test' OR Db='test_%';
 FLUSH PRIVILEGES;
 EOF
 /etc/init.d/mysqld stop
-echo "Your Mysql password is $rootpass keep it somewhere safe."
 rm /etc/rc.local
 echo '/etc/init.d/eapdd stop' > /etc/rc.local && echo " "
 echo "Installer Complete." && echo " " && echo "Installer Complete at $(date '+%r on %x')" >> /root/logs/install.log
 echo "Log file saved to /root/logs/install.log." && echo " "
 echo "|-----------------------------------------README!-----------------------------------------|" && echo " "
-echo "Add the password  in MYSQL_SECURE_INSTALLATION to line 666 of /root/eapd.py" && echo " "
+echo "Add the password '$rootpass' to line 666 of /root/eapd.py" && echo " "
 echo "Then just run '/etc/init.d/eapdd L' to start learning mode." && echo " "
 echo "|-------------------------------------------END-------------------------------------------|" >> /root/logs/install.log
 exit
