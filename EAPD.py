@@ -60,22 +60,22 @@ def Help():
 # Learning choices
 def Choices():
     print "\n###############################################################\n"
-    print "What do you want to do (please choose a number):"
-    print "1. AutoConfig (only choose SSID)"
-    print "2. Add specific Access Point"
+    print "What do you want to do (please choose a number): "
+    print "1. Auto-Select (Just type your SSID)"
+    print "2. Add specific Access Point (Your MAC)"
     print "3. Remove specific Access Point"
-    print "4. Remove whitelisted Access Points"
+    print "4. Remove all Access Points"
     print "5. Update options"
-    print "6. Go into Normal Mode"
-    print "7. Nothing, just exit\n"
+    print "6. Scan"
+    print "7. Exit\n"
 
 # Learning options
 def Options():
     print "\n###############################################################\n"
     print "What option do you want to update (please choose a number):"
-    print "1. Configure Preventive Mode"
-    print "2. Admin notification"
-    print "3. Return to previous menu\n"
+    print "1. Configure Deauth"
+    print "2. Email Notifications"
+    print "3. Exit to main menu\n"
 
 # sending an alert to the admin email
 def AlertAdmin(message):
@@ -140,7 +140,7 @@ def Conf_viewSSIDs():
         if cursor.rowcount > 0:
             ssids_data = cursor.fetchall()
             print "\n###############################################################\n"
-            print "Wireless Networks Found:"
+            print "Wireless Networks Found: \n"
             print "ID. (BSSID - SSID - PWR - Channel - Cipher - Privacy - Auth)\n"
             for row in ssids_data:
                 cmd = "select * from whitelist where mac=%s and ssid=%s and channel=%s and CIPHER=%s and Enc=%s and Auth=%s"
@@ -425,12 +425,11 @@ def CheckEvilAP():
                     msg = msg + "({} - {} - {})\n".format(row[0],row[1],row[2])
                 thread = threading.Thread(target=AlertAdmin, args=(msg,))
                 thread.start()
-                #AlertAdmin(msg)
             else:
                 file = open("/root/eapd.log","a")
                 file.write("No Evil AP Detected!\n")
                 file.close()
-                print "No Evil AP Detected!\n"
+                print "No Evil AP Detected!"
             print "\n###############################################################\n"
 
         else:
@@ -635,9 +634,10 @@ username = ""
 password = ""
 interface = ""
 frequency = ""
+time = ""
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "hLNu:p:i:f:", ["help"])
+    opts, args = getopt.getopt(sys.argv[1:], "hNLp:i:f:t:", ["help"])
 except getopt.GetoptError:
     Usage()
 except:
@@ -649,14 +649,14 @@ for opt, arg in opts:
         Mode = "Normal"
     if opt == "-L":
         Mode = "Learning"
-    if opt == "-u":
-        username = arg
     if opt == "-p":
         password = arg
     if opt == "-i":
         interface = arg
     if opt == "-f":
         frequency = arg
+    if opt == "-t":
+        scantime = arg
 
 if Mode == "":
     Usage()
@@ -786,7 +786,7 @@ file = open("/root/eapd.log","a")
 file.write("Scanning for wireless networks.\n")
 file.close()
 print "\n###############################################################\n"
-print "SCANNING FOR WIRELESS NETWORKS\n"
+print "SCANNING FOR WIRELESS NETWORKS"
 try:
     if frequency == "2":
         airodump = Popen(["airodump-ng", "--output-format", "csv",  "-w", "out.csv", mon_iface])
@@ -796,7 +796,7 @@ try:
         airodump = Popen(["airodump-ng", "--output-format", "csv",  "-w", "out.csv", mon_iface])
     
     aps = {}
-    time.sleep(120)
+    time.sleep(scantime)
     airodump.terminate()
     db_connection.commit()
 except:
