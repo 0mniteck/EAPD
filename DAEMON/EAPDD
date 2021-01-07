@@ -34,11 +34,11 @@ start() {
         printf "Scanning Mode.\n\n" && printf "Scanning Mode\n" >> /root/eapd.log
         printf "Starting MySQL...\n\n" && printf "Starting MySQL at $(date '+%r on %x')\n" >> /root/eapd.log
         /etc/init.d/mysqld start && sleep 5 && rm -f /tmp/auth && rm -f /tmp/fail && rm -f -r /root/*.csv
-        printf "\n\nStarting Scan Please Wait...\n\n" && printf "Starting Scan at $(date '+%r on %x')\n" >> /root/eapd.log
+        printf "\nStarting Scan Please Wait...\n\n" && printf "Starting Scan at $(date '+%r on %x')\n" >> /root/eapd.log
         python /root/eapd.py -N -p $password -i $interface -f $frequency
         printf "\nScan Complete.\n\n" && printf "Scan Complete at $(date '+%r on %x')\n" >> /root/eapd.log
         /etc/init.d/mysqld stop && sleep 5
-        printf "\nStopped MySQL.\n\n" && printf "Stopped MySQL at $(date '+%r on %x')\n" >> /root/eapd.log
+        printf "Stopped MySQL.\n\n" && printf "Stopped MySQL at $(date '+%r on %x')\n" >> /root/eapd.log
         printf "Log file saved to /root/eapd.log.\n\n"
         fail="$(cat /tmp/fail)"
         if [ "$fail" == "Yes" ]; then
@@ -71,7 +71,7 @@ L() {
         python /root/eapd.py -L -p $password -i $interface -f $frequency
         printf "\nLearning Mode Complete.\n\n" && printf "Learning Mode Complete at $(date '+%r on %x')\n" >> /root/eapd.log
         /etc/init.d/mysqld stop && sleep 5
-        printf "\nStopped MySQL.\n\n" && printf "Stopped MySQL at $(date '+%r on %x')\n" >> /root/eapd.log
+        printf "Stopped MySQL.\n\n" && printf "Stopped MySQL at $(date '+%r on %x')\n" >> /root/eapd.log
         printf "|-----------------------------------------README!-----------------------------------------|\n\n"
         printf "Log file saved to /root/eapd.log.\n\n"
         printf "Start Scheduled Scans by Running '/etc/init.d/cron enable && /etc/init.d/cron start'.\n\n"
