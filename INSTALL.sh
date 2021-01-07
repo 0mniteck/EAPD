@@ -35,7 +35,7 @@ mkdir /pineapple/
 mkdir /pineapple/modules/
 mkdir /pineapple/modules/EAPD/
 cp -f -r MODULE/* /pineapple/modules/EAPD/
-cp -f EAPD.py /root/eapd.py && cp -f CRONTABS /etc/crontabs/root && cp -f DAEMON/EAPDD /etc/init.d/eapdd
+cp -f EAPD.py /root/eapd.py && cp -f CRONTABS /etc/crontabs/root && cp -f EAPDD /etc/init.d/eapdd
 chmod 744 /etc/init.d/eapdd && chmod +x /etc/init.d/eapdd
 chmod 3400 /root/eapd.py && chmod +x /root/eapd.py
 printf 'innodb_use_native_aio = 0\n' >> /etc/mysql/conf.d/50-server.cnf
