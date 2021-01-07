@@ -804,10 +804,10 @@ except:
 ParseAirodumpCSV()
 
 if Mode == "Normal":
-    print "Entering Scanning Mode...\n"
+    print "Entering Scanning Mode..."
     CheckEvilAP()
 elif Mode == "Learning":
-    print "Entering Learning Mode...\n"
+    print "Entering Learning Mode..."
     LearningMode()
 else:
     print("Mode is not identified, Please use the suitable option to run the tool or use '%s' with no options for help menu." % sys.argv[0])
