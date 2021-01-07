@@ -60,7 +60,7 @@ def Help():
 # Learning choices
 def Choices():
     print "\n###############################################################\n"
-    print "What do you want to do (please choose a number): "
+    print "What do you want to do (please choose a number): \n"
     print "1. Auto-Select (Just type your SSID)"
     print "2. Add specific Access Point (Your MAC)"
     print "3. Remove specific Access Point"
@@ -72,7 +72,7 @@ def Choices():
 # Learning options
 def Options():
     print "\n###############################################################\n"
-    print "What option do you want to update (please choose a number):"
+    print "What option do you want to update (please choose a number): \n"
     print "1. Configure Deauth"
     print "2. Email Notifications"
     print "3. Exit to main menu\n"
@@ -157,7 +157,7 @@ def Conf_viewSSIDs():
         if cursor.rowcount > 0:
             whitelist_data = cursor.fetchall()
             print "\n###############################################################\n"
-            print "Whitelisted Access Points:"
+            print "Whitelisted Access Points: \n"
             print "ID. (BSSID - SSID - MinPWR - MaxPWR - Channel - Cipher - Privacy - Auth)\n"
             for row in whitelist_data:
                 print "{}. ({} - {} - '{}' - '{}' - {} - {} - {} - {})".format(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8])
@@ -615,11 +615,11 @@ def LearningMode():
                         break
 
             elif choice == "6":
-                print "Entering Normal Mode...\n"
+                print "\nEntering Scanning Mode...\n"
                 CheckEvilAP()
                 break
             elif choice == "7":
-                print "Exiting the application..." 
+                print "\nExiting the application...\n" 
                 print "Please wait...\n"
                 break
             else:
