@@ -61,7 +61,7 @@ read -n 1 -p "Please select an interface Wlan[0-9]: " interface && printf "\n\n"
 sed -i "23iinterface=wlan$interface" /etc/init.d/eapdd
 read -n 1 -p "Please select the frequency your card supports [2(Ghz)/5(Ghz)]: " frequency && printf "\n\n"
 sed -i "23ifrequency=$frequency" /etc/init.d/eapdd
-read -n 3 -p "Please select the scan length in seconds [1-120]: " time && printf "\n\n"
+read -n 3 -p "Please select the scan length in seconds [1-120]: " time && printf "\n"
 sed -i "23itime=$time" /etc/init.d/eapdd
 sed -i "23i###############VARS################\n" /etc/init.d/eapdd
 chmod 3400 /etc/init.d/eapdd && chmod +x /etc/init.d/eapdd
