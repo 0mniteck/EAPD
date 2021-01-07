@@ -29,12 +29,11 @@ error() {
 }
 
 start() {
-        rm -f /tmp/auth && rm -f /tmp/fail && rm -f -r /root/*.csv
         printf "\033[92m\nEvil Access Point Defender - Daemon (EAPDD) - Protect your Wireless Network from Bad Access Points.\n\033[0m"
         printf "Author: Shant Patrick Tchatalbachian.\nGNU License v3\n\n"
         printf "Scanning Mode.\n\n" && printf "Scanning Mode\n" >> /root/eapd.log
         printf "Starting MySQL...\n\n" && printf "Starting MySQL at $(date '+%r on %x')\n" >> /root/eapd.log
-        /etc/init.d/mysqld start && sleep 5
+        /etc/init.d/mysqld start && sleep 5 && rm -f /tmp/auth && rm -f /tmp/fail && rm -f -r /root/*.csv
         printf "\n\nStarting Scan Please Wait...\n\n" && printf "Starting Scan at $(date '+%r on %x')\n" >> /root/eapd.log
         python /root/eapd.py -N -p $password -i $interface -f $frequency
         printf "\nScan Complete.\n\n" && printf "Scan Complete at $(date '+%r on %x')\n" >> /root/eapd.log
@@ -59,7 +58,6 @@ stop() {
 }
 
 L() {
-        rm -f -r /root/*.csv
         printf "\033[92m\nEvil Access Point Defender - Daemon (EAPDD) - Protect your Wireless Network from Bad Access Points.\n\033[0m"
         printf "Author: Shant Patrick Tchatalbachian.\nGNU License v3\n\n"
         printf "Learning Mode.\n\n" && printf "Learning Mode\n" >> /root/eapd.log
@@ -68,7 +66,7 @@ L() {
         printf "\nStopping Any Running Scans...\n\n" && printf "Stopping Any Running Scans at $(date '+%r on %x')\n" >> /root/eapd.log
         pkill -f "python /root/eapd.py -N -p $password -i $interface -f $frequency" && sleep 10
         printf "\nStarting MySQL...\n\n" && printf "Starting MySQL at $(date '+%r on %x')\n" >> /root/eapd.log
-        /etc/init.d/mysqld start && sleep 5
+        /etc/init.d/mysqld start && sleep 5 && rm -f -r /root/*.csv
         printf "\n\nStarting Learning Mode Please Wait...\n\n" && printf "Starting Learning Mode at $(date '+%r on %x')\n" >> /root/eapd.log
         python /root/eapd.py -L -p $password -i $interface -f $frequency
         printf "\nLearning Mode Complete.\n\n" && printf "Learning Mode Complete at $(date '+%r on %x')\n" >> /root/eapd.log
