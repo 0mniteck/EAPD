@@ -40,7 +40,7 @@ printf 'innodb_use_native_aio = 0\n' >> /etc/mysql/conf.d/50-server.cnf
 uci set mysqld.general.enabled='1' && uci commit
 rm /etc/rc.local && printf '/etc/init.d/eapdd stop\n' > /etc/rc.local && sleep 10
 /etc/init.d/eapdd disable && mysql_install_db --force && opkg install python-mysql
-/etc/init.d/mysqld start && sleep 10 && printf "MYSQL Securing Started...\n\n"
+/etc/init.d/mysqld start && sleep 10 && printf "\nMYSQL Securing Started...\n\n"
 rootpass=$(openssl rand -base64 16)
 mysql -u root <<-EOF
 UPDATE mysql.user SET Password=PASSWORD('$rootpass') WHERE User='root';
