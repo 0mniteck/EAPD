@@ -34,9 +34,9 @@ start() {
         printf "Scanning Mode.\n\n" && printf "Scanning Mode\n" >> /root/eapd.log
         printf "Starting MySQL...\n\n" && printf "Starting MySQL at $(date '+%r on %x')\n" >> /root/eapd.log
         /etc/init.d/mysqld start && sleep 5 && rm -f /tmp/auth && rm -f /tmp/fail && rm -f -r /root/*.csv
-        printf "\nStarting Scan Please Wait...\n\n" && printf "Starting Scan at $(date '+%r on %x')\n" >> /root/eapd.log
+        printf "Starting Scan Please Wait...\n\n" && printf "Starting Scan at $(date '+%r on %x')\n" >> /root/eapd.log
         python /root/eapd.py -N -p $password -i $interface -f $frequency -t $time
-        printf "\nScan Complete.\n\n" && printf "Scan Complete at $(date '+%r on %x')\n" >> /root/eapd.log
+        printf "Scan Complete.\n\n" && printf "Scan Complete at $(date '+%r on %x')\n" >> /root/eapd.log
         /etc/init.d/mysqld stop && sleep 5
         printf "Stopped MySQL.\n\n" && printf "Stopped MySQL at $(date '+%r on %x')\n" >> /root/eapd.log
         printf "Log file saved to /root/eapd.log.\n\n"
