@@ -31,7 +31,9 @@ opkg install python-pip --force-overwrite
 #python -m pip install --upgrade pip
 python -m pip install wheel netaddr scapy
 /etc/init.d/cron stop && /etc/init.d/cron disable
-mkdir /pineapple/ && mkdir /pineapple/modules/ && mkdir /pineapple/modules/EAPD/
+mkdir -p /pineapple/modules/EAPD/src/lib/modules/material
+mkdir -p /pineapple/modules/EAPD/src/lib/components
+mkdir -p /pineapple/modules/EAPD/src/lib/services
 cp -f -r MODULE/* /pineapple/modules/EAPD/
 cp -f EAPD.py /root/eapd.py && cp -f CRONTABS /etc/crontabs/root && cp -f EAPDD /etc/init.d/eapdd
 chmod 744 /etc/init.d/eapdd && chmod +x /etc/init.d/eapdd
