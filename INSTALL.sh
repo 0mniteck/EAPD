@@ -40,7 +40,7 @@ python -m pip install wheel netaddr scapy
 mkdir /pineapple/
 mkdir /pineapple/modules/
 mkdir /pineapple/modules/EAPD/
-cp -fr MODULE/* /pineapple/modules/EAPD/
+cp -f -r MODULE/* /pineapple/modules/EAPD/
 cp -f EAPD.py /root/eapd.py && cp -f CRONTABS /etc/crontabs/root
 cp -f DAEMON/MYSQLD /etc/init.d/mysqld && cp -f DAEMON/EAPDD /etc/init.d/eapdd
 chmod 744 /etc/init.d/mysqld && chmod 744 /etc/init.d/eapdd
@@ -59,15 +59,20 @@ DELETE FROM mysql.user WHERE User='';
 DELETE FROM mysql.db WHERE Db='test' OR Db='test_%';
 FLUSH PRIVILEGES;
 EOF
+sleep 1
 /etc/init.d/mysqld stop
 sed -i "23i###################################\n" /etc/init.d/eapdd
 sed -i "23ipassword='$rootpass'\n" /etc/init.d/eapdd
 rm /etc/rc.local
 printf '/etc/init.d/eapdd stop\n' > /etc/rc.local && sleep 10
-read -n 1 -p "Please select an interface Wlan[1-9]: " interface && printf "\n\n"
+interface=1
+frequency=2
+time=120
+read -n 1 -p "Please select an interface Wlan[0-9]: " interface && printf "\n\n"
 sed -i "23iinterface=wlan$interface" /etc/init.d/eapdd
 read -n 1 -p "Please select the frequency your card supports [2(Ghz)/5(Ghz)]: " frequency && printf "\n\n"
 sed -i "23ifrequency=$frequency" /etc/init.d/eapdd
+read -n 3 -p "Please select the scan length in seconds [1-120]: " time && printf "\n\n"
 sed -i "23itime=$time" /etc/init.d/eapdd
 sed -i "23i###############VARS################\n" /etc/init.d/eapdd
 chmod 3400 /etc/init.d/mysqld && chmod 3400 /etc/init.d/eapdd
