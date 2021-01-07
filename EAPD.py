@@ -796,7 +796,7 @@ try:
         airodump = Popen(["airodump-ng", "--output-format", "csv",  "-w", "out.csv", mon_iface])
     
     aps = {}
-    time.sleep(scantime)
+    time.sleep(int(scantime))
     airodump.terminate()
     db_connection.commit()
 except:
