@@ -51,7 +51,7 @@ start() {
 }
 
 stop() {
-        pkill -f "python /root/eapd.py -N -p $password -i $interface -f $frequency" && pkill -f "python /root/eapd.py -L -p $password -i $interface -f $frequency -t $time" && /etc/init.d/mysqld stop
+        pkill -f "python /root/eapd.py -N -p $password -i $interface -f $frequency -t $time" && pkill -f "python /root/eapd.py -L -p $password -i $interface -f $frequency -t $time" && /etc/init.d/mysqld stop
         printf "\nAborted Scan.\n\n" && printf "Aborted Scan, Moved Log, or Reboot at $(date '+%r on %x')\n" >> /root/eapd.log
         printf "Log file saved to /root/eapd.log.\n\n"
         printf "|-------------------------------------------END-------------------------------------------|\n" >> /root/eapd.log
