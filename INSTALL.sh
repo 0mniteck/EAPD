@@ -31,16 +31,14 @@ opkg install python-pip --force-overwrite
 #python -m pip install --upgrade pip
 python -m pip install wheel netaddr scapy
 /etc/init.d/cron stop && /etc/init.d/cron disable
-mkdir /pineapple/
-mkdir /pineapple/modules/
-mkdir /pineapple/modules/EAPD/
+mkdir /pineapple/ && mkdir /pineapple/modules/ && mkdir /pineapple/modules/EAPD/
 cp -f -r MODULE/* /pineapple/modules/EAPD/
 cp -f EAPD.py /root/eapd.py && cp -f CRONTABS /etc/crontabs/root && cp -f EAPDD /etc/init.d/eapdd
 chmod 744 /etc/init.d/eapdd && chmod +x /etc/init.d/eapdd
 chmod 3400 /root/eapd.py && chmod +x /root/eapd.py
 printf 'innodb_use_native_aio = 0\n' >> /etc/mysql/conf.d/50-server.cnf
-uci set mysqld.general.enabled='1'
-uci commit
+uci set mysqld.general.enabled='1' && uci commit
+rm /etc/rc.local && printf '/etc/init.d/eapdd stop\n' > /etc/rc.local && sleep 10
 /etc/init.d/eapdd disable && mysql_install_db --force && opkg install python-mysql
 /etc/init.d/mysqld start && sleep 10 && printf "MYSQL Securing Started...\n\n"
 rootpass=$(openssl rand -base64 16)
@@ -51,12 +49,9 @@ DELETE FROM mysql.user WHERE User='';
 DELETE FROM mysql.db WHERE Db='test' OR Db='test_%';
 FLUSH PRIVILEGES;
 EOF
-sleep 1
-/etc/init.d/mysqld stop && printf "MySQL Stopped and Secured...\n\n"
+sleep 1 && /etc/init.d/mysqld stop && printf "MySQL Stopped and Secured...\n\n"
 sed -i "23i###################################\n" /etc/init.d/eapdd
 sed -i "23ipassword='$rootpass'\n" /etc/init.d/eapdd
-rm /etc/rc.local
-printf '/etc/init.d/eapdd stop\n' > /etc/rc.local && sleep 10
 interface=1
 frequency=2
 time=120
