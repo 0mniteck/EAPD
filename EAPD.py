@@ -634,7 +634,7 @@ username = ""
 password = ""
 interface = ""
 frequency = ""
-time = ""
+scantime = ""
 
 try:
     opts, args = getopt.getopt(sys.argv[1:], "hNLp:i:f:t:", ["help"])
