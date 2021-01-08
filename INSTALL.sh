@@ -26,11 +26,11 @@ read -s -n 1 -t 25 -p "On models before the MK7, or other openwrt, please look a
 opkg update && opkg install mariadb-server --force-overwrite && opkg install python --force-overwrite && opkg install python-pip --force-overwrite
 #python -m pip install --upgrade pip
 python -m pip install wheel netaddr scapy
-/etc/init.d/cron stop && /etc/init.d/cron disable
 mkdir -p /pineapple/modules/EAPD/src/lib/modules/material
 mkdir -p /pineapple/modules/EAPD/src/lib/components
 mkdir -p /pineapple/modules/EAPD/src/lib/services
 cp -f -r MODULE/* /pineapple/modules/EAPD/
+/etc/init.d/cron stop && /etc/init.d/cron disable
 cp -f EAPD.py /root/eapd.py && cp -f CRONTABS /etc/crontabs/root && cp -f EAPDD /etc/init.d/eapdd
 chmod 744 /etc/init.d/eapdd && chmod +x /etc/init.d/eapdd
 chmod 3400 /root/eapd.py && chmod +x /root/eapd.py
