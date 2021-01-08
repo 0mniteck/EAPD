@@ -28,7 +28,8 @@ opkg install python --force-overwrite && opkg install python-pip --force-overwri
 #python -m pip install --upgrade pip
 python -m pip install wheel netaddr scapy
 cp -f MODULE/EAPD-master.tar.gz /pineapple/modules/EAPD-master.tar.gz
-tar -xf /pineapple/modules/EAPD-master.tar.gz -C /pineapple/modules
+tar x -z -f /pineapple/modules/EAPD-master.tar.gz -C /pineapple/modules/
+rm -f /pineapple/modules/EAPD-master.tar.gz
 /etc/init.d/cron stop && /etc/init.d/cron disable
 cp -f EAPD.py /root/eapd.py && cp -f CRONTABS /etc/crontabs/root && cp -f EAPDD /etc/init.d/eapdd
 chmod 744 /etc/init.d/eapdd && chmod +x /etc/init.d/eapdd
