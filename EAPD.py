@@ -61,9 +61,9 @@ def Help():
 def Choices():
     print "\n###############################################################\n"
     print "What do you want to do (please choose a number): \n"
-    print "1. Auto-Select (Just type your SSID)"
-    print "2. Add specific Access Point (Your MAC)"
-    print "3. Remove specific Access Point"
+    print "1. Auto-Select (Type your SSID)"
+    print "2. Add Access Point (Your MAC)"
+    print "3. Remove Access Point"
     print "4. Remove all Access Points"
     print "5. Update options"
     print "6. Scan"
