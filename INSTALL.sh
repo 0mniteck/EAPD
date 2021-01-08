@@ -23,8 +23,7 @@
 mkdir /root/logs
 printf "\033[92m\nStarting Installer for EAPD...\n\n\033[0m" && printf "Starting Installer for EAPD at $(date '+%r on %x')\n" >> /root/logs/install.log
 read -s -n 1 -p "On models before the MK7, or other openwrt, please look at the wiki under Requirements. Turn off PineAP then Press any key to continue . . . or ctrl+c to stop" && printf "\n\n"
-opkg update && opkg install mariadb-server --force-overwrite && opkg install mariadb-client --force-overwrite
-opkg install python --force-overwrite && opkg install python-pip --force-overwrite
+opkg update && opkg install mariadb-server --force-overwrite && opkg install python --force-overwrite && opkg install python-pip --force-overwrite
 #python -m pip install --upgrade pip
 python -m pip install wheel netaddr scapy
 /etc/init.d/cron stop && /etc/init.d/cron disable
