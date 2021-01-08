@@ -22,8 +22,8 @@
 
 mkdir /root/logs
 printf "\033[92m\nStarting Installer for EAPD...\n\n\033[0m" && printf "Starting Installer for EAPD at $(date '+%r on %x')\n" >> /root/logs/install.log
-read -s -n 1 -t 15 -p "On models before the MK7, or other openwrt, please look at the wiki under Requirements. Turn off PineAP then Press any key to continue . . . or ctrl+c to stop" && printf "\n\n"
-opkg update && opkg install mariadb-server --force-overwrite && opkg install mariadb-client --force-overwrite
+read -s -n 1 -t 15 -p "On models before the MK7, or other openwrt, please look at the wiki under Requirements. Turn off PineAP then Press any key to continue . . . or ctrl+c to stop"
+printf "\n\n" && opkg update && opkg install mariadb-server --force-overwrite && opkg install mariadb-client --force-overwrite
 opkg install python --force-overwrite && opkg install python-pip --force-overwrite
 #python -m pip install --upgrade pip
 python -m pip install wheel netaddr scapy
@@ -51,9 +51,10 @@ EOF
 sleep 1 && /etc/init.d/mysqld stop && printf "Stopped and Secured MySQL.\n\n"
 sed -i "23i###################################\n" /etc/init.d/eapdd
 sed -i "23ipassword='$rootpass'\n" /etc/init.d/eapdd
-read -n 1 -t 25 -p "Please select an interface Wlan[0-9]: " interface && printf "\n\n"
-read -n 1 -t 25 -p "Please select the frequency your card supports [2(Ghz)/5(Ghz)]: " frequency && printf "\n\n"
-read -n 3 -t 25 -p "Please select the scan length in seconds [1-120]: " time && printf "\n"
+read -n 1 -t 25 -p "Please select an interface Wlan[0-9]: " interface
+printf "\n\n" && read -n 1 -t 25 -p "Please select the frequency your card supports [2(Ghz)/5(Ghz)]: " frequency
+printf "\n\n" && read -n 3 -t 25 -p "Please select the scan length in seconds [1-120]: " time
+printf "\n"
 if [ -z $interface ]; then
   interface=1
 fi
