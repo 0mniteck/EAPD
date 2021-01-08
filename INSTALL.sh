@@ -22,7 +22,7 @@
 
 mkdir /root/logs
 printf "\033[92m\nStarting Installer for EAPD...\n\n\033[0m" && printf "Starting Installer for EAPD at $(date '+%r on %x')\n" >> /root/logs/install.log
-read -s -n 1 -p "On models before the MK7, or other openwrt, please look at the wiki under Requirements. Turn off PineAP then Press any key to continue . . . or ctrl+c to stop" && printf "\n\n"
+read -s -n 1 -t 25 -p "On models before the MK7, or other openwrt, please look at the wiki under Requirements. Turn off PineAP then Press any key to continue . . . or ctrl+c to stop" && printf "\n\n"
 opkg update && opkg install mariadb-server --force-overwrite && opkg install python --force-overwrite && opkg install python-pip --force-overwrite
 #python -m pip install --upgrade pip
 python -m pip install wheel netaddr scapy
@@ -50,14 +50,20 @@ EOF
 sleep 1 && /etc/init.d/mysqld stop && printf "MySQL Stopped and Secured...\n\n"
 sed -i "23i###################################\n" /etc/init.d/eapdd
 sed -i "23ipassword='$rootpass'\n" /etc/init.d/eapdd
-interface=1
-frequency=2
-time=120
-read -n 1 -p "Please select an interface Wlan[0-9]: " interface && printf "\n\n"
+read -n 1 -t 25 -p "Please select an interface Wlan[0-9]: " interface && printf "\n\n"
+read -n 1 -t 25 -p "Please select the frequency your card supports [2(Ghz)/5(Ghz)]: " frequency && printf "\n\n"
+read -n 3 -t 25 -p "Please select the scan length in seconds [1-120]: " time && printf "\n"
+if [ -z $interface ]; then
+  interface=1
+fi
+if [ -z $frequency ]; then
+  frequency=2
+fi
+if [ -z $time ]; then
+  time=60
+fi
 sed -i "23iinterface=wlan$interface" /etc/init.d/eapdd
-read -n 1 -p "Please select the frequency your card supports [2(Ghz)/5(Ghz)]: " frequency && printf "\n\n"
 sed -i "23ifrequency=$frequency" /etc/init.d/eapdd
-read -n 3 -p "Please select the scan length in seconds [1-120]: " time && printf "\n"
 sed -i "23itime=$time" /etc/init.d/eapdd
 sed -i "23i###############VARS################\n" /etc/init.d/eapdd
 chmod 3400 /etc/init.d/eapdd && chmod +x /etc/init.d/eapdd
