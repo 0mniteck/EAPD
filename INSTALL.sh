@@ -65,7 +65,6 @@ chmod 3400 /etc/init.d/eapdd && chmod +x /etc/init.d/eapdd
 printf "Installer Complete.\n\n" && printf "Installer Complete at $(date '+%r on %x')\n" >> /root/logs/install.log
 printf "|-----------------------------------------README!-----------------------------------------|\n\n"
 printf "Log file saved to /root/logs/install.log.\n\n"
-printf "Your SQL password is '$rootpass'\n\n"
 printf "Just run '/etc/init.d/eapdd L' to start learning mode.\n\n"
 printf "|-------------------------------------------END-------------------------------------------|\n" >> /root/logs/install.log
 exit
