@@ -84,7 +84,7 @@ L() {
 }
 
 H() {
-        printf "\nEvil Access Point Defender - Daemon (EAPDD) - Protect your Wireless Network from Bad Access Points.\n"
+        printf "\033[92m\nEvil Access Point Defender - Daemon (EAPDD) - Protect your Wireless Network from Bad Access Points.\n\033[0m"
         printf "Author: Shant Patrick Tchatalbachian.\nGNU License v3\n\n"
         printf "Check out the Wiki: https://github.com/0mniteck/EAPD/wiki/Wiki\n\n"
         printf "Just run '/etc/init.d/eapdd L' to start learning mode.\n\n"
