@@ -41,7 +41,7 @@ def Usage():
     print "\nEvil Access Point Defender (EAPD) - Protect your Wireless Network from Bad Access Points\n."
     print "Authors: Mohamed Idris, And Shant Patrick Tchatalbachian\n"
     print "GNU License v3\n\n"
-    print "Normal Mode Usage: {} -N \n".format(sys.argv[0])
+    print "Scanning Mode Usage: {} -N \n".format(sys.argv[0])
     print "Learning Mode Usage: {} -L \n".format(sys.argv[0])
     print "Help Screen: {} -h or --help\n".format(sys.argv[0])
     print "\n###############################################################\n"
@@ -52,7 +52,7 @@ def Help():
     print "\n############################HELP###############################\n"
     print "\n     Check out the Wiki: https://github.com/0mniteck/EAPD/wiki/Wiki\n\n"
     print "\nUsage:\n"
-    print "     - Normal Mode Usage: {} -N \n".format(sys.argv[0])
+    print "     - Scanning Mode Usage: {} -N \n".format(sys.argv[0])
     print "     - Learning Mode Usage: {} -L \n".format(sys.argv[0])
     print "\n###############################################################\n"
     sys.exit(2)
@@ -66,7 +66,7 @@ def Choices():
     print "3. Remove Access Point"
     print "4. Remove all Access Points"
     print "5. Update options"
-    print "6. Scan"
+    print "6. Scanning Mode"
     print "7. Exit\n"
 
 # Learning options
