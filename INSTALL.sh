@@ -55,10 +55,10 @@ if [[ -f /etc/config/EAPD ]]; then
   mysql_installation_secure
 else
   mysql_installation_secure
-  touch /etc/config/EAPD
+  printf "\n" > /etc/config/EAPD
   chmod 200 /etc/config/EAPD
-  sed -i "23i###################################\n" /etc/config/EAPD
-  sed -i "23ipassword='$rootpass'\n" /etc/config/EAPD
+  sed -i "1i###################################\n" /etc/config/EAPD
+  sed -i "1ipassword='$rootpass'\n" /etc/config/EAPD
 fi
 if [ -z $interface ]; then
   read -n 1 -t 25 -p "Please select an interface Wlan[0-9]: " interface
@@ -72,23 +72,23 @@ fi
 printf "\n"
 if [ -z $interface ]; then
   interface=1
-  sed -i "23iinterface=wlan$interface" /etc/config/EAPD
+  sed -i "1iinterface=wlan$interface" /etc/config/EAPD
 else
-  sed -i "23iinterface=wlan$interface" /etc/config/EAPD
+  sed -i "1iinterface=wlan$interface" /etc/config/EAPD
 fi
 if [ -z $frequency ]; then
   frequency=2
-  sed -i "23ifrequency=$frequency" /etc/config/EAPD
+  sed -i "1ifrequency=$frequency" /etc/config/EAPD
 else
-  sed -i "23ifrequency=$frequency" /etc/config/EAPD
+  sed -i "1ifrequency=$frequency" /etc/config/EAPD
 fi
 if [ -z $time ]; then
   time=60
-  sed -i "23itime=$time" /etc/config/EAPD
-  sed -i "23i###############VARS################\n" /etc/config/EAPD
+  sed -i "1itime=$time" /etc/config/EAPD
+  sed -i "1i###############VARS################\n" /etc/config/EAPD
 else
-  sed -i "23itime=$time" /etc/config/EAPD
-  sed -i "23i###############VARS################\n" /etc/config/EAPD
+  sed -i "1itime=$time" /etc/config/EAPD
+  sed -i "1i###############VARS################\n" /etc/config/EAPD
 fi
 chmod 400 /etc/config/EAPD
 printf "Installer Complete.\n\n" && printf "Installer Complete at $(date '+%r on %x')\n" >> /root/logs/install.log
