@@ -54,9 +54,9 @@ if [ -f /etc/config/EAPD ]; then
   mysql_installation_secure
 else
   mysql_installation_secure
-  printf "\n" > /etc/config/EAPD
+  printf "#" > /etc/config/EAPD
   chmod 200 /etc/config/EAPD
-  sed -i "1i###################################\n" /etc/config/EAPD
+  sed -i "1i##################################" /etc/config/EAPD
   sed -i "1ipassword='$rootpass'\n" /etc/config/EAPD
 fi
 if [ -z $interface ]; then
@@ -84,10 +84,10 @@ if [ -z $time ]; then
   if [ -z $time ]; then
     time=60
     sed -i "1itime=$time" /etc/config/EAPD
-    sed -i "1i\n###############VARS################\n" /etc/config/EAPD
+    sed -i "1i###############VARS################\n" /etc/config/EAPD
   else
     sed -i "1itime=$time" /etc/config/EAPD
-    sed -i "1i\n###############VARS################\n" /etc/config/EAPD
+    sed -i "1i###############VARS################\n" /etc/config/EAPD
   fi
   printf "\nSet scantime to $time.\n"
 fi && printf "\n"
