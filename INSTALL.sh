@@ -79,7 +79,7 @@ if [ -z $frequency ]; then
   printf "\nSet frequency to "$frequency"Ghz."
 fi
 if [ -z $time ]; then
-  printf "\n\n" && read -n 3 -t 25 -p "Please select the scantime in seconds [30-120]: " time
+  printf "\n\n" && read -n 2 -t 25 -p "Please select the scantime in seconds [30-90]: " time
   if [ -z $time ]; then
     time=60
     sed -i "1itime=$time" /etc/config/eapdd
