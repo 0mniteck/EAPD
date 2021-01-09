@@ -48,24 +48,24 @@ FLUSH PRIVILEGES;
 EOF
 sleep 1 && /etc/init.d/mysqld stop && printf "Stopped and Secured MySQL.\n\n"
 }
-if [ -f /etc/config/EAPD ]; then
-  source /etc/config/EAPD
+if [ -f /etc/config/eapdd ]; then
+  source /etc/config/eapdd
   rootpass=$password
   mysql_installation_secure
 else
   mysql_installation_secure
-  printf "#" > /etc/config/EAPD
-  chmod 200 /etc/config/EAPD
-  sed -i "1i##################################" /etc/config/EAPD
-  sed -i "1ipassword='$rootpass'\n" /etc/config/EAPD
+  printf "#" > /etc/config/eapdd
+  chmod 200 /etc/config/eapdd
+  sed -i "1i##################################" /etc/config/eapdd
+  sed -i "1ipassword='$rootpass'\n" /etc/config/eapdd
 fi
 if [ -z $interface ]; then
   read -n 1 -t 25 -p "Please select an interface Wlan[0-9]: " interface
   if [ -z $interface ]; then
     interface=1
-    sed -i "1iinterface=wlan$interface" /etc/config/EAPD
+    sed -i "1iinterface=wlan$interface" /etc/config/eapdd
   else
-    sed -i "1iinterface=wlan$interface" /etc/config/EAPD
+    sed -i "1iinterface=wlan$interface" /etc/config/eapdd
   fi
   printf "\nSet interface to wlan$interface."
 fi
@@ -73,9 +73,9 @@ if [ -z $frequency ]; then
   printf "\n\n" && read -n 1 -t 25 -p "Please select the frequency your card supports [2(Ghz)/5(Ghz)]: " frequency
   if [ -z $frequency ]; then
     frequency=2
-    sed -i "1ifrequency=$frequency" /etc/config/EAPD
+    sed -i "1ifrequency=$frequency" /etc/config/eapdd
   else
-    sed -i "1ifrequency=$frequency" /etc/config/EAPD
+    sed -i "1ifrequency=$frequency" /etc/config/eapdd
   fi
   printf "\nSet frequency to "$frequency"Ghz."
 fi
@@ -83,15 +83,15 @@ if [ -z $time ]; then
   printf "\n\n" && read -n 3 -t 25 -p "Please select the scantime in seconds [30-120]: " time
   if [ -z $time ]; then
     time=60
-    sed -i "1itime=$time" /etc/config/EAPD
-    sed -i "1i###############VARS################\n" /etc/config/EAPD
+    sed -i "1itime=$time" /etc/config/eapdd
+    sed -i "1i###############VARS################\n" /etc/config/eapdd
   else
-    sed -i "1itime=$time" /etc/config/EAPD
-    sed -i "1i###############VARS################\n" /etc/config/EAPD
+    sed -i "1itime=$time" /etc/config/eapdd
+    sed -i "1i###############VARS################\n" /etc/config/eapdd
   fi
   printf "\nSet scantime to $time.\n"
 fi && printf "\n"
-chmod 400 /etc/config/EAPD
+chmod 400 /etc/config/eapdd
 printf "Installer Complete.\n\n" && printf "Installer Complete at $(date '+%r on %x')\n" >> /root/logs/install.log
 printf "|-----------------------------------------README!-----------------------------------------|\n\n"
 printf "Log file saved to /root/logs/install.log.\n\n"
