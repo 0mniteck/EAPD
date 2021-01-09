@@ -630,7 +630,6 @@ def LearningMode():
 ##################################################################### Main Start Here
 
 Mode = ""
-username = ""
 password = ""
 interface = ""
 frequency = ""
