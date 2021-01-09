@@ -28,7 +28,7 @@ read -s -n 1 -t 15 -p "On models before the MK7, or other openwrt, please look a
 printf "\n\n" && opkg update && opkg install mariadb-server --force-overwrite && opkg install mariadb-client --force-overwrite
 opkg install python --force-overwrite && opkg install python-pip --force-overwrite
 python -m pip install wheel && python -m pip install netaddr scapy
-/etc/init.d/cron stop && /etc/init.d/cron disable
+/etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/mysqld stop /etc/init.d/mysqld disable
 rm -f -r /pineapple/modules/eapd/ && cp -f MODULE/eapd-master.tar.gz /pineapple/modules/eapd-master.tar.gz
 tar x -z -f /pineapple/modules/eapd-master.tar.gz -C /pineapple/modules/ && rm -f /pineapple/modules/eapd-master.tar.gz
 cp -f EAPD.py /root/eapd.py && cp -f CRONTABS /etc/crontabs/root && cp -f EAPDD /etc/init.d/eapdd
