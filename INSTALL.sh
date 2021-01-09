@@ -20,15 +20,14 @@
 #
 ######################################################################
 
-mkdir /root/logs
-printf "\033[92m\nStarting Installer for EAPD...\n\n\033[0m" && printf "Starting Installer for EAPD at $(date '+%r on %x')\n" >> /root/logs/install.log
+mkdir -p /root/logs && printf "\033[92m\nStarting Installer for EAPD...\n\n\033[0m" && printf "Starting Installer for EAPD at $(date '+%r on %x')\n" >> /root/logs/install.log
 read -s -n 1 -t 15 -p "On models before the MK7, or other openwrt, please look at the wiki under Requirements. Turn off PineAP then Press any key to continue . . . or ctrl+c to stop"
 printf "\n\n" && opkg update && opkg install mariadb-server --force-overwrite && opkg install mariadb-client --force-overwrite
 opkg install python --force-overwrite && opkg install python-pip --force-overwrite
 #python -m pip install --upgrade pip
 python -m pip install wheel netaddr scapy
 /etc/init.d/cron stop && /etc/init.d/cron disable
-rm -f -r /pineapple/modules/EAPD && cp -f MODULE/EAPD-master.tar.gz /pineapple/modules/EAPD-master.tar.gz
+rm -f -r /pineapple/modules/EAPD/ && cp -f MODULE/EAPD-master.tar.gz /pineapple/modules/EAPD-master.tar.gz
 tar x -z -f /pineapple/modules/EAPD-master.tar.gz -C /pineapple/modules/ && rm -f /pineapple/modules/EAPD-master.tar.gz
 cp -f EAPD.py /root/eapd.py && cp -f CRONTABS /etc/crontabs/root && cp -f EAPDD /etc/init.d/eapdd
 chmod 500 /etc/init.d/eapdd && chmod 500 /root/eapd.py
@@ -97,4 +96,4 @@ printf "|-----------------------------------------README!-----------------------
 printf "Log file saved to /root/logs/install.log.\n\n"
 printf "Just run '/etc/init.d/eapdd L' to start learning mode.\n\n"
 printf "|-------------------------------------------END-------------------------------------------|\n" >> /root/logs/install.log
-exit
+exit 0
