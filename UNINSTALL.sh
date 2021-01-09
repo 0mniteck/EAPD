@@ -31,7 +31,7 @@ if [ -z $config ]; then
     printf "\nKeeping configs...\n"
   fi
 else
-  if [ $config == -r ]; then
+  if [ $config == "-r" ]; then
     printf "\nRemoving configs...\n"
     rm -f /etc/config/mysqld && rm -f /etc/config/eapdd && rm -f -r /mnt/data/ && rm -f -r /var/log/mysql/ && rm -f -r /var/log/mysqld/ && rm -f -r /var/run/mysqld/
   else
