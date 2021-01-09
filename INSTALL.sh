@@ -33,35 +33,27 @@ chmod 500 /etc/init.d/eapdd && chmod 500 /root/eapd.py
 printf "innodb_use_native_aio = 0\n" >> /etc/mysql/conf.d/50-server.cnf
 uci set mysqld.general.enabled='1' && uci commit
 rm -f /etc/rc.local && printf "/etc/init.d/eapdd stop\nexit0" > /etc/rc.local && sleep 10
-/etc/init.d/eapdd disable && mysql_install_db --force && opkg install python-mysql
+/etc/init.d/eapdd disable && mysql_install_db --force && opkg install python-mysql --force-overwrite
+mysql_installation_secure() {
+/etc/init.d/mysqld start && sleep 10 && printf "\nStarting and Securing MYSQL...\n\n"
+if [ -z $rootpass ]; then
+  rootpass=$(openssl rand -base64 16)
+fi
+mysql -u root <<-EOF
+UPDATE mysql.user SET Password=PASSWORD('$rootpass') WHERE User='root';
+DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
+DELETE FROM mysql.user WHERE User='';
+DELETE FROM mysql.db WHERE Db='test' OR Db='test_%';
+FLUSH PRIVILEGES;
+EOF
+sleep 1 && /etc/init.d/mysqld stop && printf "Stopped and Secured MySQL.\n\n"
+}
 if [ -f /etc/config/EAPD ]; then
   source /etc/config/EAPD
   rootpass=$password
-  /etc/init.d/mysqld start && sleep 10 && printf "\nStarting and Securing MYSQL...\n\n"
-  if [ -z $rootpass ]; then
-    rootpass=$(openssl rand -base64 16)
-  fi
-  mysql -u root <<-EOF
-  UPDATE mysql.user SET Password=PASSWORD('$rootpass') WHERE User='root';
-  DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
-  DELETE FROM mysql.user WHERE User='';
-  DELETE FROM mysql.db WHERE Db='test' OR Db='test_%';
-  FLUSH PRIVILEGES;
-  EOF
-  sleep 1 && /etc/init.d/mysqld stop && printf "Stopped and Secured MySQL.\n\n"
+  mysql_installation_secure
 else
-  /etc/init.d/mysqld start && sleep 10 && printf "\nStarting and Securing MYSQL...\n\n"
-  if [ -z $rootpass ]; then
-    rootpass=$(openssl rand -base64 16)
-  fi
-  mysql -u root <<-EOF
-  UPDATE mysql.user SET Password=PASSWORD('$rootpass') WHERE User='root';
-  DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
-  DELETE FROM mysql.user WHERE User='';
-  DELETE FROM mysql.db WHERE Db='test' OR Db='test_%';
-  FLUSH PRIVILEGES;
-  EOF
-  sleep 1 && /etc/init.d/mysqld stop && printf "Stopped and Secured MySQL.\n\n"
+  mysql_installation_secure
   printf "\n" > /etc/config/EAPD
   chmod 200 /etc/config/EAPD
   sed -i "1i###################################\n" /etc/config/EAPD
