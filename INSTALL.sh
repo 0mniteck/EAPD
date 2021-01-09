@@ -27,11 +27,9 @@ printf "\n\n" && opkg update && opkg install mariadb-server --force-overwrite &&
 opkg install python --force-overwrite && opkg install python-pip --force-overwrite
 #python -m pip install --upgrade pip
 python -m pip install wheel netaddr scapy
-rm -f -r /pineapple/modules/EAPD
-cp -f MODULE/EAPD-master.tar.gz /pineapple/modules/EAPD-master.tar.gz
-tar x -z -f /pineapple/modules/EAPD-master.tar.gz -C /pineapple/modules/
-rm -f /pineapple/modules/EAPD-master.tar.gz
 /etc/init.d/cron stop && /etc/init.d/cron disable
+rm -f -r /pineapple/modules/EAPD && cp -f MODULE/EAPD-master.tar.gz /pineapple/modules/EAPD-master.tar.gz
+tar x -z -f /pineapple/modules/EAPD-master.tar.gz -C /pineapple/modules/ && rm -f /pineapple/modules/EAPD-master.tar.gz
 cp -f EAPD.py /root/eapd.py && cp -f CRONTABS /etc/crontabs/root && cp -f EAPDD /etc/init.d/eapdd
 chmod 500 /etc/init.d/eapdd && chmod 500 /root/eapd.py
 printf 'innodb_use_native_aio = 0\n' >> /etc/mysql/conf.d/50-server.cnf
