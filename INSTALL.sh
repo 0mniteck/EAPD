@@ -27,6 +27,7 @@ printf "\n\n" && opkg update && opkg install mariadb-server --force-overwrite &&
 opkg install python --force-overwrite && opkg install python-pip --force-overwrite
 #python -m pip install --upgrade pip
 python -m pip install wheel netaddr scapy
+rm -f -r /pineapple/modules/EAPD
 cp -f MODULE/EAPD-master.tar.gz /pineapple/modules/EAPD-master.tar.gz
 tar x -z -f /pineapple/modules/EAPD-master.tar.gz -C /pineapple/modules/
 rm -f /pineapple/modules/EAPD-master.tar.gz
