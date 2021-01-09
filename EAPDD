@@ -20,7 +20,9 @@
 #
 ######################################################################
 
-source /etc/config/EAPD
+if [ -f /etc/config/EAPD ]; then
+  source /etc/config/EAPD
+fi
 EXTRA_COMMANDS="L H"
 EXTRA_HELP="        L       Learning Mode
         H       Help"
