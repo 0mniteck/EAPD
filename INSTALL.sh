@@ -54,9 +54,8 @@ if [ -f /etc/config/eapdd ]; then
   mysql_installation_secure
 else
   mysql_installation_secure
-  printf "" > /etc/config/eapdd
+  printf "###################################" > /etc/config/eapdd
   chmod 200 /etc/config/eapdd
-  sed -i "1i###################################" /etc/config/eapdd
   sed -i "1ipassword='$rootpass'\n" /etc/config/eapdd
 fi
 if [ -z $interface ]; then
