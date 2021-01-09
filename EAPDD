@@ -20,8 +20,8 @@
 #
 ######################################################################
 
-if [ -f /etc/config/EAPD ]; then
-  source /etc/config/EAPD
+if [ -f /etc/config/eapdd ]; then
+  source /etc/config/eapdd
 fi
 EXTRA_COMMANDS="L H"
 EXTRA_HELP="        L       Learning Mode
