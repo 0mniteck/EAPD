@@ -61,14 +61,16 @@ else
 fi
 if [ -z $interface ]; then
   read -n 1 -t 25 -p "Please select an interface Wlan[0-9]: " interface
+  printf "\nSet interface to wlan$interface."
 fi
 if [ -z $frequency ]; then
   printf "\n\n" && read -n 1 -t 25 -p "Please select the frequency your card supports [2(Ghz)/5(Ghz)]: " frequency
+  printf "\nSet frequency to "$frequency"Ghz."
 fi
-if [ -z time ]; then
-  printf "\n\n" && read -n 3 -t 25 -p "Please select the scan length in seconds [1-120]: " time
-fi
-printf "\n"
+if [ -z $time ]; then
+  printf "\n\n" && read -n 3 -t 25 -p "Please select the scantime in seconds [30-120]: " time
+  printf "\nSet scantime to $time."
+fi && printf "\n"
 if [ -z $interface ]; then
   interface=1
   sed -i "1iinterface=wlan$interface" /etc/config/EAPD
