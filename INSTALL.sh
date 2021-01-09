@@ -24,7 +24,7 @@ mkdir -p /root/logs && printf "\033[92m\nStarting Installer for EAPD...\n\n\033[
 read -s -n 1 -t 15 -p "On models before the MK7, or other openwrt, please look at the wiki under Requirements. Turn off PineAP then Press any key to continue . . . or ctrl+c to stop"
 printf "\n\n" && opkg update && opkg install mariadb-server --force-overwrite && opkg install mariadb-client --force-overwrite
 opkg install python --force-overwrite && opkg install python-pip --force-overwrite
-python -m pip install wheel netaddr scapy
+python -m pip install wheel && python -m pip install netaddr scapy
 /etc/init.d/cron stop && /etc/init.d/cron disable
 rm -f -r /pineapple/modules/EAPD/ && cp -f MODULE/EAPD-master.tar.gz /pineapple/modules/EAPD-master.tar.gz
 tar x -z -f /pineapple/modules/EAPD-master.tar.gz -C /pineapple/modules/ && rm -f /pineapple/modules/EAPD-master.tar.gz
