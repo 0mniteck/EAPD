@@ -26,7 +26,7 @@ if [ -z $config ]; then
   read -n 1 -t 25 -p "Keep config files? [Y/n]: " config
   if [ $config == "n" ]; then
     printf "\n\nRemoving configs...\n\n"
-    rm -f /etc/config/mysqld && rm -f /etc/config/eapdd && rm -f -r /mnt/data/ && rm -f -r /var/log/mysql/ && rm -f -r /var/log/mysqld/ && rm -f -r /var/run/mysqld/
+    rm -f /etc/config/eapdd && rm -f -r /mnt/data/ && rm -f -r /var/log/mysql/ && rm -f -r /var/log/mysqld/ && rm -f -r /var/run/mysqld/
   else
     printf "\n\nKeeping configs...\n\n"
   fi
