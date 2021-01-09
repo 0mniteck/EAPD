@@ -61,36 +61,36 @@ else
 fi
 if [ -z $interface ]; then
   read -n 1 -t 25 -p "Please select an interface Wlan[0-9]: " interface
+  if [ -z $interface ]; then
+    interface=1
+    sed -i "1iinterface=wlan$interface" /etc/config/EAPD
+  else
+    sed -i "1iinterface=wlan$interface" /etc/config/EAPD
+  fi
   printf "\nSet interface to wlan$interface."
 fi
 if [ -z $frequency ]; then
   printf "\n\n" && read -n 1 -t 25 -p "Please select the frequency your card supports [2(Ghz)/5(Ghz)]: " frequency
+  if [ -z $frequency ]; then
+    frequency=2
+    sed -i "1ifrequency=$frequency" /etc/config/EAPD
+  else
+    sed -i "1ifrequency=$frequency" /etc/config/EAPD
+  fi
   printf "\nSet frequency to "$frequency"Ghz."
 fi
 if [ -z $time ]; then
   printf "\n\n" && read -n 3 -t 25 -p "Please select the scantime in seconds [30-120]: " time
+  if [ -z $time ]; then
+    time=60
+    sed -i "1itime=$time" /etc/config/EAPD
+    sed -i "1i\n###############VARS################\n" /etc/config/EAPD
+  else
+    sed -i "1itime=$time" /etc/config/EAPD
+    sed -i "1i\n###############VARS################\n" /etc/config/EAPD
+  fi
   printf "\nSet scantime to $time."
 fi && printf "\n"
-if [ -z $interface ]; then
-  interface=1
-  sed -i "1iinterface=wlan$interface" /etc/config/EAPD
-else
-  sed -i "1iinterface=wlan$interface" /etc/config/EAPD
-fi
-if [ -z $frequency ]; then
-  frequency=2
-  sed -i "1ifrequency=$frequency" /etc/config/EAPD
-else
-  sed -i "1ifrequency=$frequency" /etc/config/EAPD
-fi
-if [ -z $time ]; then
-  time=60
-  sed -i "1itime=$time" /etc/config/EAPD
-  sed -i "1i\n###############VARS################\n" /etc/config/EAPD
-else
-  sed -i "1itime=$time" /etc/config/EAPD
-  sed -i "1i\n###############VARS################\n" /etc/config/EAPD
-fi
 chmod 400 /etc/config/EAPD
 printf "Installer Complete.\n\n" && printf "Installer Complete at $(date '+%r on %x')\n" >> /root/logs/install.log
 printf "|-----------------------------------------README!-----------------------------------------|\n\n"
