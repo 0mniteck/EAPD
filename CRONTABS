@@ -18,8 +18,13 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>
 #
 ######################################################################
+
 if [ -f /etc/config/eapdd-cron ]; then
   source /etc/config/eapdd-cron
+else
+  expo="0 23"
+  runs="24,48"
 fi
-0 23 * * * /etc/init.d/eapdd stop && C2EXFIL STRING /root/eapd.log EAPD_LOG && mv -f /root/eapd.log /root/logs/$(date +%F-eapd.log) && printf "Exported and moved log at $(date '+%r on %x')\n" >> /root/eapd.log
-24,48 * * * * printf "Scheduled EAPDD run at $(date '+%r on %x')\n" >> /root/eapd.log && /etc/init.d/eapdd start
+
+$expo * * * /etc/init.d/eapdd stop && C2EXFIL STRING /root/eapd.log EAPD_LOG && mv -f /root/eapd.log /root/logs/$(date +%F-eapd.log) && printf "Exported and moved log at $(date '+%r on %x')\n" >> /root/eapd.log
+$runs * * * * printf "Scheduled EAPDD run at $(date '+%r on %x')\n" >> /root/eapd.log && /etc/init.d/eapdd start
