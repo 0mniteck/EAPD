@@ -89,7 +89,7 @@ if [ -z $time ]; then
     sed -i "1itime=$time" /etc/config/EAPD
     sed -i "1i\n###############VARS################\n" /etc/config/EAPD
   fi
-  printf "\nSet scantime to $time."
+  printf "\nSet scantime to $time.\n"
 fi && printf "\n"
 chmod 400 /etc/config/EAPD
 printf "Installer Complete.\n\n" && printf "Installer Complete at $(date '+%r on %x')\n" >> /root/logs/install.log
