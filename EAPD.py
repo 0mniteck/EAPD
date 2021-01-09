@@ -789,12 +789,12 @@ print "\n###############################################################\n"
 print "SCANNING FOR WIRELESS NETWORKS"
 try:
     if frequency == "2":
-        airodump = Popen(["airodump-ng", "--output-format", "csv",  "-w", "out.csv", mon_iface])
+        airodump = Popen(["airodump-ng", "--output-format", "csv",  "-w", "out.csv", "--channel", "3,10,1,2,7,9,11,5,6,8,4", mon_iface])
     elif frequency == "5":
         airodump = Popen(["airodump-ng", "--output-format", "csv",  "-w", "out.csv", "--channel", "36,64,11,132,10,56,8,120,7,6,124,3,5,9,52,1,153,44,140,40,128,4,112,136,161,60,149,104,165,100,116,48,2,108,157", mon_iface])
     else:
-        airodump = Popen(["airodump-ng", "--output-format", "csv",  "-w", "out.csv", mon_iface])
-    
+        airodump = Popen(["airodump-ng", "--output-format", "csv",  "-w", "out.csv", "--channel", "3,10,1,2,7,9,11,5,6,8,4", mon_iface])
+
     aps = {}
     time.sleep(int(scantime))
     airodump.terminate()
