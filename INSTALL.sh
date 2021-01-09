@@ -31,10 +31,15 @@ rm -f -r /pineapple/modules/EAPD
 cp -f MODULE/EAPD-master.tar.gz /pineapple/modules/EAPD-master.tar.gz
 tar x -z -f /pineapple/modules/EAPD-master.tar.gz -C /pineapple/modules/
 rm -f /pineapple/modules/EAPD-master.tar.gz
+if [[ -f /etc/config/EAPD ]]; then
+  source /etc/config/EAPD
+else
+  touch /etc/config/EAPD
+  chmod 600 /etc/config/EAPD
+fi
 /etc/init.d/cron stop && /etc/init.d/cron disable
 cp -f EAPD.py /root/eapd.py && cp -f CRONTABS /etc/crontabs/root && cp -f EAPDD /etc/init.d/eapdd
-chmod 744 /etc/init.d/eapdd && chmod +x /etc/init.d/eapdd
-chmod 3400 /root/eapd.py && chmod +x /root/eapd.py
+chmod 500 /etc/init.d/eapdd && chmod 500 /root/eapd.py
 printf 'innodb_use_native_aio = 0\n' >> /etc/mysql/conf.d/50-server.cnf
 uci set mysqld.general.enabled='1' && uci commit
 rm /etc/rc.local && printf '/etc/init.d/eapdd stop\n' > /etc/rc.local && sleep 10
@@ -49,8 +54,8 @@ DELETE FROM mysql.db WHERE Db='test' OR Db='test_%';
 FLUSH PRIVILEGES;
 EOF
 sleep 1 && /etc/init.d/mysqld stop && printf "Stopped and Secured MySQL.\n\n"
-sed -i "23i###################################\n" /etc/init.d/eapdd
-sed -i "23ipassword='$rootpass'\n" /etc/init.d/eapdd
+sed -i "23i###################################\n" /etc/config/EAPD
+sed -i "23ipassword='$rootpass'\n" /etc/config/EAPD
 read -n 1 -t 25 -p "Please select an interface Wlan[0-9]: " interface
 printf "\n\n" && read -n 1 -t 25 -p "Please select the frequency your card supports [2(Ghz)/5(Ghz)]: " frequency
 printf "\n\n" && read -n 3 -t 25 -p "Please select the scan length in seconds [1-120]: " time
@@ -64,11 +69,11 @@ fi
 if [ -z $time ]; then
   time=60
 fi
-sed -i "23iinterface=wlan$interface" /etc/init.d/eapdd
-sed -i "23ifrequency=$frequency" /etc/init.d/eapdd
-sed -i "23itime=$time" /etc/init.d/eapdd
-sed -i "23i###############VARS################\n" /etc/init.d/eapdd
-chmod 3400 /etc/init.d/eapdd && chmod +x /etc/init.d/eapdd
+sed -i "23iinterface=wlan$interface" /etc/config/EAPD
+sed -i "23ifrequency=$frequency" /etc/config/EAPD
+sed -i "23itime=$time" /etc/config/EAPD
+sed -i "23i###############VARS################\n" /etc/config/EAPD
+chmod 400 /etc/config/EAPD
 printf "Installer Complete.\n\n" && printf "Installer Complete at $(date '+%r on %x')\n" >> /root/logs/install.log
 printf "|-----------------------------------------README!-----------------------------------------|\n\n"
 printf "Log file saved to /root/logs/install.log.\n\n"
