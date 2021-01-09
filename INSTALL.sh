@@ -32,7 +32,7 @@ cp -f EAPD.py /root/eapd.py && cp -f CRONTABS /etc/crontabs/root && cp -f EAPDD 
 chmod 500 /etc/init.d/eapdd && chmod 500 /root/eapd.py
 printf "innodb_use_native_aio = 0\n" >> /etc/mysql/conf.d/50-server.cnf
 uci set mysqld.general.enabled='1' && uci commit
-rm -f /etc/rc.local && printf "/etc/init.d/eapdd stop\nexit0" > /etc/rc.local && sleep 10
+rm -f /etc/rc.local && printf "/etc/init.d/eapdd stop\nexit 0" > /etc/rc.local && sleep 10
 /etc/init.d/eapdd disable && mysql_install_db --force && opkg install python-mysql --force-overwrite
 mysql_installation_secure() {
 /etc/init.d/mysqld start && sleep 10 && printf "\nStarting and Securing MYSQL...\n\n"
