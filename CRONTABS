@@ -19,8 +19,8 @@
 #
 ######################################################################
 
-if [ -f /etc/config/eapdd-cron ]; then
-  source /etc/config/eapdd-cron
+if [ -f /etc/config/eapd-cron ]; then
+  source /etc/config/eapd-cron
 else
   expo="0 23"
   runs="24,48"
