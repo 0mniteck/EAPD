@@ -94,6 +94,15 @@ if [ -z $time ]; then
   printf "\nSet scantime to $time.\n"
 fi && printf "\n"
 chmod 400 /etc/config/eapdd
+if [ -f /etc/config/eapd-cron ]; then
+else
+  printf "###################################" > /etc/config/eapd-cron
+  chmod 200 /etc/config/eapd-cron
+  sed -i "1iruns=24,48" /etc/config/eapd-cron
+  sed -i "1iexpo=0 23" /etc/config/eapd-cron
+  sed -i "1i###############VARS################\n" /etc/config/eapd-cron
+  chmod 400 /etc/config/eapd-cron
+fi
 printf "Installer Complete.\n\n" && printf "Installer Complete at $(date '+%r on %x')\n" >> /root/logs/install.log
 printf "|-----------------------------------------README!-----------------------------------------|\n\n"
 printf "Log file saved to /root/logs/install.log.\n\n"
