@@ -22,7 +22,7 @@
 
 interface=$1
 frequency=$2
-time=$3
+scantime=$3
 mkdir -p /root/logs && printf "\033[92m\nStarting Installer for EAPD...\n\n\033[0m" && printf "Starting Installer for EAPD at $(date '+%r on %x')\n" >> /root/logs/install.log
 read -s -n 1 -t 15 -p "On models before the MK7, or other openwrt, please look at the wiki under Requirements. Turn off PineAP then Press any key to continue . . . or ctrl+c to stop"
 printf "\n\n" && opkg update && opkg install mariadb-server --force-overwrite && opkg install mariadb-client --force-overwrite
@@ -82,17 +82,17 @@ if [ -z $frequency ]; then
   fi
   printf "\nSet frequency to "$frequency"Ghz."
 fi
-if [ -z $time ]; then
+if [ -z $scantime ]; then
   printf "\n\n" && read -n 2 -t 25 -p "Please select the scantime in seconds [30-90]: " time
-  if [ -z $time ]; then
-    time=60
-    sed -i "1itime=$time" /etc/config/eapdd
+  if [ -z $scantime ]; then
+    scantime=60
+    sed -i "1itime=$scantime" /etc/config/eapdd
     sed -i "1i###############VARS################\n" /etc/config/eapdd
   else
-    sed -i "1itime=$time" /etc/config/eapdd
+    sed -i "1itime=$scantime" /etc/config/eapdd
     sed -i "1i###############VARS################\n" /etc/config/eapdd
   fi
-  printf "\nSet scantime to $time.\n"
+  printf "\nSet scantime to $scantime.\n"
 fi && printf "\n"
 chmod 400 /etc/config/eapdd
 if [ -f /etc/config/eapd-cron ]; then
