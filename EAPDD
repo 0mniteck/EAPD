@@ -90,6 +90,9 @@ S() {
           source /etc/config/eapd-cron
           sed -i "s/$last_expo/$expo/" /etc/crontabs/root
           sed -i "s/$last_runs/$runs/" /etc/crontabs/root
+          sed -i "s/$last_expo/$expo/" /etc/config/eapd-cron
+          sed -i "s/$last_runs/$runs/" /etc/config/eapd-cron
+          /etc/init.d/cron restart
         fi
 }
 
