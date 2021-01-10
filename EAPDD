@@ -86,12 +86,14 @@ L() {
 }
 
 S() {
+        printf "Scheduling Cron Scans at $(date '+%r on %x')\n" >> /root/eapd.log        
         if [ -f /etc/config/eapd-cron ]; then
           source /etc/config/eapd-cron
           sed -i "s/$last_expo/$expo/" /etc/crontabs/root
           sed -i "s/$last_runs/$runs/" /etc/crontabs/root
           sed -i "s/$last_expo/$expo/" /etc/config/eapd-cron
           sed -i "s/$last_runs/$runs/" /etc/config/eapd-cron
+          printf "Restarting Cron at $(date '+%r on %x')\n" >> /root/eapd.log
           /etc/init.d/cron restart
         fi
 }
