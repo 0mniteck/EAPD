@@ -41,7 +41,7 @@ start() {
         printf "Starting MySQL...\n\n" && printf "Starting MySQL at $(date '+%r on %x')\n" >> /root/eapd.log
         /etc/init.d/mysqld start && sleep 5 && rm -f /tmp/auth && rm -f /tmp/fail && rm -f -r /root/*.csv
         printf "Starting Scan Please Wait...\n\n" && printf "Starting Scan at $(date '+%r on %x')\n" >> /root/eapd.log
-        python /root/eapd.py -N -p $password -i $interface -f $frequency -t $time
+        python /root/eapd.py -N -p $password -i $interface -f $frequency -t $scantime
         printf "Scan Complete.\n\n" && printf "Scan Complete at $(date '+%r on %x')\n" >> /root/eapd.log
         /etc/init.d/mysqld stop && sleep 5
         printf "Stopped MySQL.\n\n" && printf "Stopped MySQL at $(date '+%r on %x')\n" >> /root/eapd.log
@@ -56,8 +56,8 @@ start() {
 }
 
 stop() {
-        pkill -f "python /root/eapd.py -N -p $password -i $interface -f $frequency -t $time"
-        pkill -f "python /root/eapd.py -L -p $password -i $interface -f $frequency -t $time"
+        pkill -f "python /root/eapd.py -N -p $password -i $interface -f $frequency -t $scantime"
+        pkill -f "python /root/eapd.py -L -p $password -i $interface -f $frequency -t $scantime"
         /etc/init.d/mysqld stop
         printf "\nAborted Scan.\n\n" && printf "Aborted Scan, Moved Log, or Reboot at $(date '+%r on %x')\n" >> /root/eapd.log
         printf "Log file saved to /root/eapd.log.\n\n"
@@ -71,11 +71,11 @@ L() {
         printf "Stopping Cron...\n\n" && printf "Stopping Cron at $(date '+%r on %x')\n" >> /root/eapd.log
         /etc/init.d/cron stop && sleep 5
         printf "\nStopping Any Running Scans...\n\n" && printf "Stopping Any Running Scans at $(date '+%r on %x')\n" >> /root/eapd.log
-        pkill -f "python /root/eapd.py -N -p $password -i $interface -f $frequency -t $time" && sleep 10
+        pkill -f "python /root/eapd.py -N -p $password -i $interface -f $frequency -t $scantime" && sleep 10
         printf "Starting MySQL...\n\n" && printf "Starting MySQL at $(date '+%r on %x')\n" >> /root/eapd.log
         /etc/init.d/mysqld start && sleep 5 && rm -f -r /root/*.csv
         printf "Starting Learning Mode Please Wait...\n\n" && printf "Starting Learning Mode at $(date '+%r on %x')\n" >> /root/eapd.log
-        python /root/eapd.py -L -p $password -i $interface -f $frequency -t $time
+        python /root/eapd.py -L -p $password -i $interface -f $frequency -t $scantime
         printf "Learning Mode Complete.\n\n" && printf "Learning Mode Complete at $(date '+%r on %x')\n" >> /root/eapd.log
         /etc/init.d/mysqld stop && sleep 5
         printf "Stopped MySQL.\n\n" && printf "Stopped MySQL at $(date '+%r on %x')\n" >> /root/eapd.log
