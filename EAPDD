@@ -24,8 +24,10 @@ if [ -f /etc/config/eapdd ]; then
   source /etc/config/eapdd
 fi
 
-EXTRA_COMMANDS="L H"
-EXTRA_HELP="        L       Learning Mode
+EXTRA_COMMANDS="L S H"
+EXTRA_HELP="
+        L       Learning Mode
+        S       Save Schedule
         H       Help"
 
 error() {
@@ -81,6 +83,14 @@ L() {
         printf "Log file saved to /root/eapd.log.\n\n"
         printf "Start Scheduled Scans by Running '/etc/init.d/cron enable && /etc/init.d/cron start'.\n\n"
         printf "|-------------------------------------------END-------------------------------------------|\n" >> /root/eapd.log
+}
+
+S() {
+        if [ -f /etc/config/eapd-cron ]; then
+          source /etc/config/eapd-cron
+          sed -i "s/$last_expo/$expo/" /etc/crontabs/root
+          sed -i "s/$last_runs/$runs/" /etc/crontabs/root
+        fi
 }
 
 H() {
