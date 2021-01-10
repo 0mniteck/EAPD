@@ -100,7 +100,7 @@ if [ -f /etc/config/eapd-cron ]; then
 else
   printf "###################################" > /etc/config/eapd-cron
   chmod 200 /etc/config/eapd-cron
-  sed -i "1ilast_runs='24,48'" /etc/config/eapd-cron
+  sed -i "1ilast_runs='24,48'\n" /etc/config/eapd-cron
   sed -i "1ilast_expo='0 23'" /etc/config/eapd-cron
   sed -i "1iruns='first_runs'" /etc/config/eapd-cron
   sed -i "1iexpo='first_expo'" /etc/config/eapd-cron
