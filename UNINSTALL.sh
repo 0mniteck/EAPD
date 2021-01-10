@@ -28,14 +28,14 @@ if [ -z $config ]; then
     printf "\n\nRemoving configs...\n\n"
     rm -f /etc/config/eapdd && rm -f -r /mnt/data/ && rm -f -r /var/log/mysql/ && rm -f -r /var/log/mysqld/ && rm -f -r /var/run/mysqld/
   else
-    printf "\n\nKeeping configs...\n\n"
+    printf "\n\nPreserving configs...\n\n"
   fi
 else
   if [ $config == "-r" ]; then
     printf "\n\nRemoving configs...\n\n"
     rm -f /etc/config/eapdd && rm -f -r /mnt/data/ && rm -f -r /var/log/mysql/ && rm -f -r /var/log/mysqld/ && rm -f -r /var/run/mysqld/
   else
-    printf "\n\nKeeping configs...\n\n"
+    printf "\n\nPreserving configs...\n\n"
   fi
 fi
 /etc/init.d/cron stop && /etc/init.d/cron disable && /etc/init.d/eapdd stop && sleep 5 && python -m pip uninstall -y netaddr scapy wheel
