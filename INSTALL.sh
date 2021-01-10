@@ -86,10 +86,10 @@ if [ -z $scantime ]; then
   printf "\n\n" && read -n 2 -t 25 -p "Please select the scantime in seconds [30-90]: " scantime
   if [ -z $scantime ]; then
     scantime=60
-    sed -i "1itime=$scantime" /etc/config/eapdd
+    sed -i "1iscantime=$scantime" /etc/config/eapdd
     sed -i "1i###############VARS################\n" /etc/config/eapdd
   else
-    sed -i "1itime=$scantime" /etc/config/eapdd
+    sed -i "1iscantime=$scantime" /etc/config/eapdd
     sed -i "1i###############VARS################\n" /etc/config/eapdd
   fi
   printf "\nSet scantime to $scantime.\n"
