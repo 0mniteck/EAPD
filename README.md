@@ -7,4 +7,4 @@ Check out the wiki: <a target="_blank" href="https://github.com/0mniteck/EAPD/wi
 
 Download: <a target="_blank" href="https://github.com/0mniteck/EAPD/archive/master.zip">Current Pre-Release</a>
 
-Updated Last: 1/9/2021
+Updated Last: (WIP) 1/25/2021
